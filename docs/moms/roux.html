@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Knoxville Golden Retrievers</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html">Knoxville Golden Retrievers</a>
+
+            <nav class="nav" aria-label="Primary">
+                <a class="nav-link" href="index.html">Home</a>
+
+                <div class="nav-dropdown">
+                    <a class="nav-link dropdown-toggle active" href="moms.html">
+                        Moms ▾
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="moms.html">All Moms</a>
+                        <a href="lilly.html">Lilly</a>
+                        <a href="raine.html">Raine</a>
+                        <a href="roux.html">Roux</a>
+                    </div>
+                </div>
+
+
+                <div class="nav-dropdown">
+                    <a class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                    Litters ▾
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="current-litter.html">Current Litter</a>
+                        <a href="past-litter.html">Past Litters</a>
+                    </div>
+                </div>
+
+                <a class="nav-link" href="contact.html">Contact</a>
+                <a class="nav-link" href="about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Meet Our Moms</h1>
+            <p>Each of our dams is health-tested, well-loved, and an important part of our family.</p>
+        </section>
+
+        <section id="roux" class="card">
+            <h2>Roux</h2>
+            <img src="images/Roux/roux1.jpeg"
+                alt="An Image of Roux with Her Medal"
+                class="showcase-image">
+            <p>Roux's description goes here.</p>
+            <a class="btn" href="Roux.html">Roux</a>
+        </section>
+    </main>
+
+<footer class="site-footer">
+    <div class="container">
+        <small>© <span id="year"></span> Knoxville Golden Retrievers</small>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
