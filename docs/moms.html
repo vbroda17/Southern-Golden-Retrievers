@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Our Golden Retriever Dam | Knoxville Golden Retrievers</title>
+  <title>Knoxville Golden Retrievers</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -12,8 +12,19 @@
       <a class="brand" href="index.html">Knoxville Golden Retrievers</a>
 
       <nav class="nav" aria-label="Primary">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link active" href="mom.html">Mom</a>
+        <a class="nav-link active" href="index.html">Home</a>
+
+        <div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" href="moms/moms.htlm">
+            Moms ▾
+            </button>
+            <div class="dropdown-menu">
+                <a href="Moms.html">lilly</a>
+                <a href="Moms.html">rain</a>
+                <a href="Moms.html">rue</a>
+            </div>
+        </div>
+
         <div class="nav-dropdown">
             <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">
             Litters ▾
@@ -23,6 +34,7 @@
                 <a href="past-litter.html">Past Litters</a>
             </div>
         </div>
+
           <a class="nav-link" href="contact.html">Contact</a>
           <a class="nav-link" href="about.html">About</a>
       </nav>
@@ -31,36 +43,26 @@
 
   <main class="container">
     <section class="hero">
-      <h1>Our .</h1>
-      <p>See why our puppies are the perfect addition to your family.</p>
+      <h1>Meet Our Moms</h1>
+      <p>Each of our dams is health-tested, well-loved, and an important part of our family.</p>
     </section>
 
-    <section class="card-grid" aria-label="Primary navigation sections">
-      <article class="card">
-        <h2>Meet Mom</h2>
-        <p>Put info about mom here and put a picture.</p>
-              <a class="btn" href="mom.html">Mom</a>
+    <section id="lilly" class="card">
+      <h2>Lilly</h2>
+      <p>Lilly’s description goes here.</p>
+    </section>
 
-    </article>
+    <section id="rain" class="card">
+      <h2>Rain</h2>
+      <p>Rain’s description goes here.</p>
+    </section>
 
-      <article class="card">
-        <h2>See Our Litters</h2>
-        <p>See who is available in our current litter or browse through past litters.</p>
-        <a class="btn" href="current-litter.html">Current Litter</a>
-        <a class="btn" href="past-litter.html">Past Litters</a>
-
-    </article>
-
-      <article class="card">
-        <h2>About Us</h2>
-        <p>Interested in a pup, Contact us via email at 
-            <a href="mailto:email@example.com?subject=Inquiry%20About%20Your%20Product"> email@gmail.com</a>.</p>
-        <p>Curious about us and what we stand for. Feel free to learn here:
-        <a class="btn" href="about.html">About</a>
-        </p>
-        </article>
+    <section id="rue" class="card">
+      <h2>Rue</h2>
+      <p>Rue’s description goes here.</p>
     </section>
   </main>
+
 
   <footer class="site-footer">
     <div class="container">
