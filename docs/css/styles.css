@@ -222,11 +222,14 @@ input, textarea {
 
 .showcase-image {
   width: 100%;
-  height: 500px;               /* Controls visual impact */
-  object-fit: cover;           /* Crops nicely instead of stretching */
+  max-height: 500px;      /* Controls size without forcing crop */
+  object-fit: scale-down;
   border-radius: 1rem;
   display: block;
+  margin: 0 auto;
+  background: #f5f5f5;    /* Soft letterboxing */
 }
+
 
 .card > .showcase-image {
   margin: 0 auto;
@@ -379,4 +382,54 @@ input, textarea {
 
 .featured-dots button.active {
   background: white;
+}
+
+/* ---------- Puppy Card Grid ---------- */
+.puppy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Puppy Card ---------- */
+.puppy-card {
+  background: white;
+  border: 1px solid var(--tan);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.puppy-name {
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+/* Image */
+.puppy-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Meta list */
+.puppy-meta {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+}
+
+.puppy-meta li {
+  margin-bottom: 0.25rem;
+}
+
+/* Description */
+.puppy-description {
+  font-size: 0.95rem;
+  color: #444;
 }
