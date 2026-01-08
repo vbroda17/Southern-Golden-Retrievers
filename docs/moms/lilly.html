@@ -53,13 +53,21 @@
         <section id="lilly" class="card">
             <h2>Lilly</h2>
             <div class="featured-image-wrapper">
+                <button class="featured-arrow prev" aria-label="Previous image">‹</button>
+
                 <img
                     id="featured-image"
-                    src="../images/moms/lilly/lilly1.jpeg"
+                    src="../images/lilly/lilly1.jpeg"
                     alt="Lilly the Golden Retriever"
                     class="showcase-image clickable"
                 >
+
+                <button class="featured-arrow next" aria-label="Next image">›</button>
+
+                <div id="featured-dots" class="featured-dots"></div>
             </div>
+
+
 
 
             <!-- Lightbox (once per page, near bottom of body) -->
@@ -91,41 +99,78 @@
     ];
 
     const featuredImage = document.getElementById("featured-image");
+    const dotsContainer = document.getElementById("featured-dots");
+
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     const nextBtn = document.querySelector(".lightbox-btn.next");
     const prevBtn = document.querySelector(".lightbox-btn.prev");
     const closeBtn = document.querySelector(".lightbox-close");
 
+    const featuredNext = document.querySelector(".featured-arrow.next");
+    const featuredPrev = document.querySelector(".featured-arrow.prev");
+
     let currentIndex = 0;
+
+    function updateFeatured() {
+      featuredImage.src = "../images/lilly/" + images[currentIndex];
+      updateDots();
+    }
 
     function openLightbox(index) {
       currentIndex = index;
-      lightboxImg.src = "../images/Lilly/" + images[index];
+      lightboxImg.src = "../images/lilly/" + images[currentIndex];
       lightbox.classList.remove("hidden");
+      updateFeatured();
     }
 
     function showNext() {
-      openLightbox((currentIndex + 1) % images.length);
+      currentIndex = (currentIndex + 1) % images.length;
+      updateFeatured();
+      if (!lightbox.classList.contains("hidden")) {
+        lightboxImg.src = "../images/lilly/" + images[currentIndex];
+      }
     }
 
     function showPrev() {
-      openLightbox((currentIndex - 1 + images.length) % images.length);
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateFeatured();
+      if (!lightbox.classList.contains("hidden")) {
+        lightboxImg.src = "../images/lilly/" + images[currentIndex];
+      }
     }
 
-    // Clicking the featured image opens slideshow
-    featuredImage.addEventListener("click", () => openLightbox(0));
+    // Dots
+    function updateDots() {
+      dotsContainer.querySelectorAll("button").forEach((dot, i) => {
+        dot.classList.toggle("active", i === currentIndex);
+      });
+    }
 
-    nextBtn.addEventListener("click", showNext);
-    prevBtn.addEventListener("click", showPrev);
-    closeBtn.addEventListener("click", () => {
-      lightbox.classList.add("hidden");
+    images.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.addEventListener("click", () => {
+        currentIndex = i;
+        updateFeatured();
+      });
+      dotsContainer.appendChild(dot);
     });
 
+    // Initial render
+    updateFeatured();
+
+    // Featured image controls
+    featuredNext.addEventListener("click", showNext);
+    featuredPrev.addEventListener("click", showPrev);
+    featuredImage.addEventListener("click", () => openLightbox(currentIndex));
+
+    // Lightbox controls
+    nextBtn.addEventListener("click", showNext);
+    prevBtn.addEventListener("click", showPrev);
+    closeBtn.addEventListener("click", () => lightbox.classList.add("hidden"));
+
     lightbox.addEventListener("click", e => {
-      if (e.target === lightbox) {
-        lightbox.classList.add("hidden");
-      }
+      if (e.target === lightbox) lightbox.classList.add("hidden");
     });
 
     document.addEventListener("keydown", e => {
@@ -136,6 +181,7 @@
     });
   });
 </script>
+
 
 
 

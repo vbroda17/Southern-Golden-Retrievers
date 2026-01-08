@@ -319,3 +319,62 @@ input, textarea {
     font-size: 2.2rem;
   }
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+/* ---------- Featured Image Slider ---------- */
+.featured-image-wrapper {
+  position: relative;
+}
+
+/* Arrows */
+.featured-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  z-index: 5;
+}
+
+.featured-arrow.prev {
+  left: 0.75rem;
+}
+
+.featured-arrow.next {
+  right: 0.75rem;
+}
+
+.featured-arrow:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+/* Dots */
+.featured-dots {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.featured-dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+}
+
+.featured-dots button.active {
+  background: white;
+}
