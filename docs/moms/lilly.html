@@ -67,10 +67,6 @@
                 <div id="featured-dots" class="featured-dots"></div>
             </div>
 
-
-
-
-            <!-- Lightbox (once per page, near bottom of body) -->
             <div id="lightbox" class="lightbox hidden">
                 <button class="lightbox-btn prev" aria-label="Previous image">‹</button>
                 <img id="lightbox-img" alt="">
@@ -80,7 +76,7 @@
 
 
             <p>Lilly’s description goes here.</p>
-            <a class="btn" href="../moms/lilly.html">Lilly</a>
+            <a class="btn" href="../moms/">All Moms</a>
         </section>
     </main>
 
@@ -95,7 +91,8 @@
     const images = [
       "lilly1.jpeg",
       "lilly2.jpeg",
-      "lilly3.jpeg"
+      "lilly3.jpeg",
+      "lilly4.jpeg"
     ];
 
     const featuredImage = document.getElementById("featured-image");
@@ -181,9 +178,6 @@
     });
   });
 </script>
-
-
-
 
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
