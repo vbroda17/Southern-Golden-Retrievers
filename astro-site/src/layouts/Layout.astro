@@ -1,0 +1,18 @@
+// Main Layout
+// src/layouts/Layout.astro
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+    title: string;
+    description?: string;
+    keywords?: string;
+}
+
+const { 
+  title, 
+  description = "Southern Golden Retrievers - Premium golden retriever puppies in Knoxville, TN. Award-winning and health-tested parents.",
+  keywords = "golden retriever puppies, golden retriever breeders, Knoxville TN, Tennessee golden retrievers, AKC golden retrievers, golden retriever breeder near me"
+} = Astro.props;
+
