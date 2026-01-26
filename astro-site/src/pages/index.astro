@@ -1,5 +1,5 @@
 ---
-// src/pages/dams.astro
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
 import EmailLink from '../components/EmailLink.astro';
 import ContactButton from '../components/ContactButton.astro';
@@ -21,20 +21,20 @@ const description = "Raised with Love. Backed by Excellence. See why our puppies
       <section class="card">
         <h2>Meet Our Moms</h2>
         <p>Lilly, Raine, and Roux are the three most beautiful, kind, and smart dogs we could ask for. Award winning and loving, they have made great additions to our home.</p>
-        <a href={`${base}dams`} class="btn">Learn More About Each Mom</a>
+        <a href="/dams/" class="btn">Learn More About Each Mom</a>
       </section>
 
       <section class="card">
         <h2>View Our Litters</h2>
         <p>See who is available in our current litter. See previous pups from the dam's gallery or our tesomonials.</p>
-        <a href={`${base}current-litters`}> class="btn">Current Litter</a>
+        <a href="/current-litters/" class="btn">Current Litter</a>
       </section>
 
       <section class="card">
         <h2>About Us</h2>
         <p>Interested in a pup? Contact us via email at <EmailLink showCopy={true}/>.</p>
         <p>Curious about us and what we stand for. We invite you to learn more about us.</p>
-        <a href={'${base}current-litters} class="btn">About</a>
+        <a href="/about/" class="btn">About</a>
       </section>
     </div>
   </div>
