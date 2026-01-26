@@ -1,0 +1,35 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+import EmailLink from '../components/EmailLink.astro';
+import ContactButton from '../components/ContactButton.astro';
+import '../styles/index.css';
+
+const title = "About | Southern Golden Retrievers";
+const description = "Learn about us and how we make sure you get the perfect pup. Located in Knoxville, TN.";
+---
+
+<Layout title={title} description={description}>
+  <div class="container">
+        <section class="hero">
+            <h1>About Us!</h1>
+            <p>Knoxville Golden Retrievers is a dedicated breeder of high-quality Golden Retrievers. We focus on producing healthy, well-socialized puppies with excellent temperaments and strong genetic lines.</p>
+            <p>We are a family of passionate breeders committed to maintaining the highest standards in our breeding program.</p>
+            <p>From the knoxville area, we are dedicated to find loving homes for our puppies.</p>
+            <p>Get in touch with us please email us at 
+            <EmailLink showCopy={true} />
+            .</p>
+            <p>Feel Free to explore more about us in the meantime.</p>
+            <a class="btn" href="dams">Dams</a>
+            <a class="btn" href="current-litters">Current Litters</a>
+            <a class="btn" href="contact">Contact Us</a>
+        </section>
+
+        <section class="card">
+            <img src="images/Group/group2-4.jpeg"
+                alt="Our Three Golden Retrievers"
+                class="showcase-image">
+        </section>
+    </div>
+  </div>
+</Layout>
