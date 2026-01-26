@@ -3,6 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 import EmailLink from '../components/EmailLink.astro';
 import ContactButton from '../components/ContactButton.astro';
+import { url } from '../utils.js';
 import '../styles/index.css';
 
 const title = "Contact | Southern Golden Retrievers";
@@ -17,13 +18,13 @@ const description = "Contact us today and get your perfect godlen retriever pup.
             <EmailLink showCopy={true} />
             .</p>
             <p>In the meantime, explore our other pages to learn more about our dams, current litters, and us.</p>
-            <a class="btn" href="dams">Dams</a>
-            <a class="btn" href="current-litters">Current Litters</a>
-            <a class="btn" href="about">About Us</a>
+            <a class="btn" href={url("dams")}>Dams</a>
+            <a class="btn" href={url("current-litters")}>Current Litters</a>
+            <a class="btn" href={url("about")}>About Us</a>
         </section>
 
         <section class="card">
-            <img src="/images/Group/group2-3.jpeg"
+            <img src={url("/images/Group/group2-3.jpeg")}
                 alt="Our Three Golden Retrievers"
                 class="showcase-image">
         </section>
