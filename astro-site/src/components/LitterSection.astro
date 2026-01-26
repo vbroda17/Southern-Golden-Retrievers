@@ -4,6 +4,7 @@
 import '../styles/liter-section.css';
 import { SITE_CONFIG } from '../config.js';
 import ContactButton from '../components/ContactButton.astro';
+import { url } from '../utils.js';
 
 interface Props {
   litter: {
@@ -35,11 +36,11 @@ const { litter } = Astro.props;
       <div class="parent-card">
         <h3>Dam</h3>
         {litter.dam.link ? (
-          <a href={litter.dam.link}>
-            <img src={litter.dam.image} alt={litter.dam.name} class="parent-image">
+          <a href={url(litter.dam.link)}>
+            <img src={url(litter.dam.image)} alt={litter.dam.name} class="parent-image">
           </a>
         ) : (
-          <img src={litter.dam.image} alt={litter.dam.name} class="parent-image">
+          <img src={url(litter.dam.image)} alt={litter.dam.name} class="parent-image">
         )}
         <h4>{litter.dam.name}</h4>
       </div>
@@ -48,11 +49,11 @@ const { litter } = Astro.props;
       <div class="parent-card">
         <h3>Sire</h3>
         {litter.sire.link ? (
-          <a href={litter.sire.link}>
-            <img src={litter.sire.image} alt={litter.sire.name} class="parent-image">
+          <a href={url(litter.sire.link)}>
+            <img src={url(litter.sire.image)} alt={litter.sire.name} class="parent-image">
           </a>
         ) : (
-          <img src={litter.sire.image} alt={litter.sire.name} class="parent-image">
+          <img src={url(litter.sire.image)} alt={litter.sire.name} class="parent-image">
         )}
         <h4>{litter.sire.name}</h4>
       </div>
@@ -78,7 +79,7 @@ const { litter } = Astro.props;
     {litter.puppies.map(puppy => (
       <div class="puppy-card">
         <h4 class="puppy-name">{puppy.name}</h4>
-        <img src={puppy.image} alt={puppy.name} class="puppy-image">
+        <img src={url(puppy.image)} alt={puppy.name} class="puppy-image">
         
         <ul class="puppy-meta">
           <li><strong>Gender:</strong> {puppy.gender}</li>
