@@ -1,0 +1,32 @@
+---
+// src/pages/contact.astro
+import Layout from '../layouts/Layout.astro';
+import EmailLink from '../components/EmailLink.astro';
+import ContactButton from '../components/ContactButton.astro';
+import '../styles/index.css';
+
+const title = "Contact | Southern Golden Retrievers";
+const description = "Contact us today and get your perfect godlen retriever pup. Located in Knoxville, TN.";
+---
+
+<Layout title={title} description={description}>
+  <div class="container">
+            <section class="hero">
+            <h1>Contact Us!</h1>
+            <p>We currently have two litters. If you would like to get in touch with us for more information, please email us at 
+            <a href="mailto:email@example.com?subject=Inquiry%20About%20Your%20Product"> email@gmail.com</a>
+            .</p>
+            <p>In the meantime, explore our other pages to learn more about our dams, current litters, and us.</p>
+            <a class="btn" href="dams/">Dams</a>
+            <a class="btn" href="current-litters.html">Current Litters</a>
+            <a class="btn" href="about.html">About Us</a>
+        </section>
+
+        <section class="card">
+            <img src="images/Group/group2-3.jpeg"
+                alt="Our Three Golden Retrievers"
+                class="showcase-image">
+        </section>
+    </div>
+  </div>
+</Layout>
