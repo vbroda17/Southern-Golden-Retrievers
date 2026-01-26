@@ -1,0 +1,8 @@
+  .email-link {
+    color: var(--gold);
+    text-decoration: underline;
+  }
+  
+  .email-link:hover {
+    color: var(--gold-dark);
+  }

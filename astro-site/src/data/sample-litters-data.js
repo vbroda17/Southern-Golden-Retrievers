@@ -3,7 +3,7 @@
 
 export const currentLitters = [
   {
-    id: "lilly-2024-spring",
+    id: "lilly-winter-2026",
     dam: {
       name: "Lilly",
       image: "/images/Lilly/lilly3.jpeg",
@@ -14,12 +14,12 @@ export const currentLitters = [
       image: "/images/sires/bruno.jpg",
       link: null // or link to sire page if you have one
     },
-    bornDate: "March 15, 2024",
-    availableDate: "May 10, 2024",
+    bornDate: "January 1, 2026",
+    availableDate: "Febuary 26, 2026",
     puppies: [
       {
         name: "Puppy 1",
-        image: "/images/litters/lilly-spring-2024/puppy1.jpg",
+        image: "/images/litters/lilly-winter-2026/puppy1.jpg",
         gender: "Male",
         color: "Golden",
         status: "Available", // Available, Reserved, Adopted
@@ -27,7 +27,7 @@ export const currentLitters = [
       },
       {
         name: "Puppy 2",
-        image: "/images/litters/lilly-spring-2024/puppy2.jpg",
+        image: "/images/litters/lilly-winter-2026/puppy2.jpg",
         gender: "Female",
         color: "Golden",
         status: "Reserved",
@@ -35,16 +35,16 @@ export const currentLitters = [
       },
       {
         name: "Puppy 3",
-        image: "/images/litters/lilly-spring-2024/puppy3.jpg",
+        image: "/images/litters/lilly-winter-2026/puppy3.jpg",
         gender: "Male",
         color: "Light Golden",
-        status: "Available",
+        status: "Adopted",
         // description: "Calm and cuddly, loves attention."
       }
     ]
   },
   {
-    id: "roux-2024-spring",
+    id: "roux-winter-2026",
     dam: {
       name: "Roux",
       image: "/images/Roux/roux1.jpeg",
@@ -55,24 +55,24 @@ export const currentLitters = [
       image: "/images/sires/duke.jpg",
       link: null
     },
-    bornDate: "April 1, 2024",
-    availableDate: "May 27, 2024",
+    bornDate: "January 3, 2026",
+    availableDate: "Febuary 28, 2026",
     puppies: [
       {
         name: "Puppy A",
-        image: "/images/litters/roux-spring-2024/puppy1.jpg",
+        image: "/images/litters/roux-winter-2026/puppy1.jpg",
         gender: "Female",
         color: "Golden",
         status: "Available",
-        description: "Adventurous and curious."
+        // description: "Adventurous and curious."
       },
       {
         name: "Puppy B",
-        image: "/images/litters/roux-spring-2024/puppy2.jpg",
+        image: "/images/litters/roux-winter-2026/puppy2.jpg",
         gender: "Male",
         color: "Golden",
         status: "Available",
-        description: "Friendly and outgoing."
+        // description: "Friendly and outgoing."
       }
     ]
   }

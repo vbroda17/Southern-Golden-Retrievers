@@ -2,6 +2,7 @@
 // src/components/LitterSection.astro
 // Reusable component for displaying a single litter
 import '../styles/liter-section.css';
+import { SITE_CONFIG } from '../config.js';
 
 interface Props {
   litter: {
@@ -87,7 +88,9 @@ const { litter } = Astro.props;
         <p class="puppy-description">{puppy.description}</p>
         
         {puppy.status === 'Available' && (
-          <a href="/contact" class="btn">Inquire About {puppy.name}</a>
+          <a href={`mailto:${SITE_CONFIG.email}?subject=Inquire About ${puppy.name}`} class="btn">
+            Contact About {puppy.name} Here: {SITE_CONFIG.email}
+          </a>
         )}
       </div>
     ))}

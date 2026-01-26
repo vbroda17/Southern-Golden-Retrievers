@@ -2,13 +2,16 @@
 // src/components/EmailLink.astro
 // Reusable email link component
 
+import { SITE_CONFIG } from '../config.js';
+import '../styles/email-link.css';
+
 interface Props {
   subject?: string;
   body?: string;
   text?: string;
 }
 
-const EMAIL = "cadbihl03@gmail.com";
+const EMAIL = SITE_CONFIG.email
 
 const { 
   subject = "Inquiry About Golden Retriever Puppies",
@@ -25,14 +28,3 @@ const mailtoUrl = `mailto:${EMAIL}${params.toString() ? '?' + params.toString() 
 ---
 
 <a href={mailtoUrl} class="email-link">{text}</a>
-
-<style>
-  .email-link {
-    color: var(--gold);
-    text-decoration: underline;
-  }
-  
-  .email-link:hover {
-    color: var(--gold-dark);
-  }
-</style>

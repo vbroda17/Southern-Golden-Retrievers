@@ -2,6 +2,7 @@
 // src/layouts/Layout.astro
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { SITE_CONFIG } from '../config.js';
 import '../styles/global.css';
 
 interface Props {
@@ -10,21 +11,17 @@ interface Props {
   keywords?: string;
 }
 
-// Site-wide constants
-export const SITE_EMAIL = "cadbihl03@gmail.com";
-export const SITE_NAME = "Southern Golden Retrievers";
-
 const { 
   title, 
-  description = "Southern Golden Retrievers - Award-winning golden retriever puppies in Knoxville, TN. Raised with love, backed by excellence.",
-  keywords = "golden retriever puppies, golden retriever breeders, Knoxville TN, Tennessee golden retrievers, AKC golden retrievers"
+  description = SITE_CONFIG.defaultDescription,
+  keywords = SITE_CONFIG.defaultKeywords
 } = Astro.props;
 
 // Structured data for Google
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "PetStore",
-  "name": SITE_NAME,
+  "name": SITE_CONFIG.name,
   "description": description,
   "address": {
     "@type": "PostalAddress",
@@ -37,7 +34,7 @@ const structuredData = {
     "latitude": "35.9606",
     "longitude": "-83.9207"
   },
-  "priceRange": "$$"
+  "priceRange": "$$$$"
 };
 ---
 
