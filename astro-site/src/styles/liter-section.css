@@ -1,0 +1,104 @@
+.litter-section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 5rem; /* For smooth scroll with sticky header */
+  }
+
+  .parents-section {
+    margin-bottom: 2rem;
+  }
+
+  .parents-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .parents-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .parent-card {
+    text-align: center;
+  }
+
+  .parent-card h3 {
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+
+  .parent-card h4 {
+    margin-top: 0.5rem;
+    font-size: 1.3rem;
+  }
+
+  .parent-image {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .parent-card a {
+    display: block;
+  }
+
+  .parent-card a:hover .parent-image {
+    opacity: 0.9;
+  }
+
+  .litter-info-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--cream);
+    border-radius: 0.75rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .info-item {
+    text-align: center;
+  }
+
+  .info-item strong {
+    display: block;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .puppies-heading {
+    text-align: center;
+    margin: 2rem 0 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  .status-available {
+    color: #2d6a3e;
+    font-weight: 600;
+  }
+
+  .status-reserved {
+    color: #b8860b;
+    font-weight: 600;
+  }
+
+  .status-adopted {
+    color: #666;
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    .parents-grid {
+      grid-template-columns: 1fr;
+    }
+  }

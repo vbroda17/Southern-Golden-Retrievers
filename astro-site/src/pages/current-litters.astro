@@ -2,6 +2,8 @@
 // src/pages/current-litters.astro
 import Layout from '../layouts/Layout.astro';
 import EmailLink from '../components/EmailLink.astro';
+import LitterSection from '../components/LitterSection.astro';
+import { currentLitters } from '../data/sample-litters-data.js';
 import '../styles/current-litters.css';
 
 const title = "Our Available Litters - Southern Golden Retrievers";
@@ -10,94 +12,43 @@ const description = "View our current litter(s) of golden retriever puppies avai
 
 <Layout title={title} description={description}>
     <div class="container">
-<section class="hero">
-            <h1>Take a look at our puppies!</h1>
-            <p> Right now, two of our dams have just given birth. Roux has 9 and Lilly has 11 beufitul godlen pups. see each of their litters here! </p>
-            <p>Contact us at <EmailLink />.</p>
+        <section class="hero">
+            <h1>Current Litters</h1>
+            <p>Meet our beautiful golden retriever puppies currently available.</p>
         </section>
 
-        <section class="puppy-grid">
-        <article class="puppy-card">
-            <h3 class="puppy-name">Sunny</h3>
+        <!-- Quick Navigation -->
+        {currentLitters.length > 1 && (
+          <div class="litter-nav card">
+            <h2>Jump to Litter:</h2>
+            <div class="litter-nav-buttons">
+              {currentLitters.map(litter => (
+                <a href={`#${litter.id}`} class="btn">
+                  {litter.dam.name}'s Litter
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
-            <img
-            src="../images/Group/group3-7.jpeg"
-            alt="Golden Retriever puppy named Sunny"
-            class="puppy-image"
-            >
+        <!-- Display Each Litter -->
+        {currentLitters.map(litter => (
+          <LitterSection litter={litter} />
+        ))}
 
-            <ul class="puppy-meta">
-            <li><strong>Gender:</strong> Female</li>
-            <li><strong>Color:</strong> Light Golden</li>
-            <li><strong>Status:</strong> Available</li>
-            </ul>
+        <!-- No Litters Message -->
+        {currentLitters.length === 0 && (
+          <section class="card no-litters">
+            <h2>No Current Litters</h2>
+            <p>We don't have any puppies available right now, but we have litters planned! Contact us to be added to our waiting list.</p>
+            <p><EmailLink subject="Waiting List Inquiry" text="Join our waiting list" /></p>
+          </section>
+        )}
 
-            <p class="puppy-description">
-            Sunny is playful, confident, and loves people. She will make a wonderful family companion.
-            </p>
-        </article>
-
-        <article class="puppy-card">
-            <h3 class="puppy-name">Buddy</h3>
-
-            <img
-            src="../images/Group/group3-6.jpeg"
-            alt="Golden Retriever puppy named Buddy"
-            class="puppy-image"
-            >
-
-            <ul class="puppy-meta">
-            <li><strong>Gender:</strong> Male</li>
-            <li><strong>Color:</strong> Dark Golden</li>
-            <li><strong>Status:</strong> Reserved</li>
-            </ul>
-
-            <p class="puppy-description">
-            Buddy is calm, affectionate, and already showing great focus and intelligence.
-            </p>
-        </article>
-
-        <!-- Add new dogs, section is from article to article -->
-        <article class="puppy-card">
-            <h3 class="puppy-name">Sunny</h3>
-
-            <img
-            src="../images/Group/group3-7.jpeg"
-            alt="Golden Retriever puppy named Sunny"
-            class="puppy-image"
-            >
-
-            <ul class="puppy-meta">
-            <li><strong>Gender:</strong> Female</li>
-            <li><strong>Mom</strong> The Mother</li>
-            <li><strong>Color:</strong> Light Golden</li>
-            <li><strong>Status:</strong> Available</li>
-            </ul>
-
-            <p class="puppy-description">
-            Sunny is playful, confident, and loves people. She will make a wonderful family companion.
-            </p>
-        </article>
-        <article class="puppy-card">
-            <h3 class="puppy-name">Sunny</h3>
-
-            <img
-            src="../images/Group/group3-7.jpeg"
-            alt="Golden Retriever puppy named Sunny"
-            class="puppy-image"
-            >
-
-            <ul class="puppy-meta">
-            <li><strong>Gender:</strong> Female</li>
-            <li><strong>Color:</strong> Light Golden</li>
-            <li><strong>Status:</strong> Available</li>
-            </ul>
-
-            <p class="puppy-description">
-            Sunny is playful, confident, and loves people. She will make a wonderful family companion.
-            </p>
-        </article>
-
+        <!-- Contact CTA -->
+        <section class="card contact-cta">
+            <h2>Interested in a Puppy?</h2>
+            <p>Contact us at <EmailLink subject="Interested in Current Litter" /> or visit our <a href="/contact">contact page</a> to learn more about adopting one of our puppies.</p>
         </section>
     </div>
 </Layout>

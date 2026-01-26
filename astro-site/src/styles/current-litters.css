@@ -1,42 +1,49 @@
 /* src/styles/litters.css - Litter pages styles */
 
-.litter-info {
-  margin-bottom: 2rem;
-}
+.litter-nav {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 
-.litter-details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
+  .litter-nav h2 {
+    margin-bottom: 1rem;
+  }
 
-.detail-item {
-  padding: 0.75rem;
-  background: var(--cream);
-  border-radius: 0.5rem;
-  text-align: center;
-}
+  .litter-nav-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
-.detail-item strong {
-  display: block;
-  color: var(--gold);
-  margin-bottom: 0.25rem;
-}
+  .no-litters {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
 
-.contact-cta {
-  text-align: center;
-  margin-top: 2rem;
-}
+  .no-litters h2 {
+    margin-bottom: 1rem;
+  }
 
-.contact-cta h2 {
-  margin-bottom: 1rem;
-}
+  .contact-cta {
+    text-align: center;
+    margin-top: 2rem;
+  }
 
-.contact-cta a {
-  color: var(--gold);
-}
+  .contact-cta h2 {
+    margin-bottom: 1rem;
+  }
 
-.contact-cta a:hover {
-  color: var(--gold-dark);
-}
+  .contact-cta a {
+    color: var(--gold);
+  }
+
+  .contact-cta a:hover {
+    color: var(--gold-dark);
+  }
+
+  @media (max-width: 600px) {
+    .litter-nav-buttons {
+      flex-direction: column;
+    }
+  }

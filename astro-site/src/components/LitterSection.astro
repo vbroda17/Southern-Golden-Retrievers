@@ -1,0 +1,95 @@
+---
+// src/components/LitterSection.astro
+// Reusable component for displaying a single litter
+import '../styles/liter-section.css';
+
+interface Props {
+  litter: {
+    id: string;
+    dam: { name: string; image: string; link: string | null };
+    sire: { name: string; image: string; link: string | null };
+    bornDate: string;
+    availableDate: string;
+    puppies: Array<{
+      name: string;
+      image: string;
+      gender: string;
+      color: string;
+      status: string;
+      description: string;
+    }>;
+  };
+}
+
+const { litter } = Astro.props;
+---
+
+<section id={litter.id} class="litter-section card">
+  <!-- Parents Section -->
+  <div class="parents-section">
+    <h2>Current Litter</h2>
+    <div class="parents-grid">
+      <!-- Dam -->
+      <div class="parent-card">
+        <h3>Dam</h3>
+        {litter.dam.link ? (
+          <a href={litter.dam.link}>
+            <img src={litter.dam.image} alt={litter.dam.name} class="parent-image">
+          </a>
+        ) : (
+          <img src={litter.dam.image} alt={litter.dam.name} class="parent-image">
+        )}
+        <h4>{litter.dam.name}</h4>
+      </div>
+
+      <!-- Sire -->
+      <div class="parent-card">
+        <h3>Sire</h3>
+        {litter.sire.link ? (
+          <a href={litter.sire.link}>
+            <img src={litter.sire.image} alt={litter.sire.name} class="parent-image">
+          </a>
+        ) : (
+          <img src={litter.sire.image} alt={litter.sire.name} class="parent-image">
+        )}
+        <h4>{litter.sire.name}</h4>
+      </div>
+    </div>
+
+    <!-- Litter Info -->
+    <div class="litter-info-details">
+      <div class="info-item">
+        <strong>Born:</strong> {litter.bornDate}
+      </div>
+      <div class="info-item">
+        <strong>Ready:</strong> {litter.availableDate}
+      </div>
+      <div class="info-item">
+        <strong>Available:</strong> {litter.puppies.filter(p => p.status === 'Available').length} of {litter.puppies.length}
+      </div>
+    </div>
+  </div>
+
+  <!-- Puppies Grid -->
+  <h3 class="puppies-heading">Available Puppies</h3>
+  <div class="puppy-grid">
+    {litter.puppies.map(puppy => (
+      <div class="puppy-card">
+        <h4 class="puppy-name">{puppy.name}</h4>
+        <img src={puppy.image} alt={puppy.name} class="puppy-image">
+        
+        <ul class="puppy-meta">
+          <li><strong>Gender:</strong> {puppy.gender}</li>
+          <li><strong>Color:</strong> {puppy.color}</li>
+          <li><strong>Status:</strong> <span class={`status-${puppy.status.toLowerCase()}`}>{puppy.status}</span></li>
+        </ul>
+        
+        <p class="puppy-description">{puppy.description}</p>
+        
+        {puppy.status === 'Available' && (
+          <a href="/contact" class="btn">Inquire About {puppy.name}</a>
+        )}
+      </div>
+    ))}
+  </div>
+</section>
