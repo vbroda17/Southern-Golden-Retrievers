@@ -1,15 +1,32 @@
 ---
 // src/components/Navbar.astro
+import { SITE_CONFIG } from '../config.js';
 import '../styles/navbar.css';
 
 const currentPath = Astro.url.pathname;
 ---
 
+<!-- Top Info Bar -->
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar-content">
+      <span class="top-bar-location">📍 Knoxville, TN</span>
+      <button 
+        class="top-bar-email copy-email-btn" 
+        data-email={SITE_CONFIG.email}
+        title="Click to copy email address"
+      >
+        📧 {SITE_CONFIG.email}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navbar -->
 <header class="site-header">
   <div class="container">
     <div class="header-inner">
       <a href="/" class="brand">Southern Golden Retrievers</a>
-      
       <nav class="nav">
         <a href="/" class={`nav-link ${currentPath === '/' ? 'active' : ''}`}>Home</a>
         <a href="/current-litters" class={`nav-link ${currentPath.startsWith('/current-litters') ? 'active' : ''}`}>Current Litters</a>

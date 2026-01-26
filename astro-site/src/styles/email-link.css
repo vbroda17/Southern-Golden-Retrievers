@@ -1,33 +1,44 @@
-  .email-link {
+.email-link {
     color: var(--gold);
     text-decoration: underline;
+    transition: color 0.2s ease;
   }
   
   .email-link:hover {
     color: var(--gold-dark);
   }
-  
+
   .email-with-copy {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.35rem;
   }
 
   .copy-btn {
-    background: var(--gold);
-    color: white;
-    border: none;
-    padding: 0.25rem 0.5rem;
+    background: var(--tan);
+    color: var(--charcoal);
+    border: 1px solid var(--gold);
+    padding: 0.2rem 0.4rem;
     border-radius: 0.4rem;
     cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.2s;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    line-height: 1;
   }
 
   .copy-btn:hover {
-    background: var(--gold-dark);
+    background: var(--gold);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(201, 162, 77, 0.3);
+  }
+
+  .copy-btn:active {
+    transform: translateY(0);
   }
 
   .copy-btn.copied {
-    background: #2d6a3e;
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold-dark);
   }

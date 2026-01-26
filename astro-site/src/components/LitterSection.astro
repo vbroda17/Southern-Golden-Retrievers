@@ -3,6 +3,7 @@
 // Reusable component for displaying a single litter
 import '../styles/liter-section.css';
 import { SITE_CONFIG } from '../config.js';
+import ContactButton from '../components/ContactButton.astro';
 
 interface Props {
   litter: {
@@ -88,9 +89,10 @@ const { litter } = Astro.props;
         <p class="puppy-description">{puppy.description}</p>
         
         {puppy.status === 'Available' && (
-          <a href={`mailto:${SITE_CONFIG.email}?subject=Inquire About ${puppy.name}`} class="btn">
-            Contact About {puppy.name} Here: {SITE_CONFIG.email}
-          </a>
+            <ContactButton 
+            subject={`Inquire About ${puppy.name}`}
+            buttonText={`Contact About ${puppy.name}`}
+            />
         )}
       </div>
     ))}
