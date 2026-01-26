@@ -1,0 +1,28 @@
+---
+// src/components/ContactButton.astro
+// Displays email with both mailto link AND copy button
+
+import { SITE_CONFIG } from '../config.js';
+
+interface Props {
+  subject?: string;
+  buttonText?: string;
+}
+
+const { 
+  subject = "Inquiry About Golden Retriever Puppies",
+  buttonText = "Contact Us"
+} = Astro.props;
+
+const mailtoUrl = `mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent(subject)}`;
+---
+
+<div class="contact-button-wrapper">
+  <a href={mailtoUrl} class="btn contact-main-btn">{buttonText}</a>
+  <div class="contact-email-display">
+    <span class="email-text">{SITE_CONFIG.email}</span>
+    <button class="copy-email-btn" data-email={SITE_CONFIG.email} title="Copy email">
+      📋
+    </button>
+  </div>
+</div>

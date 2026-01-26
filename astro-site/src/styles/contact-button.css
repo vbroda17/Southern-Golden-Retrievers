@@ -1,0 +1,46 @@
+  .contact-button-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .contact-main-btn {
+    /* Uses existing .btn styles from global.css */
+  }
+
+  .contact-email-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.6rem;
+    background: var(--cream);
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .email-text {
+    color: var(--charcoal);
+  }
+
+  .copy-email-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1rem;
+    transition: transform 0.2s;
+  }
+
+  .copy-email-btn:hover {
+    transform: scale(1.2);
+  }
+
+  .copy-email-btn.copied {
+    animation: copySuccess 0.3s ease;
+  }
+
+  @keyframes copySuccess {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }

@@ -6,3 +6,28 @@
   .email-link:hover {
     color: var(--gold-dark);
   }
+  
+  .email-with-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .copy-btn {
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+
+  .copy-btn:hover {
+    background: var(--gold-dark);
+  }
+
+  .copy-btn.copied {
+    background: #2d6a3e;
+  }
