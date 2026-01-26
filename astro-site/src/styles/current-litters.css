@@ -1,0 +1,42 @@
+/* src/styles/litters.css - Litter pages styles */
+
+.litter-info {
+  margin-bottom: 2rem;
+}
+
+.litter-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.detail-item {
+  padding: 0.75rem;
+  background: var(--cream);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.detail-item strong {
+  display: block;
+  color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+
+.contact-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.contact-cta h2 {
+  margin-bottom: 1rem;
+}
+
+.contact-cta a {
+  color: var(--gold);
+}
+
+.contact-cta a:hover {
+  color: var(--gold-dark);
+}
