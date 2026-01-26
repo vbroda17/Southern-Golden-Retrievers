@@ -1,10 +1,10 @@
 ---
 // src/components/Navbar.astro
 import { SITE_CONFIG } from '../config.js';
+import { url } from '../utils.js';
 import '../styles/navbar.css';
 
 const currentPath = Astro.url.pathname;
-const base = import.meta.env.BASE_URL;
 ---
 
 <!-- Top Info Bar -->
@@ -27,14 +27,14 @@ const base = import.meta.env.BASE_URL;
 <header class="site-header">
   <div class="container">
     <div class="header-inner">
-      <a href={base} class="brand">Southern Golden Retrievers</a>
+      <a href={url('')} class="brand">Southern Golden Retrievers</a>
       <nav class="nav">
-        <a href={base} class={`nav-link ${currentPath === base ? 'active' : ''}`}>Home</a>
-        <a href={`${base}current-litters`} class={`nav-link ${currentPath.includes('/current-litters') ? 'active' : ''}`}>Current Litters</a>
-        <a href={`${base}dams`} class={`nav-link ${currentPath.includes('/dams') ? 'active' : ''}`}>Dams</a>
-        <a href={`${base}testimonials`} class={`nav-link ${currentPath.includes('/testimonials') ? 'active' : ''}`}>Testimonials</a>
-        <a href={`${base}contact`} class={`nav-link ${currentPath.includes('/contact') ? 'active' : ''}`}>Contact</a>
-        <a href={`${base}about`} class={`nav-link ${currentPath.includes('/about') ? 'active' : ''}`}>About</a>
+        <a href={url('')} class={`nav-link ${currentPath === url('') ? 'active' : ''}`}>Home</a>
+        <a href={url('current-litters')} class={`nav-link ${currentPath.includes('current-litters') ? 'active' : ''}`}>Current Litters</a>
+        <a href={url('dams')} class={`nav-link ${currentPath.includes('dams') ? 'active' : ''}`}>Dams</a>
+        <a href={url('testimonials')} class={`nav-link ${currentPath.includes('testimonials') ? 'active' : ''}`}>Testimonials</a>
+        <a href={url('contact')} class={`nav-link ${currentPath.includes('contact') ? 'active' : ''}`}>Contact</a>
+        <a href={url('about')} class={`nav-link ${currentPath.includes('about') ? 'active' : ''}`}>About</a>
       </nav>
     </div>
   </div>
