@@ -2,6 +2,7 @@
 // src/pages/dams.astro
 import Layout from '../layouts/Layout.astro';
 import EmailLink from '../components/EmailLink.astro';
+import ImageCarousel from '../components/ImageCarousel.astro';
 import { url } from '../utils.js';
 import '../styles/dams.css';
 
@@ -18,25 +19,19 @@ const description = "Meet Lilly, Roux, and Raine - our tested, certified, and aw
 
         <section id="lilly" class="card dam-section">
             <h2>Lilly</h2>
-            <img src={url('images/Lilly/lilly3.jpeg')}
-                alt="An Image of Lilly in the Driveway"
-                class="showcase-image">
-            <p>Lilly’s description goes here.</p>
+            <ImageCarousel folders={['Lilly']} alt="Lilly" />
+            <p>Lilly's description goes here.</p>
         </section>
 
         <section id="roux" class="card dam-section">
             <h2>Roux</h2>
-            <img src={url('images/Roux/roux1.jpeg')}
-                alt="An Image of Roux with Her Medal"
-                class="showcase-image">
+            <ImageCarousel folders={['Roux']} alt="Roux" />
             <p>Roux's description goes here.</p>
         </section>
 
         <section id="raine" class="card dam-section">
             <h2>Raine (Retired)</h2>
-            <img src={url('images/Raine/raine4.jpeg')}
-                alt="An Image of Raine in the yard"
-                class="showcase-image">
+            <ImageCarousel folders={['Raine']} alt="Raine" />
             <p>Raine's description goes here.</p>
         </section>
     </div>

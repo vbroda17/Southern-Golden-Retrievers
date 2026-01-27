@@ -1,0 +1,127 @@
+---
+// src/components/ImageCarousel.astro
+// Reusable image carousel component with arrow navigation
+
+import { url } from '../utils.js';
+import { readdirSync } from 'fs';
+import { join } from 'path';
+import '../styles/image-carousel.css';
+
+interface Props {
+  folders?: string[]; // Array of folder paths relative to public/images/
+  images?: string[]; // Array of specific image paths relative to public/
+  alt?: string; // Default alt text (image name will be appended)
+  autoplay?: boolean; // Auto-advance slides (default: false)
+  interval?: number; // Auto-advance interval in ms (default: 5000)
+}
+
+const {
+  folders = [],
+  images = [],
+  alt = "Carousel image",
+  autoplay = false,
+  interval = 5000
+} = Astro.props;
+
+// Collect all image paths
+const allImages: string[] = [];
+
+// Add images from folders
+for (const folder of folders) {
+  try {
+    const folderPath = join(process.cwd(), 'public', 'images', folder);
+    const files = readdirSync(folderPath);
+
+    // Filter for image files and sort them
+    const imageFiles = files
+      .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
+      .sort();
+
+    // Add full paths
+    imageFiles.forEach(file => {
+      allImages.push(`images/${folder}/${file}`);
+    });
+  } catch (error) {
+    console.warn(`Could not read folder: images/${folder}`);
+  }
+}
+
+// Add individual images
+allImages.push(...images);
+
+// Generate a unique ID for this carousel instance
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="image-carousel" data-carousel-id={carouselId} data-autoplay={autoplay} data-interval={interval}>
+  <div class="carousel-container">
+    {allImages.map((imagePath, index) => {
+      const fileName = imagePath.split('/').pop()?.split('.')[0] || '';
+      const imageAlt = `${alt} - ${fileName}`;
+
+      return (
+        <div class={`carousel-slide ${index === 0 ? 'active' : ''}`}>
+          <img
+            src={url(imagePath)}
+            alt={imageAlt}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            class="carousel-image"
+          />
+        </div>
+      );
+    })}
+
+    {allImages.length > 1 && (
+      <>
+        <button class="carousel-btn carousel-prev" aria-label="Previous image">
+          &lsaquo;
+        </button>
+        <button class="carousel-btn carousel-next" aria-label="Next image">
+          &rsaquo;
+        </button>
+
+        <div class="carousel-indicators">
+          {allImages.map((_, index) => (
+            <button
+              class={`indicator ${index === 0 ? 'active' : ''}`}
+              aria-label={`Go to image ${index + 1}`}
+              data-index={index}
+            />
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+</div>
+
+<!-- Lightbox overlay -->
+<div class="carousel-lightbox" id={`lightbox-${carouselId}`}>
+  <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+  <button class="lightbox-prev" aria-label="Previous image">&lsaquo;</button>
+  <button class="lightbox-next" aria-label="Next image">&rsaquo;</button>
+  <img class="lightbox-image" src="" alt="" />
+  <div class="lightbox-counter"></div>
+</div>
+
+<script>
+  import { initCarousel } from '../scripts/carousel.js';
+
+  // Initialize all carousels on the page
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllCarousels);
+  } else {
+    initAllCarousels();
+  }
+
+  function initAllCarousels() {
+    const carousels = document.querySelectorAll('[data-carousel-id]');
+
+    carousels.forEach((carousel) => {
+      const carouselId = carousel.getAttribute('data-carousel-id');
+      const autoplay = carousel.getAttribute('data-autoplay') === 'true';
+      const interval = parseInt(carousel.getAttribute('data-interval') || '5000');
+
+      initCarousel(carouselId, { autoplay, interval });
+    });
+  }
+</script>
