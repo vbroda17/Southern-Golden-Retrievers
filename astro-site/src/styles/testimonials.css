@@ -19,7 +19,7 @@
 
     .testimonial-image {
         width: 100%;
-        height: 300px;
+        aspect-ratio: 4 / 5;
         object-fit: cover;
         border-radius: 0.75rem;
         display: block;
@@ -63,10 +63,6 @@
             width: 100%;
             max-width: 400px;
         }
-
-        .testimonial-image {
-            height: 250px;
-        }
     }
 
     @media (max-width: 600px) {
@@ -77,9 +73,5 @@
 
         .testimonial-quote {
             font-size: 1rem;
-        }
-
-        .testimonial-image {
-            height: 200px;
         }
     }
