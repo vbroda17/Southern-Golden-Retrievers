@@ -10,6 +10,13 @@
   margin-top: 1rem;
 }
 
+.card .btn {
+  display: block;
+  width: fit-content;
+  margin: 1rem auto 0;
+}
+
+
   @media (max-width: 600px) {
     .home-card-grid {
       display: grid;
