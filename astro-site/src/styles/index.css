@@ -10,18 +10,41 @@
   margin-top: 1rem;
 }
 
+.card {
+  text-align: center;
+}
+
 .card .btn {
-  display: block;
+  display: inline-block;
   width: fit-content;
-  margin: 1rem auto 0;
+  margin: 1rem 0 0;
+  vertical-align: middle;
+}
+
+.card .btn + .btn {
+  margin-left: 0.5rem;
 }
 
 
-  @media (max-width: 600px) {
-    .home-card-grid {
-      display: grid;
-      grid-template-columns: repeat(1, 1fr);
-      gap: 1rem;
-      margin-top: 1rem;
-    }
+@media (max-width: 600px) {
+  .home-card-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
   }
+
+  .card {
+    text-align: center;
+  }
+
+  /* keep buttons inline so they wrap and remain centered on narrow screens */
+  .card .btn {
+    display: inline-block;
+    margin: 0.75rem 0.4rem 0;
+  }
+
+  .card .btn + .btn {
+    margin-left: 0.5rem;
+  }
+}
