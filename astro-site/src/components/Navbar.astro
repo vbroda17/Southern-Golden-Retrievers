@@ -25,7 +25,7 @@ const currentPath = Astro.url.pathname;
 
 <!-- Main Navbar -->
 <header class="site-header">
-  <nav class="container">
+  <div class="container">
     <div class="header-inner">
       <a href={url('')} class="brand">Southern Golden Retrievers</a>
       <nav class="nav">
@@ -37,5 +37,5 @@ const currentPath = Astro.url.pathname;
         <a href={url('about')} class={`nav-link ${currentPath.includes('about') ? 'active' : ''}`}>About</a>
       </nav>
     </div>
-  </nav>
+  </div>
 </header>
