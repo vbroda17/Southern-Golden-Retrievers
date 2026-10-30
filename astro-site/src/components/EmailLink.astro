@@ -30,7 +30,7 @@ const mailtoUrl = `mailto:${SITE_CONFIG.email}${params.toString() ? '?' + params
 {showCopy ? (
   <span class="email-with-copy">
     <a href={mailtoUrl} class="email-link">{text}</a>
-    <button class="copy-btn" data-email={SITE_CONFIG.email} title="Copy email address">
+    <button class="copy-btn" data-email={SITE_CONFIG.email} title="Copy email address" aria-label="Copy email address">
       📋
     </button>
   </span>

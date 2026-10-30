@@ -51,16 +51,19 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
       const imageAlt = `${alt} - ${fileName}`;
 
       return (
-        <div class={`carousel-slide ${index === 0 ? 'active' : ''}`}>
-          <Image
-            src={image}
-            alt={imageAlt}
-            width={1600}
-            widths={[600, 1000, 1600]}
-            sizes="(max-width: 1000px) 100vw, 1000px"
-            loading={index === 0 ? 'eager' : 'lazy'}
-            class="carousel-image"
-          />
+        <!-- Hidden slides are inert so keyboard focus skips them -->
+        <div class={`carousel-slide ${index === 0 ? 'active' : ''}`} inert={index !== 0}>
+          <button class="carousel-open" aria-label={`View larger: ${imageAlt}`}>
+            <Image
+              src={image}
+              alt={imageAlt}
+              width={1600}
+              widths={[600, 1000, 1600]}
+              sizes="(max-width: 1000px) 100vw, 1000px"
+              loading={index === 0 ? 'eager' : 'lazy'}
+              class="carousel-image"
+            />
+          </button>
         </div>
       );
     })}
@@ -79,6 +82,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
             <button
               class={`indicator ${index === 0 ? 'active' : ''}`}
               aria-label={`Go to image ${index + 1}`}
+              aria-current={index === 0 ? 'true' : undefined}
               data-index={index}
             />
           ))}
@@ -89,7 +93,7 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 </div>
 
 <!-- Lightbox overlay -->
-<div class="carousel-lightbox" id={`lightbox-${carouselId}`}>
+<div class="carousel-lightbox" id={`lightbox-${carouselId}`} role="dialog" aria-modal="true" aria-label={`${alt} photos`}>
   <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
   <button class="lightbox-prev" aria-label="Previous image">&lsaquo;</button>
   <button class="lightbox-next" aria-label="Next image">&rsaquo;</button>

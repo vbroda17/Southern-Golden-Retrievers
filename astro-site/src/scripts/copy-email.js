@@ -9,6 +9,12 @@ const COPY_BUTTONS = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Screen readers don't announce text changes inside a button, so report copies here
+  const status = document.createElement('div');
+  status.setAttribute('role', 'status');
+  status.className = 'visually-hidden';
+  document.body.appendChild(status);
+
   COPY_BUTTONS.forEach(({ selector, feedback, duration }) => {
     document.querySelectorAll(selector).forEach(button => {
       button.addEventListener('click', async () => {
@@ -22,10 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const originalText = button.textContent;
           button.textContent = feedback;
           button.classList.add('copied');
+          status.textContent = 'Email address copied';
 
           setTimeout(() => {
             button.textContent = originalText;
             button.classList.remove('copied');
+            status.textContent = '';
           }, duration);
         } catch (err) {
           // Fallback for older browsers or if clipboard API fails

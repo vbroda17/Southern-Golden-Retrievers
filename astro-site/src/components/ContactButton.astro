@@ -22,7 +22,7 @@ const mailtoUrl = `mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent(subj
   <a href={mailtoUrl} class="btn contact-main-btn">{buttonText}</a>
   <div class="contact-email-display">
     <span class="email-text">{SITE_CONFIG.email}</span>
-    <button class="copy-email-btn" data-email={SITE_CONFIG.email} title="Copy email">
+    <button class="copy-email-btn" data-email={SITE_CONFIG.email} title="Copy email address" aria-label="Copy email address">
       📋
     </button>
   </div>
