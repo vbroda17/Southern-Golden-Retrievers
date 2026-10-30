@@ -2,6 +2,7 @@
 // src/pages/dams.astro
 import Layout from '../layouts/Layout.astro';
 import ImageCarousel from '../components/ImageCarousel.astro';
+import { url } from '../utils.js';
 import '../styles/dams.css';
 
 const title = "Our Dams - Southern Golden Retrievers";
@@ -67,6 +68,14 @@ const description = "Meet Lilly, Roux, and Raine - our tested, certified, and aw
                 <p>She has the friendly, affectionate temperament the breed is known for and absolutely loves being around people. Raine is full of personality — she loves showing her belly for attention, spins in circles when it’s time for food, and makes her adorable signature “wookie” noise whenever she gets excited playing with her toys. Her playful, loving nature makes her a favorite with everyone she meets.</p>
                 <p>Raine is gentle, social, and eager to please, with the kind of calm and affectionate temperament that makes an outstanding family companion. Her puppies inherited her friendly disposition, intelligence, and playful personality.</p>
             </div>
+        </section>
+
+        <section class="card cta-card">
+            <h2>Meet Their Puppies</h2>
+            <p>See who's available now in Current Litters, look back at their Past Litters, or check Puppy News to see which mom is having puppies next.</p>
+            <a class="btn" href={url('current-litters')}>Current Litters</a>
+            <a class="btn" href={url('past-litters')}>Past Litters</a>
+            <a class="btn" href={url('puppy-news')}>Puppy News</a>
         </section>
     </div>
 </Layout>

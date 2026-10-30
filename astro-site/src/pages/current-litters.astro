@@ -5,6 +5,7 @@ import EmailLink from '../components/EmailLink.astro';
 import LitterSection from '../components/LitterSection.astro';
 import { getCurrentLitters } from '../litters.js';
 import { url } from '../utils.js';
+import { SITE_CONFIG } from '../config.js';
 import '../styles/current-litters.css';
 
 const title = "Available Litters - Southern Golden Retrievers";
@@ -48,8 +49,9 @@ const currentLitters = await getCurrentLitters();
         {currentLitters.length === 0 && (
           <section class="card no-litters">
             <h2>No Current Litters</h2>
-            <p>We don't have any puppies available right now, but we have litters planned! Contact us to be added to our waiting list.</p>
-            <p><EmailLink subject="Waiting List Inquiry" text="Join our waiting list" /></p>
+            <p>We don't have any puppies available right now, but we have litters planned! See what's coming next in Puppy News, and send us an email to join the waitlist so you don't miss out.</p>
+            <a class="btn" href={url("puppy-news")}>See Puppy News</a>
+            <a class="btn" href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`}>Join the Waitlist</a>
           </section>
         )}
 

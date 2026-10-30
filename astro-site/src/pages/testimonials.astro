@@ -3,6 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import testimonialImage from '../assets/images/Group/group2-4.jpeg';
+import { url } from '../utils.js';
 import '../styles/testimonials.css';
 
 const title = "Testimonials | Southern Golden Retrievers";
@@ -53,5 +54,13 @@ const description = "Hear from families who brought home a Southern Golden Retri
                 <p class="testimonial-date">Got their pup in Fall 2023</p>
             </div>
         </div>
+
+        <section class="card cta-card">
+            <h2>Ready for Your Own Golden?</h2>
+            <p>See who's available now, or check Puppy News to see which mom is having puppies next. You can also see more of our pups in Past Litters.</p>
+            <a class="btn" href={url('current-litters')}>Current Litters</a>
+            <a class="btn" href={url('puppy-news')}>Puppy News</a>
+            <a class="btn" href={url('past-litters')}>Past Litters</a>
+        </section>
     </div>
 </Layout>
