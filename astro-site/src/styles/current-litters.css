@@ -34,27 +34,6 @@
     margin-bottom: 1rem;
   }
 
-  .contact-cta a {
-    color: var(--gold);
-  }
-
-  .contact-cta a:hover {
-    color: var(--gold-dark);
-  }
-
-  .past-litters-link {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .past-litters-link a {
-    color: var(--gold);
-  }
-
-  .past-litters-link a:hover {
-    color: var(--gold-dark);
-  }
-
   @media (max-width: 600px) {
     .litter-nav-buttons {
       flex-direction: column;

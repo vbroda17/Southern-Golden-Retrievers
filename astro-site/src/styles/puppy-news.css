@@ -30,19 +30,6 @@
   color: #444;
 }
 
-.puppy-news-links {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.puppy-news-links a {
-  color: var(--gold);
-}
-
-.puppy-news-links a:hover {
-  color: var(--gold-dark);
-}
-
 @media (max-width: 600px) {
   .planned-litter {
     padding: 1rem;
