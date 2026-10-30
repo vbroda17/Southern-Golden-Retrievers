@@ -37,6 +37,9 @@ for (const puppy of litter.puppies) {
   }
 }
 
+// Available pups first, then Reserved, then Adopted (keeping data order within each group)
+const puppies = [...litter.puppies].sort((a, b) => STATUSES.indexOf(a.status) - STATUSES.indexOf(b.status));
+
 // Image paths in the litter data are relative to src/assets/images/
 const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
 ---
@@ -90,7 +93,7 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
   <!-- Puppies Grid -->
   <h3 class="puppies-heading">Meet the Puppies</h3>
   <div class="puppy-grid">
-    {litter.puppies.map(puppy => (
+    {puppies.map(puppy => (
       <div class="puppy-card">
         <h4 class="puppy-name">{puppy.name}</h4>
         <LitterPhoto
