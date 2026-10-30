@@ -1,0 +1,70 @@
+---
+// src/components/PastLitter.astro
+// One archived litter on the Past Litters page: its puppy photos and photos families sent in
+import '../styles/past-litters.css';
+import LitterPhoto from './LitterPhoto.astro';
+import { url, countOf } from '../utils.js';
+
+// Shape produced by getPastLitters() in src/litters.js
+interface Props {
+  litter: {
+    id: string;
+    dam: { name: string; link: string | null };
+    sire: { name: string };
+    bornDate: string;
+    note?: string;
+    puppies: Array<{ name: string; image?: string }>;
+    familyPhotos: Array<{ image: string; caption?: string }>;
+  };
+}
+
+const { litter } = Astro.props;
+
+// Only pups with a photo; a grid of "Photo coming soon" boxes isn't useful here
+const puppyPhotos = litter.puppies.filter(puppy => puppy.image);
+const photo = { widths: [400, 800], sizes: '(max-width: 600px) 100vw, 320px' };
+---
+
+<section id={litter.id} class="past-litter card">
+  <h2>
+    {litter.dam.link ? <a href={url(litter.dam.link)}>{litter.dam.name}</a> : litter.dam.name}
+    &times; {litter.sire.name}
+  </h2>
+  <p class="past-litter-meta">
+    Born {litter.bornDate}
+    {litter.puppies.length > 0 && <span> &middot; {countOf(litter.puppies.length, 'puppy', 'puppies')}</span>}
+  </p>
+  {litter.note && <p class="past-litter-note">{litter.note}</p>}
+
+  {puppyPhotos.length > 0 && (
+    <>
+      <h3>As Puppies</h3>
+      <div class="past-photo-grid">
+        {puppyPhotos.map(puppy => (
+          <figure class="past-photo">
+            <LitterPhoto path={puppy.image} alt={puppy.name} class="past-photo-image" {...photo} />
+            <figcaption>{puppy.name}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </>
+  )}
+
+  {litter.familyPhotos.length > 0 && (
+    <>
+      <h3>All Grown Up</h3>
+      <div class="past-photo-grid">
+        {litter.familyPhotos.map(({ image, caption }) => (
+          <figure class="past-photo">
+            <LitterPhoto path={image} alt={caption ?? `A puppy from ${litter.dam.name}'s litter, all grown up`} class="past-photo-image" {...photo} />
+            {caption && <figcaption>{caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </>
+  )}
+
+  {puppyPhotos.length === 0 && litter.familyPhotos.length === 0 && (
+    <p class="past-litter-empty">Photos coming soon.</p>
+  )}
+</section>

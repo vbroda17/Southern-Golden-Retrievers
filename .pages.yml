@@ -23,7 +23,7 @@ content:
     filename: "{dam}-{year}-{month}.yml"
     view:
       primary: dam
-      fields: [dam, sire, born]
+      fields: [dam, sire, born, archived]
       sort: born
       order: desc
     fields:
@@ -61,10 +61,42 @@ content:
 
       - name: readyDate
         label: Ready to go home
+        description: Required while the litter is on Current Litters. Can be left empty for an old litter added straight to Past Litters.
         type: date
-        required: true
         options:
           format: yyyy-MM-dd
+
+      - name: archived
+        label: Move to Past Litters
+        description: Turn on once the puppies have gone home. The litter leaves Current Litters and shows on Past Litters instead.
+        type: boolean
+        default: false
+
+      - name: pastNote
+        label: Past Litters note (optional)
+        description: A sentence or two shown with this litter on Past Litters.
+        type: text
+
+      - name: familyPhotos
+        label: Family photos (Past Litters)
+        description: Photos families send of their grown-up pups. Shown under "All Grown Up" on Past Litters.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{caption}"
+        fields:
+          - name: photo
+            label: Photo
+            type: image
+            required: true
+            options:
+              path: astro-site/src/assets/images/litters
+
+          - name: caption
+            label: Caption (optional)
+            description: e.g. "Bella at one year old"
+            type: string
 
       - name: puppies
         label: Puppies

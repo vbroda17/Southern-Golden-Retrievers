@@ -19,3 +19,8 @@ puppies:
     color: Light Golden
     status: Adopted
     description: Calm and cuddly, loves attention.
+archived: true
+pastNote: All of Lilly's winter pups are home with their families.
+familyPhotos:
+  - photo: Group/group3-7.jpeg
+    caption: Puppy 1 at six months

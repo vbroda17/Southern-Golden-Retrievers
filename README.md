@@ -14,6 +14,7 @@ Built with [Astro](https://astro.build) as a static site and hosted on GitHub Pa
 - [Running the site locally](#running-the-site-locally)
 - [How changes go live](#how-changes-go-live)
 - [Updating litters](#updating-litters)
+- [Past litters](#past-litters)
 - [Updating the FAQ](#updating-the-faq)
 - [Adding photos of the dams](#adding-photos-of-the-dams)
 - [Other common edits](#other-common-edits)
@@ -72,7 +73,7 @@ This only conflicts if the same litter file was changed on both branches, so avo
 
 Litters are edited through **[Pages CMS](https://app.pagescms.org)**, a free web editor with simple forms. No code, no installs. Each litter is saved as a small file in [`astro-site/src/content/litters/`](astro-site/src/content/litters/), and the site rebuilds itself after every save.
 
-The Current Litters page is built from these files, and the Home and Contact pages count them to say "one litter", "two litters", or show a waiting-list message when there are none. You never need to edit those pages by hand.
+The Current Litters and Past Litters pages are built from these files, and the Home and Contact pages count them to say "one litter", "two litters", or show a waiting-list message when there are none. You never need to edit those pages by hand.
 
 ### One-time setup
 
@@ -101,7 +102,8 @@ Photos straight off a phone are fine. The site automatically resizes and compres
 
 - **A pup was reserved or went home:** open the litter, expand the pup, change **Status**, and save.
 - **Add photos later:** open the pup and upload a **Photo**. Pups without one show a "Photo coming soon" box.
-- **Remove a litter:** once every pup has gone home, open the litter and delete the entry. With no litters, the Current Litters page shows a "join our waiting list" message, and Home/Contact update their wording.
+- **Litter is done:** once every pup has gone home, turn on **Move to Past Litters** (see [Past litters](#past-litters)) instead of deleting it. With no current litters, the Current Litters page shows a "join our waiting list" message, and Home/Contact update their wording.
+- **Remove a litter completely:** delete the entry. It disappears from both pages.
 
 With two or more litters, a "Jump to Litter" menu appears at the top of the Current Litters page automatically. Litters are listed oldest first.
 
@@ -151,6 +153,36 @@ puppies:
 
 ---
 
+## Past litters
+
+The Past Litters page ([`/past-litters`](https://vbroda17.github.io/Southern-Golden-Retrievers/past-litters/)) shows litters whose **Move to Past Litters** switch is on, newest first. It uses the same litter entries in Pages CMS, so there's nothing to copy over.
+
+**Moving a current litter to Past Litters:** open the litter in Pages CMS, turn on **Move to Past Litters**, and save. It leaves Current Litters and appears on Past Litters, keeping its puppy photos. Turn the switch off to move it back.
+
+**Adding photos families send in:** open the litter, scroll to **Family photos**, click **Add**, upload the photo, and optionally add a caption (e.g. "Bella at one year old"). They show under "All Grown Up".
+
+**Adding an older litter that was never on the site:** click **Add an entry** in Litters, fill in the mom, dad, and date born, turn on **Move to Past Litters**, and add family photos. **Ready to go home** and **Puppies** can be left empty (it's only required for current litters).
+
+On the page, each litter shows:
+- the parents, birth date, and number of puppies
+- the optional **Past Litters note**
+- **As Puppies:** puppy photos with names (puppies without a photo are left out)
+- **All Grown Up:** the family photos
+
+Puppy statuses, contact buttons, and share buttons are not shown on Past Litters.
+
+In a YAML file, these are the extra fields:
+
+```yaml
+archived: true                 # on Past Litters instead of Current Litters
+pastNote: All of Lilly's winter pups are home with their families.   # optional
+familyPhotos:                  # optional
+  - photo: litters/bella-1yr.jpg
+    caption: Bella at one year old   # optional
+```
+
+---
+
 ## Updating the FAQ
 
 The FAQ page ([`/faq`](https://vbroda17.github.io/Southern-Golden-Retrievers/faq/)) is edited in **Pages CMS** under **FAQ**, the same way as litters. Saves on `main` go live in about two minutes.
@@ -193,6 +225,7 @@ Drop a photo (`.jpg`, `.jpeg`, `.png`, `.webp`, or `.gif`) into the folder and i
 | Contact email (top bar, all email links) | `email` in [`astro-site/src/config.js`](astro-site/src/config.js) |
 | Default page description for search results | `defaultDescription` in `config.js` |
 | Page text | the matching file in [`astro-site/src/pages/`](astro-site/src/pages/) |
+| Past Litters (move a litter, family photos) | Pages CMS → **Litters** (see [Past litters](#past-litters)) |
 | FAQ questions and answers | Pages CMS → **FAQ** (see [Updating the FAQ](#updating-the-faq)) |
 | Nav menu links | `navLinks` in [`astro-site/src/components/Navbar.astro`](astro-site/src/components/Navbar.astro) |
 | Colors | the `--gold`, `--cream`, etc. variables at the top of [`astro-site/src/styles/global.css`](astro-site/src/styles/global.css) |
@@ -258,11 +291,11 @@ astro-site/
   src/
     assets/images/        all photos (optimized at build time)
       <Dam name>/         carousel photos for each dam
-      litters/            puppy photos
+      litters/            puppy and family photos
       sires/              sire photos
       Group/              group photos used on Home/About/Contact/Testimonials
-    components/           reusable pieces (Navbar, Footer, ImageCarousel, LitterSection, ...)
-    content/litters/      one YAML file per current litter (edited via Pages CMS)
+    components/           reusable pieces (Navbar, Footer, ImageCarousel, LitterSection, PastLitter, ...)
+    content/litters/      one YAML file per litter, current or past (edited via Pages CMS)
     content/faq.json      FAQ intro, sections, questions, and answers (edited via Pages CMS)
     content.config.ts     rules each litter file is checked against
     layouts/Layout.astro  shared page shell: <head>, SEO tags, nav, footer
@@ -272,7 +305,7 @@ astro-site/
     config.js             email, site name, default description
     faq.js                loads and checks faq.json for the FAQ page
     images.js             photo lookup used by the carousel and litter cards
-    litters.js            loads litter files and fills in dam photo/link and dates
+    litters.js            loads litter files, splits current/past, fills in dam photo/link and dates
     utils.js              url() for base-path links, countOf() for wording
 ```
 
