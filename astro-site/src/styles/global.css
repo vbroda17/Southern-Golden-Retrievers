@@ -37,6 +37,11 @@ main {
   padding: 2rem 0 3rem;
 }
 
+/* The same gap between every box on a page (hero, cards, litters, ...) */
+main > .container > * + * {
+  margin-top: 1.5rem;
+}
+
 /* Hero Section */
 .hero {
   background: white;
@@ -60,7 +65,7 @@ main {
   border: none;
   border-radius: 0.8rem;
   padding: 0.6rem 0.9rem;
-  margin: 0.25rem 0.35rem;
+  margin: 0.25rem 0.5rem 0.25rem 0; /* space only to the right, so a row of buttons lines up with the text above */
   background: var(--gold);
   color: #fff;
   text-decoration: none;
@@ -78,32 +83,32 @@ main {
   color: var(--gold-dark);
 }
 
-/* Centered "what next" box with a line or two of text and buttons, used at the end of pages */
-.cta-card {
-  margin: 1.5rem 0;
-  padding: 1.25rem 1.5rem;
-  text-align: center;
-}
-
-.cta-card h2 {
-  margin-bottom: 0.5rem;
-}
-
-.cta-card p {
-  max-width: 650px;
-  margin: 0 auto 0.75rem;
-}
-
-/* Card */
+/* Card: every white box on the site. Content is left-aligned; center only photos and captions. */
 .card {
   background: white;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--tan);
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
 }
 
 .card h2 {
-  margin-top: 0;
+  margin: 0 0 0.75rem;
+}
+
+:where(.card) p {
+  margin: 0 0 0.75rem;
+}
+
+/* Sub-headings inside a card ("Meet the Puppies", "All Grown Up", ...). :where() lets components override these. */
+:where(.card) h3 {
+  color: var(--gold-dark);
+  font-size: 1.3rem;
+  margin: 1.5rem 0 1rem;
+}
+
+/* "What next" box at the end of a page: a line or two of text and buttons */
+:where(.cta-card) p {
+  max-width: 700px;
 }
 
 /* Images */
@@ -132,6 +137,13 @@ main {
 }
 
 /* Responsive */
+@media (max-width: 600px) {
+  .hero,
+  .card {
+    padding: 1rem;
+  }
+}
+
 @media (max-width: 480px) {
   .card .btn {
     display: block;

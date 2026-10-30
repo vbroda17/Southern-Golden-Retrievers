@@ -1,10 +1,7 @@
 /* src/styles/past-litters.css - Past Litters page and PastLitter component */
 
 .past-litter {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem 1.5rem;
   scroll-margin-top: 5rem;
-  text-align: center;
 }
 
 .past-litter h2 {
@@ -23,25 +20,15 @@
 
 .past-litter-meta {
   color: #555;
-  margin-bottom: 0.75rem;
 }
 
 .past-litter-note {
-  max-width: 650px;
-  margin: 0 auto 1rem;
+  max-width: 700px;
 }
 
-.past-litter h3 {
-  color: var(--gold);
-  font-size: 1.3rem;
-  margin: 1.5rem 0 1rem;
-}
-
-/* Flex instead of grid so one or two photos stay centered */
 .past-photo-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 1rem;
 }
 
@@ -69,22 +56,7 @@
   font-style: italic;
 }
 
-.past-litters-cta {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  text-align: center;
-}
-
-.past-litters-cta h2 {
-  margin-bottom: 1rem;
-}
-
 @media (max-width: 600px) {
-  .past-litter,
-  .past-litters-cta {
-    padding: 1rem;
-  }
-
   .past-photo {
     width: 100%;
   }

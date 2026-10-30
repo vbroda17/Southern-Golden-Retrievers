@@ -1,7 +1,7 @@
   .contact-button-wrapper {
     display: inline-flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* line up with the text above */
     gap: 0.5rem;
   }
 
