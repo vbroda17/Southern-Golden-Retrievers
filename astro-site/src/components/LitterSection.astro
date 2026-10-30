@@ -143,8 +143,8 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
             />
         )}
 
-        {/* No point sharing a pup that has already gone home */}
-        {puppy.status !== 'Adopted' && (
+        {/* Only pups a family can still get are worth sharing */}
+        {puppy.status === 'Available' && (
           <div class="puppy-share">
             <ShareButton
               path={`current-litters/#${puppy.id}`}
