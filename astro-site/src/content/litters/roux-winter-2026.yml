@@ -1,0 +1,12 @@
+dam: Roux
+sire: Duke
+sirePhoto: sires/duke.jpg
+born: 2026-01-03
+readyDate: 2026-02-28
+puppies:
+  - name: Puppy A
+    gender: Female
+    status: Available
+  - name: Puppy B
+    gender: Male
+    status: Available

@@ -1,37 +1,27 @@
 /* src/styles/index.css - Homepage specific styles */
 
 /* All base styles are in global.css */
-/* Astro bundles every stylesheet into one file, so scope rules here to .home-card-grid */
+/* Astro bundles every stylesheet into one file, so scope rules here to the home page classes */
 
 .home-card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.5rem;
 }
 
+/* Keep each card's buttons at the bottom so the three cards line up */
 .home-card-grid .card {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.home-card-grid .btn {
-  display: inline-block;
-  width: fit-content;
-  margin: 1rem 0 0;
-  vertical-align: middle;
+.home-card-grid .card-buttons {
+  margin-top: auto;
+  padding-top: 0.5rem;
 }
 
-.home-card-grid .btn + .btn {
-  margin-left: 0.5rem;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .home-card-grid {
     grid-template-columns: 1fr;
-  }
-
-  /* keep buttons inline so they wrap and remain centered on narrow screens */
-  .home-card-grid .btn {
-    margin: 0.75rem 0.4rem 0;
   }
 }

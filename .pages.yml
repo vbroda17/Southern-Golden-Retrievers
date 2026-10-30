@@ -1,0 +1,227 @@
+# Pages CMS configuration (https://app.pagescms.org)
+# Defines the forms used to update litters, Puppy News, and the FAQ without editing code.
+# Saving in Pages CMS commits to the selected branch; saves on `main` go live automatically.
+#
+# Keep in sync with the checks the site runs at build time:
+#   - Litters: astro-site/src/content.config.ts
+#     - dam choices below should match the dam galleries in astro-site/src/assets/images/
+#     - status choices must match PUPPY_STATUSES in astro-site/src/config.js
+#   - Puppy News: astro-site/src/puppy-news.js (dam choices same as Litters)
+#   - FAQ: astro-site/src/faq.js
+
+media:
+  input: astro-site/src/assets/images
+  output: /images
+  rename: safe
+  categories: [image]
+
+content:
+  - name: litters
+    label: Litters
+    type: collection
+    path: astro-site/src/content/litters
+    format: yaml
+    filename: "{dam}-{year}-{month}.yml"
+    view:
+      primary: dam
+      fields: [dam, sire, born, archived]
+      sort: born
+      order: desc
+    fields:
+      - name: dam
+        label: Mom (dam)
+        type: select
+        required: true
+        options:
+          values: [Lilly, Roux, Raine]
+
+      - name: damPhoto
+        label: Mom's photo (optional)
+        description: Leave empty to use the first photo from her gallery on the Dams page.
+        type: image
+        options:
+          path: astro-site/src/assets/images
+
+      - name: sire
+        label: Dad (sire)
+        type: string
+        required: true
+
+      - name: sirePhoto
+        label: Dad's photo
+        type: image
+        options:
+          path: astro-site/src/assets/images/sires
+
+      - name: born
+        label: Date born
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: readyDate
+        label: Ready to go home
+        description: Required while the litter is on Current Litters. Can be left empty for an old litter added straight to Past Litters.
+        type: date
+        options:
+          format: yyyy-MM-dd
+
+      - name: archived
+        label: Move to Past Litters
+        description: Turn on once the puppies have gone home. The litter leaves Current Litters and shows on Past Litters instead.
+        type: boolean
+        default: false
+
+      - name: pastNote
+        label: Past Litters note (optional)
+        description: A sentence or two shown with this litter on Past Litters.
+        type: text
+
+      - name: familyPhotos
+        label: Family photos (Past Litters)
+        description: Photos families send of their grown-up pups. Shown under "All Grown Up" on Past Litters.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{caption}"
+        fields:
+          - name: photo
+            label: Photo
+            type: image
+            required: true
+            options:
+              path: astro-site/src/assets/images/litters
+
+          - name: caption
+            label: Caption (optional)
+            description: e.g. "Bella at one year old"
+            type: string
+
+      - name: puppies
+        label: Puppies
+        description: Leave empty until the puppies have names. The page will say details are coming soon.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} - {status}"
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+
+          - name: photo
+            label: Photo
+            type: image
+            options:
+              path: astro-site/src/assets/images/litters
+
+          - name: gender
+            label: Gender
+            type: select
+            required: true
+            options:
+              values: [Male, Female]
+
+          - name: status
+            label: Status
+            description: Available shows a "Contact About" button. Available puppies are listed first.
+            type: select
+            required: true
+            options:
+              values: [Available, Reserved, Adopted]
+
+          - name: description
+            label: Description (optional)
+            type: text
+
+  - name: faq
+    label: FAQ
+    type: file
+    path: astro-site/src/content/faq.json
+    format: json
+    fields:
+      - name: intro
+        label: Intro
+        description: Short line shown under the "Frequently Asked Questions" title.
+        type: text
+
+      - name: sections
+        label: Sections
+        description: Groups of questions, e.g. "Getting a Puppy". Drag to reorder.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Section title
+            type: string
+            required: true
+
+          - name: questions
+            label: Questions
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{question}"
+            fields:
+              - name: question
+                label: Question
+                type: string
+                required: true
+
+              - name: answer
+                label: Answer
+                description: Leave a blank line between paragraphs. Questions with no answer yet are hidden on the site.
+                type: text
+
+  - name: puppy-news
+    label: Puppy News
+    type: file
+    path: astro-site/src/content/puppy-news.json
+    format: json
+    fields:
+      - name: plannedLitters
+        label: Planned litters
+        description: The first one listed is also shown on the home page. Drag to reorder. Remove a litter once she has her puppies and add it under Litters instead.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{dam} × {sire}"
+        fields:
+          - name: dam
+            label: Mom (dam)
+            type: select
+            required: true
+            options:
+              values: [Lilly, Roux, Raine]
+
+          - name: sire
+            label: Dad (sire) (optional)
+            description: Leave empty if not decided yet. The page will say "Sire to be announced."
+            type: string
+
+          - name: sirePhoto
+            label: Dad's photo (optional)
+            type: image
+            options:
+              path: astro-site/src/assets/images/sires
+
+          - name: expected
+            label: Expected around (rough estimate)
+            description: Pick any day in the month; only the month and year are shown ("likely around March 2027"). Leave empty, or once the month has passed, and the page says you're not sure yet.
+            type: date
+            options:
+              format: yyyy-MM-dd
+
+          - name: note
+            label: Extra note (optional)
+            description: Anything else to share about this litter.
+            type: text

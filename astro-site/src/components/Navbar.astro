@@ -5,17 +5,33 @@ import { url } from '../utils.js';
 import '../styles/navbar.css';
 
 const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { path: '', label: 'Home' },
+  { path: 'current-litters', label: 'Current Litters' },
+  { path: 'past-litters', label: 'Past Litters' },
+  { path: 'puppy-news', label: 'Puppy News' },
+  { path: 'dams', label: 'Dams' },
+  { path: 'testimonials', label: 'Testimonials' },
+  { path: 'faq', label: 'FAQ' },
+  { path: 'contact', label: 'Contact' },
+  { path: 'about', label: 'About' }
+];
+
+// Home only matches exactly; other pages match anywhere in the path
+const isActive = (path: string) => path === '' ? currentPath === url('') : currentPath.includes(path);
 ---
 
 <!-- Top Info Bar -->
 <div class="top-bar">
   <div class="container">
     <div class="top-bar-content">
-      <span class="top-bar-location">📍 Knoxville, TN</span>
-      <button 
-        class="top-bar-email copy-email-btn" 
+      <span class="top-bar-location"><span aria-hidden="true">📍</span> Knoxville, TN</span>
+      <button
+        class="top-bar-email copy-email-btn"
         data-email={SITE_CONFIG.email}
         title="Click to copy email address"
+        aria-label={`Copy email address ${SITE_CONFIG.email}`}
       >
         📧 {SITE_CONFIG.email}
       </button>
@@ -28,14 +44,58 @@ const currentPath = Astro.url.pathname;
   <div class="container">
     <div class="header-inner">
       <a href={url('')} class="brand">Southern Golden Retrievers</a>
-      <nav class="nav">
-        <a href={url('')} class={`nav-link ${currentPath === url('') ? 'active' : ''}`}>Home</a>
-        <a href={url('current-litters')} class={`nav-link ${currentPath.includes('current-litters') ? 'active' : ''}`}>Current Litters</a>
-        <a href={url('dams')} class={`nav-link ${currentPath.includes('dams') ? 'active' : ''}`}>Dams</a>
-        <a href={url('testimonials')} class={`nav-link ${currentPath.includes('testimonials') ? 'active' : ''}`}>Testimonials</a>
-        <a href={url('contact')} class={`nav-link ${currentPath.includes('contact') ? 'active' : ''}`}>Contact</a>
-        <a href={url('about')} class={`nav-link ${currentPath.includes('about') ? 'active' : ''}`}>About</a>
+      <!-- Hamburger toggle, only shown on narrow screens -->
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <nav id="site-nav" class="nav" aria-label="Main">
+        {navLinks.map(({ path, label }) => (
+          <a
+            href={url(path)}
+            class={`nav-link ${isActive(path) ? 'active' : ''}`}
+            aria-current={isActive(path) ? 'page' : undefined}
+          >{label}</a>
+        ))}
       </nav>
     </div>
   </div>
 </header>
+
+<!-- Without JavaScript the toggle can't work, so always show the menu -->
+<noscript>
+  <style>
+    .nav-toggle { display: none !important; }
+    .site-header .nav { display: flex !important; }
+  </style>
+</noscript>
+
+<script>
+  const header = document.querySelector('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('.nav-toggle');
+
+  if (header && toggle) {
+    const setOpen = (open: boolean) => {
+      header.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    const isOpen = () => header.classList.contains('menu-open');
+
+    toggle.addEventListener('click', () => setOpen(!isOpen()));
+
+    // Close with Escape, returning focus to the toggle
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Close when tapping anywhere outside the header
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !header.contains(e.target as Node)) setOpen(false);
+    });
+  }
+</script>

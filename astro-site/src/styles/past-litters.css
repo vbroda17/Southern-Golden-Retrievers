@@ -1,0 +1,61 @@
+/* src/styles/past-litters.css - Past Litters page and PastLitter component */
+
+.past-litter {
+  scroll-margin-top: 5rem;
+}
+
+.past-litter h2 {
+  margin-bottom: 0.25rem;
+}
+
+.past-litter h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.past-litter h2 a:hover {
+  color: var(--gold-dark);
+  text-decoration: underline;
+}
+
+.past-litter-meta {
+  color: #555;
+}
+
+/* Flex instead of grid so one or two photos stay centered */
+.past-photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.past-photo {
+  margin: 0;
+  width: 240px;
+}
+
+.past-photo-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.past-photo figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.past-litter-empty {
+  color: #666;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .past-photo {
+    width: 100%;
+  }
+}

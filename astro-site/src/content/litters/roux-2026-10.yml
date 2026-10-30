@@ -1,0 +1,10 @@
+dam: Roux
+sire: guy
+born: 2026-10-30
+readyDate: 2026-10-30
+puppies:
+  - name: puppie 1
+    photo: /images/litters/images.jpg
+    gender: Female
+    status: Available
+    description: test

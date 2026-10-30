@@ -37,12 +37,18 @@ main {
   padding: 2rem 0 3rem;
 }
 
+/* The same gap between every box on a page (hero, cards, litters, ...) */
+main > .container > * + * {
+  margin-top: 1.5rem;
+}
+
 /* Hero Section */
 .hero {
   background: white;
   border: 1px solid var(--tan);
   border-radius: 1rem;
   padding: 1.5rem;
+  text-align: center;
 }
 
 .hero h1 {
@@ -50,8 +56,15 @@ main {
 }
 
 .hero p {
-  margin: 0 0 1rem;
+  margin: 0 auto 1rem;
   color: #444;
+}
+
+/* Headings, buttons, and photos are centered; paragraphs are left-aligned in a
+   centered column so long text stays easy to read */
+:where(.hero, .card) p {
+  max-width: 700px;
+  text-align: left;
 }
 
 /* Button */
@@ -73,21 +86,39 @@ main {
   background: var(--gold-dark);
 }
 
-/* Card */
+/* Inline text links in page copy. :where() keeps this weaker than component styles like .email-link */
+:where(.hero, .card) p a:not(.btn) {
+  color: var(--gold-dark);
+}
+
+/* Card: every white box on the site, laid out like .hero */
 .card {
   background: white;
-  border: 1px solid #eaeaea;
+  border: 1px solid var(--tan);
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
 }
 
 .card h2 {
-  margin-top: 0;
+  margin: 0 0 0.75rem;
+}
+
+:where(.card) p {
+  margin: 0 auto 0.75rem;
+}
+
+/* Sub-headings inside a card ("Meet the Puppies", "All Grown Up", ...). :where() lets components override these. */
+:where(.card) h3 {
+  color: var(--gold-dark);
+  font-size: 1.3rem;
+  margin: 1.5rem 0 1rem;
 }
 
 /* Images */
 .showcase-image {
   width: 100%;
+  height: auto;
   max-height: 500px;
   object-fit: scale-down;
   border-radius: 1rem;
@@ -96,7 +127,27 @@ main {
   background: #f5f5f5;
 }
 
+/* Hidden on screen but still read by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Responsive */
+@media (max-width: 600px) {
+  .hero,
+  .card {
+    padding: 1rem;
+  }
+}
+
 @media (max-width: 480px) {
   .card .btn {
     display: block;

@@ -1,5 +1,4 @@
 .litter-section {
-    margin-bottom: 3rem;
     scroll-margin-top: 5rem; /* For smooth scroll with sticky header */
   }
 
@@ -7,9 +6,12 @@
     margin-bottom: 2rem;
   }
 
-  .parents-section h2 {
-    text-align: center;
+  .litter-share {
     margin-bottom: 1.5rem;
+  }
+
+  .puppy-share {
+    margin-top: 0.75rem;
   }
 
   .parents-grid {
@@ -39,6 +41,7 @@
 
   .parent-image {
     width: 100%;
+    height: auto;
     max-width: 300px;
     aspect-ratio: 4 / 5;
     object-fit: cover;
@@ -66,25 +69,20 @@
     margin: 0 auto;
   }
 
-  .info-item {
-    text-align: center;
-  }
-
   .info-item strong {
     display: block;
     color: var(--gold);
     margin-bottom: 0.25rem;
   }
 
-  .puppies-heading {
-    text-align: center;
-    margin: 2rem 0 1.5rem;
-    font-size: 1.8rem;
+  .puppies-coming-soon {
+    color: #444;
   }
 
   .puppy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+    justify-content: center; /* one or two puppies stay centered */
     gap: 1.25rem;
     margin-top: 1.5rem;
   }
@@ -96,7 +94,14 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
+    scroll-margin-top: 1.5rem;
+  }
+
+  /* Highlight the puppy someone arrived at from a shared link */
+  .puppy-card:target {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px var(--gold);
   }
 
   .puppy-name {
@@ -105,6 +110,7 @@
 
   .puppy-image {
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: 0.75rem;
@@ -122,9 +128,22 @@
     margin-bottom: 0.25rem;
   }
 
+  /* Small cards: keep their text centered too */
   .puppy-description {
+    text-align: center;
     font-size: 0.95rem;
     color: #444;
+  }
+
+  /* Shown in place of a dam, sire, or puppy photo that hasn't been added yet */
+  .photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border: 2px dashed var(--tan);
+    color: #888;
+    font-size: 0.95rem;
   }
 
   .status-available {

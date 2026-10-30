@@ -3,43 +3,79 @@
 // Reusable component for displaying a single litter
 import '../styles/litter-section.css';
 import ContactButton from './ContactButton.astro';
-import { url } from '../utils.js';
+import LitterPhoto from './LitterPhoto.astro';
+import ShareButton from './ShareButton.astro';
+import { url, slugify } from '../utils.js';
+import { PUPPY_STATUSES, SITE_CONFIG } from '../config.js';
 
+// Shape produced by getCurrentLitters() in src/litters.js
 interface Props {
   litter: {
     id: string;
-    dam: { name: string; image: string; link: string | null };
-    sire: { name: string; image: string; link: string | null };
+    dam: { name: string; image?: string; link: string | null };
+    sire: { name: string; image?: string; link: string | null };
     bornDate: string;
     availableDate: string;
     puppies: Array<{
       name: string;
-      image: string;
+      image?: string;
       gender: string;
-      color: string;
       status: string;
-      description: string;
+      description?: string;
     }>;
   };
 }
 
 const { litter } = Astro.props;
+
+// Available pups first, then Reserved, then Adopted (keeping data order within each group).
+// Statuses are validated by the schema in src/content.config.ts.
+const sortedPuppies = [...litter.puppies].sort((a, b) => PUPPY_STATUSES.indexOf(a.status) - PUPPY_STATUSES.indexOf(b.status));
+
+// Each puppy card gets its own link target, e.g. #lilly-winter-2026-puppy-1 (numbered if two pups share a name)
+const usedIds = new Set();
+const puppies = sortedPuppies.map((puppy) => {
+  const base = `${litter.id}-${slugify(puppy.name) || 'puppy'}`;
+  let id = base;
+  for (let n = 2; usedIds.has(id); n++) id = `${base}-${n}`;
+  usedIds.add(id);
+  return { ...puppy, id };
+});
+
+// Wording used when someone shares this litter or one of its pups
+const parents = `${litter.dam.name} and ${litter.sire.name}`;
+const breeder = `${SITE_CONFIG.name} in ${SITE_CONFIG.location}`;
+const litterShare = {
+  path: `current-litters/#${litter.id}`,
+  title: `${litter.dam.name} × ${litter.sire.name} Puppies | ${SITE_CONFIG.name}`,
+  text: `Golden retriever puppies from ${parents} at ${breeder}, ready to go home ${litter.availableDate}.`
+};
+
+// Image paths are relative to src/assets/images/
+const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
 ---
 
 <section id={litter.id} class="litter-section card">
   <!-- Parents Section -->
   <div class="parents-section">
-    <h2>Current Litter</h2>
+    <h2>{litter.dam.name} &times; {litter.sire.name}</h2>
+    <div class="litter-share">
+      <ShareButton
+        {...litterShare}
+        label="Share this litter"
+        ariaLabel={`Share ${litter.dam.name} and ${litter.sire.name}'s litter`}
+      />
+    </div>
     <div class="parents-grid">
       <!-- Dam -->
       <div class="parent-card">
         <h3>Dam</h3>
         {litter.dam.link ? (
           <a href={url(litter.dam.link)}>
-            <img src={url(litter.dam.image)} alt={litter.dam.name} class="parent-image">
+            <LitterPhoto path={litter.dam.image} alt={litter.dam.name} {...parentPhoto} />
           </a>
         ) : (
-          <img src={url(litter.dam.image)} alt={litter.dam.name} class="parent-image">
+          <LitterPhoto path={litter.dam.image} alt={litter.dam.name} {...parentPhoto} />
         )}
         <h4>{litter.dam.name}</h4>
       </div>
@@ -49,10 +85,10 @@ const { litter } = Astro.props;
         <h3>Sire</h3>
         {litter.sire.link ? (
           <a href={url(litter.sire.link)}>
-            <img src={url(litter.sire.image)} alt={litter.sire.name} class="parent-image">
+            <LitterPhoto path={litter.sire.image} alt={litter.sire.name} {...parentPhoto} />
           </a>
         ) : (
-          <img src={url(litter.sire.image)} alt={litter.sire.name} class="parent-image">
+          <LitterPhoto path={litter.sire.image} alt={litter.sire.name} {...parentPhoto} />
         )}
         <h4>{litter.sire.name}</h4>
       </div>
@@ -66,33 +102,55 @@ const { litter } = Astro.props;
       <div class="info-item">
         <strong>Ready:</strong> {litter.availableDate}
       </div>
-      <div class="info-item">
-        <strong>Available:</strong> {litter.puppies.filter(p => p.status === 'Available').length} of {litter.puppies.length}
-      </div>
+      {litter.puppies.length > 0 && (
+        <div class="info-item">
+          <strong>Available:</strong> {litter.puppies.filter(p => p.status === 'Available').length} of {litter.puppies.length}
+        </div>
+      )}
     </div>
   </div>
 
   <!-- Puppies Grid -->
-  <h3 class="puppies-heading">Available Puppies</h3>
+  <h3 class="puppies-heading">Meet the Puppies</h3>
+  {puppies.length === 0 && (
+    <p class="puppies-coming-soon">Puppy details and photos are coming soon. Email us to join the waitlist for this litter!</p>
+  )}
   <div class="puppy-grid">
-    {litter.puppies.map(puppy => (
-      <div class="puppy-card">
+    {puppies.map(puppy => (
+      <div id={puppy.id} class="puppy-card">
         <h4 class="puppy-name">{puppy.name}</h4>
-        <img src={url(puppy.image)} alt={puppy.name} class="puppy-image">
+        <LitterPhoto
+          path={puppy.image}
+          alt={puppy.name}
+          class="puppy-image"
+          widths={[400, 800]}
+          sizes="(max-width: 600px) 100vw, 320px"
+        />
         
         <ul class="puppy-meta">
           <li><strong>Gender:</strong> {puppy.gender}</li>
-          <li><strong>Color:</strong> {puppy.color}</li>
           <li><strong>Status:</strong> <span class={`status-${puppy.status.toLowerCase()}`}>{puppy.status}</span></li>
         </ul>
         
-        <p class="puppy-description">{puppy.description}</p>
+        {puppy.description && <p class="puppy-description">{puppy.description}</p>}
         
         {puppy.status === 'Available' && (
             <ContactButton 
             subject={`Inquire About ${puppy.name}`}
             buttonText={`Contact About ${puppy.name}`}
             />
+        )}
+
+        {/* Only pups a family can still get are worth sharing */}
+        {puppy.status === 'Available' && (
+          <div class="puppy-share">
+            <ShareButton
+              path={`current-litters/#${puppy.id}`}
+              title={`${puppy.name} | ${SITE_CONFIG.name}`}
+              text={`Meet ${puppy.name}! A ${puppy.gender.toLowerCase()} golden retriever puppy from ${parents} at ${breeder}.`}
+              ariaLabel={`Share ${puppy.name}`}
+            />
+          </div>
         )}
       </div>
     ))}

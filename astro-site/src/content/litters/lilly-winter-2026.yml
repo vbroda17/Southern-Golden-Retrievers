@@ -1,0 +1,23 @@
+dam: Lilly
+damPhoto: Lilly/lilly3.jpeg
+sire: Champion Bruno
+sirePhoto: sires/bruno.jpg
+born: 2026-01-01
+readyDate: 2026-02-26
+puppies:
+  - name: Puppy 1
+    photo: Group/group3-7.jpeg
+    gender: Male
+    status: Available
+  - name: Puppy 2
+    gender: Female
+    status: Reserved
+  - name: Puppy 3
+    gender: Male
+    status: Adopted
+    description: Calm and cuddly, loves attention.
+archived: true
+pastNote: All of Lilly's winter pups are home with their families.
+familyPhotos:
+  - photo: Group/group3-7.jpeg
+    caption: Puppy 1 at six months

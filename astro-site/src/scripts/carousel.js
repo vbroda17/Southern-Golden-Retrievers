@@ -11,7 +11,7 @@ export function initCarousel(carouselId, options = {}) {
   const prevBtn = carousel.querySelector('.carousel-prev');
   const nextBtn = carousel.querySelector('.carousel-next');
   const indicators = carousel.querySelectorAll('.indicator');
-  const carouselImages = carousel.querySelectorAll('.carousel-image');
+  const openButtons = carousel.querySelectorAll('.carousel-open');
 
   // Lightbox elements
   const lightbox = document.getElementById(`lightbox-${carouselId}`);
@@ -26,12 +26,15 @@ export function initCarousel(carouselId, options = {}) {
   let currentIndex = 0;
   let autoplayTimer = null;
   let isLightboxOpen = false;
+  let focusBeforeLightbox = null;
 
   function showSlide(index) {
     // Remove active class from current slide and indicator
     slides[currentIndex].classList.remove('active');
+    slides[currentIndex].inert = true;
     if (indicators[currentIndex]) {
       indicators[currentIndex].classList.remove('active');
+      indicators[currentIndex].removeAttribute('aria-current');
     }
 
     // Update index
@@ -41,8 +44,10 @@ export function initCarousel(carouselId, options = {}) {
 
     // Add active class to new slide and indicator
     slides[currentIndex].classList.add('active');
+    slides[currentIndex].inert = false;
     if (indicators[currentIndex]) {
       indicators[currentIndex].classList.add('active');
+      indicators[currentIndex].setAttribute('aria-current', 'true');
     }
 
     // Update lightbox if it's open
@@ -74,20 +79,39 @@ export function initCarousel(carouselId, options = {}) {
   // Lightbox functions
   function openLightbox() {
     isLightboxOpen = true;
+    focusBeforeLightbox = document.activeElement;
     updateLightboxImage();
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
   }
 
   function closeLightbox() {
     isLightboxOpen = false;
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
+    // Return focus to whatever opened the lightbox. If that was a carousel photo, use the one
+    // now showing, since the original slide may be inert after navigating in the lightbox.
+    if (focusBeforeLightbox && carousel.contains(focusBeforeLightbox)) {
+      slides[currentIndex].querySelector('.carousel-open')?.focus();
+    } else if (focusBeforeLightbox) {
+      focusBeforeLightbox.focus();
+    }
+  }
+
+  // Keep Tab cycling between the lightbox's own buttons while it's open
+  function trapFocus(e) {
+    const buttons = [lightboxClose, lightboxPrev, lightboxNext];
+    const i = buttons.indexOf(document.activeElement);
+    const next = e.shiftKey ? i - 1 : i + 1;
+    e.preventDefault();
+    buttons[(next + buttons.length) % buttons.length].focus();
   }
 
   function updateLightboxImage() {
     const currentImg = slides[currentIndex].querySelector('img');
-    lightboxImg.src = currentImg.src;
+    // currentSrc is the size the browser picked from the srcset
+    lightboxImg.src = currentImg.currentSrc || currentImg.src;
     lightboxImg.alt = currentImg.alt;
     lightboxCounter.textContent = `${currentIndex + 1} / ${slides.length}`;
   }
@@ -111,9 +135,9 @@ export function initCarousel(carouselId, options = {}) {
     indicator.addEventListener('click', () => showSlide(index));
   });
 
-  // Click on carousel image to open lightbox
-  carouselImages.forEach((img) => {
-    img.addEventListener('click', openLightbox);
+  // Click (or Enter/Space) on carousel image to open lightbox
+  openButtons.forEach((button) => {
+    button.addEventListener('click', openLightbox);
   });
 
   // Lightbox event listeners
@@ -131,6 +155,7 @@ export function initCarousel(carouselId, options = {}) {
   // Keyboard navigation
   const handleKeydown = (e) => {
     if (isLightboxOpen) {
+      if (e.key === 'Tab') trapFocus(e);
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowRight') nextSlide();
       if (e.key === 'ArrowLeft') prevSlide();

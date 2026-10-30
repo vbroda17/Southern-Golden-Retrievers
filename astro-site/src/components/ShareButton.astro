@@ -1,0 +1,58 @@
+---
+// src/components/ShareButton.astro
+// "Share" button: opens the phone's share sheet (Messages, Facebook, WhatsApp, ...) on touch devices,
+// or a small menu with Facebook, Email, and Copy link elsewhere. Works without JavaScript too
+// (the menu opens natively; Copy link needs JS so it stays hidden until the script runs).
+import { url } from '../utils.js';
+import '../styles/share-button.css';
+
+interface Props {
+  path: string; // Page path to share, relative to the site, e.g. "current-litters/#lilly-winter-2026"
+  title: string; // Used as the share title and email subject
+  text: string; // Short message shared along with the link
+  label?: string; // Visible button text
+  ariaLabel?: string; // Fuller name for screen readers, e.g. "Share Puppy 1"
+}
+
+const { path, title, text, label = 'Share', ariaLabel = label } = Astro.props;
+
+const shareUrl = new URL(url(path), Astro.site).href;
+const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+const emailUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${text}\n\n${shareUrl}`)}`;
+---
+
+<details class="share" data-share-url={shareUrl} data-share-title={title} data-share-text={text}>
+  <summary class="share-toggle" aria-label={ariaLabel}>
+    <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" />
+    </svg>
+    <span>{label}</span>
+  </summary>
+
+  <div class="share-menu">
+    <a class="share-option share-facebook" href={facebookUrl} target="_blank" rel="noopener noreferrer">
+      <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+        <path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z" />
+      </svg>
+      Facebook
+    </a>
+    <a class="share-option" href={emailUrl}>
+      <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="M3 7l9 6 9-6" />
+      </svg>
+      Email
+    </a>
+    <button type="button" class="share-option share-copy" hidden>
+      <svg class="share-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" />
+        <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" />
+      </svg>
+      <span class="share-copy-label">Copy link</span>
+    </button>
+  </div>
+</details>
+
+<script>
+  import '../scripts/share.js';
+</script>

@@ -1,0 +1,23 @@
+/* src/styles/puppy-news.css - Puppy News page */
+
+.planned-litter {
+  scroll-margin-top: 5rem;
+}
+
+.planned-litter .parents-grid {
+  margin-bottom: 1.25rem;
+}
+
+/* Only the dam's photo when the sire isn't announced yet */
+.parents-grid.parents-grid-single {
+  grid-template-columns: 1fr;
+  max-width: 300px;
+}
+
+.planned-timing {
+  font-size: 1.05rem;
+}
+
+.planned-note {
+  color: #444;
+}

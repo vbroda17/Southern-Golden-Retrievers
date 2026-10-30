@@ -14,6 +14,9 @@ export const SITE_CONFIG = {
   // instagram: "https://instagram.com/...",
   
   // SEO
-  defaultDescription: "Southern Golden Retrievers - Award-winning golden retriever puppies in Knoxville, TN. Raised with love, backed by excellence.",
-  defaultKeywords: "golden retriever puppies, golden retriever breeders, Knoxville TN, Tennessee golden retrievers, AKC golden retrievers"
+  defaultDescription: "Southern Golden Retrievers - Award-winning golden retriever puppies in Knoxville, TN. Raised with love, backed by excellence."
 };
+
+// Allowed puppy statuses, in the order puppies are listed on the page.
+// Keep in sync with the status dropdown in /.pages.yml.
+export const PUPPY_STATUSES = ['Available', 'Reserved', 'Adopted'];

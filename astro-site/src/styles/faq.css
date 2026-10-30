@@ -1,0 +1,84 @@
+/* src/styles/faq.css - FAQ page */
+
+.faq-section h2 {
+  margin-bottom: 0.25rem;
+}
+
+/* Questions are full-width rows with the +/- at the right, so they stay left-aligned */
+.faq-item {
+  border-bottom: 1px solid var(--tan);
+  text-align: left;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+/* Each question is a full-width row that expands to show its answer */
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::marker {
+  content: '';
+}
+
+/* Plus sign that turns into a minus when open */
+.faq-question::after {
+  content: '+';
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--gold-dark);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.faq-item[open] .faq-question::after {
+  content: '\2212';
+}
+
+.faq-question:hover {
+  color: var(--gold-dark);
+}
+
+.faq-question:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+.faq-answer {
+  padding: 0 2.75rem 1rem 0;
+  color: #444;
+}
+
+.faq-answer p {
+  max-width: none;
+  margin: 0 0 0.75rem;
+}
+
+.faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .faq-answer {
+    padding-right: 0;
+  }
+}

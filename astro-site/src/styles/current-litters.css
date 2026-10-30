@@ -1,49 +1,13 @@
 /* src/styles/current-litters.css - Current Litters page styles */
 
-.litter-nav {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
+.litter-nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-  .litter-nav h2 {
-    margin-bottom: 1rem;
-  }
-
+@media (max-width: 600px) {
   .litter-nav-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
-
-  .no-litters {
-    text-align: center;
-    padding: 3rem 2rem;
-  }
-
-  .no-litters h2 {
-    margin-bottom: 1rem;
-  }
-
-  .contact-cta {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .contact-cta h2 {
-    margin-bottom: 1rem;
-  }
-
-  .contact-cta a {
-    color: var(--gold);
-  }
-
-  .contact-cta a:hover {
-    color: var(--gold-dark);
-  }
-
-  @media (max-width: 600px) {
-    .litter-nav-buttons {
-      flex-direction: column;
-    }
-  }
+}

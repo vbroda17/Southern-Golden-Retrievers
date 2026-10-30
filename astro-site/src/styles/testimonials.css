@@ -4,8 +4,7 @@
         background: white;
         border: 1px solid var(--tan);
         border-radius: 1rem;
-        padding: 1.5rem;
-        margin-top: 2rem;
+        padding: 1.25rem 1.5rem;
         align-items: center;
     }
 
@@ -19,6 +18,7 @@
 
     .testimonial-image {
         width: 100%;
+        height: auto;
         aspect-ratio: 4 / 5;
         object-fit: cover;
         border-radius: 0.75rem;

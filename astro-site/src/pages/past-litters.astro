@@ -1,0 +1,44 @@
+---
+// src/pages/past-litters.astro
+// Litters marked "archived" (Move to Past Litters) in Pages CMS or their YAML file
+import Layout from '../layouts/Layout.astro';
+import EmailLink from '../components/EmailLink.astro';
+import PastLitter from '../components/PastLitter.astro';
+import { getPastLitters } from '../litters.js';
+import { url } from '../utils.js';
+
+const title = "Past Litters | Southern Golden Retrievers";
+const description = "Photos of our past golden retriever litters, as puppies and all grown up with their families. Knoxville, TN.";
+
+const pastLitters = await getPastLitters();
+---
+
+<Layout title={title} description={description}>
+  <div class="container">
+    <section class="hero">
+      <h1>Past Litters</h1>
+      <p>Our puppies grow up to be wonderful family dogs. Here are some of our past litters, both as puppies and all grown up with their families.</p>
+    </section>
+
+    {pastLitters.map(litter => <PastLitter litter={litter} />)}
+
+    {pastLitters.length === 0 && (
+      <section class="card past-litters-cta">
+        <h2>Photos Coming Soon</h2>
+        <p>We're gathering photos of our past puppies with their families. Check back soon!</p>
+      </section>
+    )}
+
+    <section class="card past-litters-cta">
+      <h2>Have One of Our Puppies?</h2>
+      <p>We love seeing how they've grown! Send a photo to <EmailLink showCopy={true} subject="Photo of my Southern Golden" /> and we may add it here.</p>
+    </section>
+
+    <section class="card past-litters-cta">
+      <h2>Want a Puppy Like These?</h2>
+      <p>See who's available now, or check Puppy News to see which mom is having puppies next.</p>
+      <a class="btn" href={url('current-litters')}>Current Litters</a>
+      <a class="btn" href={url('puppy-news')}>Puppy News</a>
+    </section>
+  </div>
+</Layout>

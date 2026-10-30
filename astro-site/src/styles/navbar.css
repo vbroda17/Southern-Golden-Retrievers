@@ -32,7 +32,8 @@
 .nav-link {
   text-decoration: none;
   color: #333;
-  padding: 0.45rem 0.75rem;
+  padding: 0.45rem 0.55rem; /* padding and size let all 9 links fit the 1000px header */
+  font-size: 0.95rem;
   border-radius: 0.6rem;
   display: inline-flex;
   align-items: center;
@@ -103,26 +104,73 @@
     }
   }
 
-/* Mobile */
-@media (max-width: 800px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav {
-    justify-content: flex-start;
-    width: 100%;
-  }
+/* Hamburger toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  background: none;
+  border: 1px solid var(--tan);
+  border-radius: 0.6rem;
+  cursor: pointer;
 }
 
-@media (max-width: 600px) {
-  .nav {
-    flex-direction: column;
-    gap: 0.5rem;
+.nav-toggle:hover {
+  background: #f1f1f1;
+}
+
+.nav-toggle-bar {
+  display: block;
+  height: 2px;
+  background: var(--charcoal);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Turn the three bars into an X while the menu is open */
+.menu-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile/tablet: brand + hamburger on one row, links drop down below.
+   1080px: the 9 nav links need ~960px to fit on one row beside the brand. */
+@media (max-width: 1080px) {
+  .header-inner {
+    flex-wrap: wrap;
   }
-  
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--tan);
+  }
+
+  .menu-open .nav {
+    display: flex;
+  }
+
   .nav-link {
     width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
   }
 }
