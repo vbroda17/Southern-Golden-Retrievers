@@ -8,15 +8,12 @@ puppies:
   - name: Puppy 1
     photo: Group/group3-7.jpeg
     gender: Male
-    color: Golden
     status: Available
   - name: Puppy 2
     gender: Female
-    color: Golden
     status: Reserved
   - name: Puppy 3
     gender: Male
-    color: Light Golden
     status: Adopted
     description: Calm and cuddly, loves attention.
 archived: true

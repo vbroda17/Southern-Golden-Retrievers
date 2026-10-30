@@ -93,7 +93,7 @@ The Current Litters and Past Litters pages are built from these files, and the H
    - **Mom (dam):** pick from the list. Her photo and the link to her Dams-page section are added automatically. Optionally choose a different **Mom's photo**.
    - **Dad (sire):** type his name and upload his photo.
    - **Date born** and **Ready to go home:** pick the dates.
-   - **Puppies:** click **Add** for each pup, then fill in name, photo, gender, color, status, and an optional description. You can leave this empty until the pups have names; the page will say details are coming soon.
+   - **Puppies:** click **Add** for each pup, then fill in name, photo, gender, status, and an optional description. You can leave this empty until the pups have names; the page will say details are coming soon.
 3. Click **Save**. The site updates in about two minutes.
 
 Photos straight off a phone are fine. The site automatically resizes and compresses them.
@@ -142,7 +142,6 @@ puppies:
   - name: Puppy 1
     photo: litters/puppy1.jpg  # optional
     gender: Male               # Male or Female
-    color: Golden
     status: Available          # Available, Reserved, or Adopted
     description: Playful and loves to fetch.   # optional
 ```

@@ -125,11 +125,6 @@ content:
             options:
               values: [Male, Female]
 
-          - name: color
-            label: Color
-            type: string
-            required: true
-
           - name: status
             label: Status
             description: Available shows a "Contact About" button. Available puppies are listed first.
