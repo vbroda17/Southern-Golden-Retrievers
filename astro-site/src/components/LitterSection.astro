@@ -4,8 +4,9 @@
 import '../styles/litter-section.css';
 import ContactButton from './ContactButton.astro';
 import LitterPhoto from './LitterPhoto.astro';
+import ShareButton from './ShareButton.astro';
 import { url, slugify } from '../utils.js';
-import { PUPPY_STATUSES } from '../config.js';
+import { PUPPY_STATUSES, SITE_CONFIG } from '../config.js';
 
 // Shape produced by getCurrentLitters() in src/litters.js
 interface Props {
@@ -42,6 +43,15 @@ const puppies = sortedPuppies.map((puppy) => {
   return { ...puppy, id };
 });
 
+// Wording used when someone shares this litter or one of its pups
+const parents = `${litter.dam.name} and ${litter.sire.name}`;
+const breeder = `${SITE_CONFIG.name} in ${SITE_CONFIG.location}`;
+const litterShare = {
+  path: `current-litters/#${litter.id}`,
+  title: `${litter.dam.name} × ${litter.sire.name} Puppies | ${SITE_CONFIG.name}`,
+  text: `Golden retriever puppies from ${parents} at ${breeder}, ready to go home ${litter.availableDate}.`
+};
+
 // Image paths are relative to src/assets/images/
 const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
 ---
@@ -50,6 +60,13 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
   <!-- Parents Section -->
   <div class="parents-section">
     <h2>{litter.dam.name} &times; {litter.sire.name}</h2>
+    <div class="litter-share">
+      <ShareButton
+        {...litterShare}
+        label="Share this litter"
+        ariaLabel={`Share ${litter.dam.name} and ${litter.sire.name}'s litter`}
+      />
+    </div>
     <div class="parents-grid">
       <!-- Dam -->
       <div class="parent-card">
@@ -124,6 +141,18 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
             subject={`Inquire About ${puppy.name}`}
             buttonText={`Contact About ${puppy.name}`}
             />
+        )}
+
+        {/* No point sharing a pup that has already gone home */}
+        {puppy.status !== 'Adopted' && (
+          <div class="puppy-share">
+            <ShareButton
+              path={`current-litters/#${puppy.id}`}
+              title={`${puppy.name} | ${SITE_CONFIG.name}`}
+              text={`Meet ${puppy.name}! A ${puppy.gender.toLowerCase()} golden retriever puppy from ${parents} at ${breeder}.`}
+              ariaLabel={`Share ${puppy.name}`}
+            />
+          </div>
         )}
       </div>
     ))}

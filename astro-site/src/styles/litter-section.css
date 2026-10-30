@@ -9,7 +9,16 @@
 
   .parents-section h2 {
     text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .litter-share {
+    text-align: center;
     margin-bottom: 1.5rem;
+  }
+
+  .puppy-share {
+    margin-top: 0.75rem;
   }
 
   .parents-grid {
