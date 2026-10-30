@@ -1,0 +1,68 @@
+{
+  "intro": "Answers to the questions families ask us most. Don't see yours? Email us, we're happy to help.",
+  "sections": [
+    {
+      "title": "Getting a Puppy",
+      "questions": [
+        {
+          "question": "How do I get on your waiting list?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "How are puppies matched with families?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "How much is a deposit, and is it refundable?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "How much do your puppies cost?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        }
+      ]
+    },
+    {
+      "title": "Health",
+      "questions": [
+        {
+          "question": "What health testing do the parents have?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "What vet care and vaccinations will my puppy have?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "Do you offer a health guarantee?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "Are your puppies AKC registered?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        }
+      ]
+    },
+    {
+      "title": "Bringing Your Puppy Home",
+      "questions": [
+        {
+          "question": "When can my puppy come home?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "Can I visit before pickup?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "Do you deliver or ship puppies?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        },
+        {
+          "question": "What comes home with my puppy?",
+          "answer": "Answer coming soon. In the meantime, feel free to email us with this question."
+        }
+      ]
+    }
+  ]
+}
