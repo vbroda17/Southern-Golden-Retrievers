@@ -82,6 +82,51 @@
     font-size: 1.8rem;
   }
 
+  .puppy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .puppy-card {
+    background: white;
+    border: 1px solid var(--tan);
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .puppy-name {
+    margin: 0 0 0.5rem;
+  }
+
+  .puppy-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .puppy-meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .puppy-meta li {
+    margin-bottom: 0.25rem;
+  }
+
+  .puppy-description {
+    font-size: 0.95rem;
+    color: #444;
+  }
+
   .status-available {
     color: #2d6a3e;
     font-weight: 600;

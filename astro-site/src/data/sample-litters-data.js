@@ -15,7 +15,7 @@ export const currentLitters = [
       link: null // or link to sire page if you have one
     },
     bornDate: "January 1, 2026",
-    availableDate: "Febuary 26, 2026",
+    availableDate: "February 26, 2026",
     puppies: [
       {
         name: "Puppy 1",
@@ -57,7 +57,7 @@ export const currentLitters = [
       link: null
     },
     bornDate: "January 3, 2026",
-    availableDate: "Febuary 28, 2026",
+    availableDate: "February 28, 2026",
     puppies: [
       {
         name: "Puppy A",

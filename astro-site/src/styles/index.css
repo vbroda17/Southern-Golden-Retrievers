@@ -1,7 +1,7 @@
 /* src/styles/index.css - Homepage specific styles */
 
 /* All base styles are in global.css */
-/* This file is for any homepage-specific overrides if needed */
+/* Astro bundles every stylesheet into one file, so scope rules here to .home-card-grid */
 
 .home-card-grid {
   display: grid;
@@ -10,41 +10,28 @@
   margin-top: 1rem;
 }
 
-.card {
+.home-card-grid .card {
   text-align: center;
 }
 
-.card .btn {
+.home-card-grid .btn {
   display: inline-block;
   width: fit-content;
   margin: 1rem 0 0;
   vertical-align: middle;
 }
 
-.card .btn + .btn {
+.home-card-grid .btn + .btn {
   margin-left: 0.5rem;
 }
 
-
 @media (max-width: 600px) {
   .home-card-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .card {
-    text-align: center;
+    grid-template-columns: 1fr;
   }
 
   /* keep buttons inline so they wrap and remain centered on narrow screens */
-  .card .btn {
-    display: inline-block;
+  .home-card-grid .btn {
     margin: 0.75rem 0.4rem 0;
-  }
-
-  .card .btn + .btn {
-    margin-left: 0.5rem;
   }
 }
