@@ -87,7 +87,8 @@ export function initCarousel(carouselId, options = {}) {
 
   function updateLightboxImage() {
     const currentImg = slides[currentIndex].querySelector('img');
-    lightboxImg.src = currentImg.src;
+    // currentSrc is the size the browser picked from the srcset
+    lightboxImg.src = currentImg.currentSrc || currentImg.src;
     lightboxImg.alt = currentImg.alt;
     lightboxCounter.textContent = `${currentIndex + 1} / ${slides.length}`;
   }

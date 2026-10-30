@@ -2,14 +2,13 @@
 // src/components/ImageCarousel.astro
 // Reusable image carousel component with arrow navigation
 
-import { url } from '../utils.js';
-import { readdirSync } from 'fs';
-import { join } from 'path';
+import { Image } from 'astro:assets';
+import { findImage, folderImages } from '../images.js';
 import '../styles/image-carousel.css';
 
 interface Props {
-  folders?: string[]; // Array of folder paths relative to public/images/
-  images?: string[]; // Array of specific image paths relative to public/
+  folders?: string[]; // Array of folder paths relative to src/assets/images/
+  images?: string[]; // Array of specific image paths relative to src/assets/images/
   alt?: string; // Default alt text (image name will be appended)
   autoplay?: boolean; // Auto-advance slides (default: false)
   interval?: number; // Auto-advance interval in ms (default: 5000)
@@ -23,31 +22,23 @@ const {
   interval = 5000
 } = Astro.props;
 
-// Collect all image paths
-const allImages: string[] = [];
+// Collect all images from folders, then individual images
+const allImages = folders.flatMap(folder => {
+  const found = folderImages(folder);
+  if (found.length === 0) {
+    console.warn(`No images found in: src/assets/images/${folder}`);
+  }
+  return found;
+});
 
-// Add images from folders
-for (const folder of folders) {
-  try {
-    const folderPath = join(process.cwd(), 'public', 'images', folder);
-    const files = readdirSync(folderPath);
-
-    // Filter for image files and sort them
-    const imageFiles = files
-      .filter(file => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
-      .sort();
-
-    // Add full paths
-    imageFiles.forEach(file => {
-      allImages.push(`images/${folder}/${file}`);
-    });
-  } catch (error) {
-    console.warn(`Could not read folder: images/${folder}`);
+for (const path of images) {
+  const image = findImage(path);
+  if (image) {
+    allImages.push({ path, image });
+  } else {
+    console.warn(`Image not found: src/assets/images/${path}`);
   }
 }
-
-// Add individual images
-allImages.push(...images);
 
 // Generate a unique ID for this carousel instance
 const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
@@ -55,15 +46,18 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
 
 <div class="image-carousel" data-carousel-id={carouselId} data-autoplay={autoplay} data-interval={interval}>
   <div class="carousel-container">
-    {allImages.map((imagePath, index) => {
-      const fileName = imagePath.split('/').pop()?.split('.')[0] || '';
+    {allImages.map(({ path, image }, index) => {
+      const fileName = path.split('/').pop()?.split('.')[0] || '';
       const imageAlt = `${alt} - ${fileName}`;
 
       return (
         <div class={`carousel-slide ${index === 0 ? 'active' : ''}`}>
-          <img
-            src={url(imagePath)}
+          <Image
+            src={image}
             alt={imageAlt}
+            width={1600}
+            widths={[600, 1000, 1600]}
+            sizes="(max-width: 1000px) 100vw, 1000px"
             loading={index === 0 ? 'eager' : 'lazy'}
             class="carousel-image"
           />

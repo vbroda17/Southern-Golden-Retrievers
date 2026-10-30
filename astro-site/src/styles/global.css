@@ -88,6 +88,7 @@ main {
 /* Images */
 .showcase-image {
   width: 100%;
+  height: auto;
   max-height: 500px;
   object-fit: scale-down;
   border-radius: 1rem;

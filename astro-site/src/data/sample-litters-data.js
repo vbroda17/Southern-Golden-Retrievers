@@ -1,17 +1,19 @@
 // src/data/sample-litters-data.js
 // Simple data file for managing litters
+// Image paths are relative to src/assets/images/ (e.g. "Lilly/lilly3.jpeg")
+// Put puppy photos in src/assets/images/litters/<litter id>/
 
 export const currentLitters = [
   {
     id: "lilly-winter-2026",
     dam: {
       name: "Lilly",
-      image: "/images/Lilly/lilly3.jpeg",
+      image: "Lilly/lilly3.jpeg",
       link: "/dams#lilly"
     },
     sire: {
       name: "Champion Bruno",
-      image: "/images/sires/bruno.jpg",
+      image: "sires/bruno.jpg",
       link: null // or link to sire page if you have one
     },
     bornDate: "January 1, 2026",
@@ -19,8 +21,8 @@ export const currentLitters = [
     puppies: [
       {
         name: "Puppy 1",
-        // image: "/images/litters/lilly-winter-2026/puppy1.jpg",
-        image: "/images/Group/group3-7.jpeg",
+        // image: "litters/lilly-winter-2026/puppy1.jpg",
+        image: "Group/group3-7.jpeg",
         gender: "Male",
         color: "Golden",
         status: "Available", // Available, Reserved, Adopted
@@ -28,7 +30,7 @@ export const currentLitters = [
       },
       {
         name: "Puppy 2",
-        image: "/images/litters/lilly-winter-2026/puppy2.jpg",
+        image: "litters/lilly-winter-2026/puppy2.jpg",
         gender: "Female",
         color: "Golden",
         status: "Reserved",
@@ -36,7 +38,7 @@ export const currentLitters = [
       },
       {
         name: "Puppy 3",
-        image: "/images/litters/lilly-winter-2026/puppy3.jpg",
+        image: "litters/lilly-winter-2026/puppy3.jpg",
         gender: "Male",
         color: "Light Golden",
         status: "Adopted",
@@ -48,12 +50,12 @@ export const currentLitters = [
     id: "roux-winter-2026",
     dam: {
       name: "Roux",
-      image: "/images/Roux/roux1.jpeg",
+      image: "Roux/roux1.jpeg",
       link: "/dams#roux"
     },
     sire: {
       name: "Duke",
-      image: "/images/sires/duke.jpg",
+      image: "sires/duke.jpg",
       link: null
     },
     bornDate: "January 3, 2026",
@@ -61,7 +63,7 @@ export const currentLitters = [
     puppies: [
       {
         name: "Puppy A",
-        image: "/images/litters/roux-winter-2026/puppy1.jpg",
+        image: "litters/roux-winter-2026/puppy1.jpg",
         gender: "Female",
         color: "Golden",
         status: "Available",
@@ -69,7 +71,7 @@ export const currentLitters = [
       },
       {
         name: "Puppy B",
-        image: "/images/litters/roux-winter-2026/puppy2.jpg",
+        image: "litters/roux-winter-2026/puppy2.jpg",
         gender: "Male",
         color: "Golden",
         status: "Available",
