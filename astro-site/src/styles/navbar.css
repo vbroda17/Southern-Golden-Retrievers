@@ -143,8 +143,9 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile: brand + hamburger on one row, links drop down below */
-@media (max-width: 800px) {
+/* Mobile/tablet: brand + hamburger on one row, links drop down below.
+   900px: the 7 nav links need ~860px to fit on one row beside the brand. */
+@media (max-width: 900px) {
   .header-inner {
     flex-wrap: wrap;
   }

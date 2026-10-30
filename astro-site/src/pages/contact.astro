@@ -24,9 +24,11 @@ const litterCount = currentLitters.length;
             ) : (
               <p>We don't have any litters right now, but more are planned. If you would like to join our waiting list or get more information, please email us at <EmailLink showCopy={true} subject="Waiting List Inquiry" />.</p>
             )}
+            <p>Have a question about the waiting list, deposits, health, or pickup? Many answers are in our <a href={url("faq")}>FAQ</a>.</p>
             <p>In the meantime, explore our other pages to learn more about our dams, current litters, and us.</p>
             <a class="btn" href={url("dams")}>Dams</a>
             <a class="btn" href={url("current-litters")}>Current Litters</a>
+            <a class="btn" href={url("faq")}>FAQ</a>
             <a class="btn" href={url("about")}>About Us</a>
         </section>
 
