@@ -42,85 +42,111 @@ npm run preview   # serves that build locally
 
 ## How changes go live
 
-1. Create a branch off `dev` (e.g. `feature/new-litter`).
-2. Make your changes and open a pull request into **`dev`**.
-3. When you're ready to release, open a pull request from `dev` into **`main`**.
+There are two kinds of changes:
 
-Every push to `main` automatically builds and deploys the site through GitHub Actions ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). You can watch it in the repo's **Actions** tab; it takes a couple of minutes. Merging into `dev` does not change the live site.
+- **Litter updates** (adding a litter, marking a pup Reserved, new puppy photos) are made in **Pages CMS on `main`** and go live automatically a couple of minutes after saving. See [Updating litters](#updating-litters).
+- **Code and design changes** go through `dev`:
+  1. Create a branch off `dev` (e.g. `feature/new-page`).
+  2. Make your changes and open a pull request into **`dev`**.
+  3. When you're ready to release, open a pull request from `dev` into **`main`**.
+
+Every push to `main` (including every save in Pages CMS) builds and deploys the site through GitHub Actions ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)). You can watch it in the repo's **Actions** tab. Merging into `dev` does not change the live site.
+
+### Keeping `dev` up to date with litter edits
+
+Because litter edits are committed straight to `main`, `dev` falls behind. Before starting new code work (and before a `dev` → `main` release), bring those edits into `dev`:
+
+```sh
+git checkout dev
+git pull
+git merge origin/main
+git push
+```
+
+This only conflicts if the same litter file was changed on both branches, so avoid editing `astro-site/src/content/litters/` on feature branches.
 
 ---
 
 ## Updating litters
 
-All litter information is in one file: **[`astro-site/src/data/litters.js`](astro-site/src/data/litters.js)**. The Current Litters page is built from it, and the Home and Contact pages read it to say how many litters there are ("one litter", "two litters", or a waiting-list message when there are none). You never need to edit those pages by hand.
+Litters are edited through **[Pages CMS](https://app.pagescms.org)**, a free web editor with simple forms. No code, no installs. Each litter is saved as a small file in [`astro-site/src/content/litters/`](astro-site/src/content/litters/), and the site rebuilds itself after every save.
 
-### Adding a new litter
+The Current Litters page is built from these files, and the Home and Contact pages count them to say "one litter", "two litters", or show a waiting-list message when there are none. You never need to edit those pages by hand.
 
-1. **Add the puppy photos.** Make a folder named after the litter inside `astro-site/src/assets/images/litters/`, for example:
+### One-time setup
 
-   ```
-   astro-site/src/assets/images/litters/raine-spring-2027/
-     puppy1.jpg
-     puppy2.jpg
-   ```
+**Site owner (once):**
+1. Go to https://app.pagescms.org and sign in with GitHub.
+2. When asked, install the Pages CMS GitHub App on this repository.
 
-   Photos straight off a phone are fine. The site automatically resizes and compresses them.
+**Each person who will update litters:**
+1. Create a free account at https://github.com.
+2. The site owner adds them in the repo under **Settings → Collaborators → Add people** (they'll get an email invite to accept).
+3. They go to https://app.pagescms.org, choose **Sign in with GitHub**, then open this repository on the **`main`** branch.
 
-2. **Add the litter to `litters.js`.** Copy an existing litter block inside `currentLitters = [ ... ]` and change the details:
+### Adding a new litter (in Pages CMS)
 
-   ```js
-   {
-     id: "raine-spring-2027",            // unique; also the photo folder name and the page link (#raine-spring-2027)
-     dam: {
-       name: "Raine",
-       image: "Raine/raine1.jpeg",       // any photo under src/assets/images/
-       link: "/dams#raine"               // links the photo to her section on the Dams page
-     },
-     sire: {
-       name: "Duke",
-       image: "sires/duke.jpg",
-       link: null                        // null = no link
-     },
-     bornDate: "March 3, 2027",          // shown exactly as written
-     availableDate: "April 28, 2027",
-     puppies: [
-       {
-         name: "Blue Collar",
-         image: "litters/raine-spring-2027/puppy1.jpg",
-         gender: "Male",
-         color: "Golden",
-         status: "Available",
-         description: "Playful and loves to fetch."   // optional
-       },
-       // ...one block per puppy
-     ]
-   },
-   ```
+1. Open **Litters** and click **Add an entry**.
+2. Fill in the form:
+   - **Mom (dam):** pick from the list. Her photo and the link to her Dams-page section are added automatically. Optionally choose a different **Mom's photo**.
+   - **Dad (sire):** type his name and upload his photo.
+   - **Date born** and **Ready to go home:** pick the dates.
+   - **Puppies:** click **Add** for each pup, then fill in name, photo, gender, color, status, and an optional description. You can leave this empty until the pups have names; the page will say details are coming soon.
+3. Click **Save**. The site updates in about two minutes.
 
-3. Run `npm run dev` and check the Current Litters page.
+Photos straight off a phone are fine. The site automatically resizes and compresses them.
 
-Image paths are always relative to `astro-site/src/assets/images/`. Don't start them with `/images/`.
+### Updating or removing a litter
+
+- **A pup was reserved or went home:** open the litter, expand the pup, change **Status**, and save.
+- **Add photos later:** open the pup and upload a **Photo**. Pups without one show a "Photo coming soon" box.
+- **Remove a litter:** once every pup has gone home, open the litter and delete the entry. With no litters, the Current Litters page shows a "join our waiting list" message, and Home/Contact update their wording.
+
+With two or more litters, a "Jump to Litter" menu appears at the top of the Current Litters page automatically. Litters are listed oldest first.
 
 ### Puppy status
 
-`status` must be exactly one of the following (capitalized as shown):
-
 | Status | What the site does |
 |---|---|
-| `"Available"` | Green status, shows a **Contact About …** button, counted in "Available: X of Y" |
-| `"Reserved"` | Gold status, no contact button |
-| `"Adopted"` | Grey status, no contact button |
+| **Available** | Green status, shows a **Contact About …** button, counted in "Available: X of Y" |
+| **Reserved** | Gold status, no contact button |
+| **Adopted** | Grey status, no contact button |
 
-Puppies are automatically shown in that order: available first. If a status is misspelled (e.g. `"available"`), the build stops with a message naming the puppy, so a typo can't silently go live.
+Puppies are automatically shown in that order: available first.
 
-### Other litter tips
+### If a save doesn't show up
 
-- **No photo yet?** Leave out `image` (or point it at a file that doesn't exist yet). The card shows a "Photo coming soon" box.
-- **No description?** Leave out `description`; nothing extra is shown.
-- **Updating a pup:** just change its `status`, e.g. from `"Available"` to `"Reserved"`.
-- **Removing a litter:** delete its block once every pup has gone home. You can also delete its photo folder.
-- **No current litters:** set `export const currentLitters = [];`. The Current Litters page shows a "join our waiting list" message, and Home/Contact update their wording.
-- With two or more litters, a "Jump to Litter" menu appears at the top of the page automatically.
+Every litter is checked when the site builds. If something is wrong (for example, a file edited by hand with a misspelled status), the update **won't go live** and the previous version of the site stays up; nothing breaks. To see why, open the repo's **Actions** tab, click the failed (red ✗) run, and look for a message like:
+
+```
+litters → roux-2026-11: puppies.0.status: Invalid option: expected one of "Available"|"Reserved"|"Adopted"
+```
+
+That names the litter file and the field to fix. Fix it in Pages CMS (or the file) and save again.
+
+### Editing litter files by hand
+
+You can also edit the YAML files directly. Each looks like this:
+
+```yaml
+dam: Lilly                     # must match a dam's gallery folder name for her photo/link
+damPhoto: Lilly/lilly3.jpeg    # optional; default is her first gallery photo
+sire: Champion Bruno
+sirePhoto: sires/bruno.jpg
+born: 2026-01-01               # YYYY-MM-DD; shown as "January 1, 2026"
+readyDate: 2026-02-26
+puppies:
+  - name: Puppy 1
+    photo: litters/puppy1.jpg  # optional
+    gender: Male               # Male or Female
+    color: Golden
+    status: Available          # Available, Reserved, or Adopted
+    description: Playful and loves to fetch.   # optional
+```
+
+- The file name (e.g. `lilly-winter-2026.yml`) becomes the litter's link on the page (`#lilly-winter-2026`).
+- Photo paths are relative to `astro-site/src/assets/images/`. Puppy photos go in `astro-site/src/assets/images/litters/`.
+- The rules the site checks are in [`astro-site/src/content.config.ts`](astro-site/src/content.config.ts).
 
 ---
 
@@ -139,8 +165,9 @@ Drop a photo (`.jpg`, `.jpeg`, `.png`, `.webp`, or `.gif`) into the folder and i
 ### Adding a new dam
 
 1. Create her photo folder, e.g. `astro-site/src/assets/images/Daisy/`, and add photos.
-2. In [`astro-site/src/pages/dams.astro`](astro-site/src/pages/dams.astro), copy one of the `<section id="...">` blocks and change the id, name, folder, and description.
-3. Update the "Meet Our Moms" text on the home page ([`index.astro`](astro-site/src/pages/index.astro)), which names the dams.
+2. In [`astro-site/src/pages/dams.astro`](astro-site/src/pages/dams.astro), copy one of the `<section id="...">` blocks and change the id, name, folder, and description. Use her name in lowercase as the id (e.g. `id="daisy"`) so litter pages can link to her.
+3. Add her name to the **Mom (dam)** list in [`.pages.yml`](.pages.yml) (`values: [Lilly, Roux, Raine, Daisy]`) so she can be picked in Pages CMS.
+4. Update the "Meet Our Moms" text on the home page ([`index.astro`](astro-site/src/pages/index.astro)), which names the dams.
 
 ---
 
@@ -208,23 +235,26 @@ Then open `dist/domain-test/robots.txt` and `sitemap-index.xml` to confirm they 
 ## Project layout
 
 ```
+.pages.yml                Pages CMS forms for editing litters
 astro-site/
   astro.config.mjs        site address, base path, sitemap
   public/                 files copied as-is (favicon)
   src/
     assets/images/        all photos (optimized at build time)
       <Dam name>/         carousel photos for each dam
-      litters/<id>/       puppy photos for each litter
+      litters/            puppy photos
       sires/              sire photos
       Group/              group photos used on Home/About/Contact/Testimonials
     components/           reusable pieces (Navbar, Footer, ImageCarousel, LitterSection, ...)
-    data/litters.js       current litters
+    content/litters/      one YAML file per current litter (edited via Pages CMS)
+    content.config.ts     rules each litter file is checked against
     layouts/Layout.astro  shared page shell: <head>, SEO tags, nav, footer
     pages/                one file per page (404, robots.txt included)
     scripts/              browser scripts (carousel, copy email)
     styles/               CSS, one file per page/component plus global.css
     config.js             email, site name, default description
     images.js             photo lookup used by the carousel and litter cards
+    litters.js            loads litter files and fills in dam photo/link and dates
     utils.js              url() for base-path links, countOf() for wording
 ```
 
