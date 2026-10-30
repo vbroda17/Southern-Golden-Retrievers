@@ -1,0 +1,23 @@
+---
+// src/pages/404.astro
+// Shown by GitHub Pages for any URL that doesn't exist
+import Layout from '../layouts/Layout.astro';
+import { url } from '../utils.js';
+
+const title = "Page Not Found | Southern Golden Retrievers";
+const description = "Sorry, we couldn't find that page.";
+---
+
+<Layout title={title} description={description} noindex>
+  <div class="container">
+    <section class="hero">
+      <h1>Page Not Found</h1>
+      <p>Sorry, we couldn't find that page. It may have moved, or the link may be mistyped.</p>
+      <p>Try one of these instead:</p>
+      <a class="btn" href={url('')}>Home</a>
+      <a class="btn" href={url('current-litters')}>Current Litters</a>
+      <a class="btn" href={url('dams')}>Dams</a>
+      <a class="btn" href={url('contact')}>Contact</a>
+    </section>
+  </div>
+</Layout>
