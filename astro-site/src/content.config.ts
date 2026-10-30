@@ -9,6 +9,7 @@ import { PUPPY_STATUSES } from './config.js';
 
 // Pages CMS may save an empty optional field as "" or null; treat both as "not set"
 const optionalText = z.string().nullish().transform(value => value || undefined);
+const optionalDate = z.union([z.coerce.date(), z.literal('')]).nullish().transform(value => value || undefined);
 
 const litters = defineCollection({
   loader: glob({ pattern: '*.{yml,yaml}', base: './src/content/litters' }),
@@ -18,7 +19,10 @@ const litters = defineCollection({
     sire: z.string(),
     sirePhoto: optionalText,
     born: z.coerce.date(),
-    readyDate: z.coerce.date(),
+    readyDate: optionalDate,  // required while the litter is current (checked below)
+    // true moves the litter from Current Litters to Past Litters
+    archived: z.boolean().nullish().transform(value => value ?? false),
+    pastNote: optionalText,   // short note shown on Past Litters
     puppies: z.array(z.object({
       name: z.string(),
       photo: optionalText,
@@ -26,7 +30,15 @@ const litters = defineCollection({
       color: z.string(),
       status: z.enum(PUPPY_STATUSES),
       description: optionalText
-    })).nullish().transform(puppies => puppies ?? [])
+    })).nullish().transform(puppies => puppies ?? []),
+    // "All grown up" photos families send in, shown on Past Litters
+    familyPhotos: z.array(z.object({
+      photo: z.string(),
+      caption: optionalText
+    })).nullish().transform(photos => photos ?? [])
+  }).refine(litter => litter.archived || litter.readyDate, {
+    path: ['readyDate'],
+    message: 'A current litter needs a "Ready to go home" date'
   })
 });
 
