@@ -1,10 +1,12 @@
 # Pages CMS configuration (https://app.pagescms.org)
-# Defines the forms used to add and update litters without editing code.
+# Defines the forms used to update litters and the FAQ without editing code.
 # Saving in Pages CMS commits to the selected branch; saves on `main` go live automatically.
 #
-# Keep in sync with astro-site/src/content.config.ts (the schema the site checks at build time):
-#   - dam choices below should match the dam galleries in astro-site/src/assets/images/
-#   - status choices must match PUPPY_STATUSES in astro-site/src/config.js
+# Keep in sync with the checks the site runs at build time:
+#   - Litters: astro-site/src/content.config.ts
+#     - dam choices below should match the dam galleries in astro-site/src/assets/images/
+#     - status choices must match PUPPY_STATUSES in astro-site/src/config.js
+#   - FAQ: astro-site/src/faq.js
 
 media:
   input: astro-site/src/assets/images
@@ -107,3 +109,46 @@ content:
           - name: description
             label: Description (optional)
             type: text
+
+  - name: faq
+    label: FAQ
+    type: file
+    path: astro-site/src/content/faq.json
+    format: json
+    fields:
+      - name: intro
+        label: Intro
+        description: Short line shown under the "Frequently Asked Questions" title.
+        type: text
+
+      - name: sections
+        label: Sections
+        description: Groups of questions, e.g. "Getting a Puppy". Drag to reorder.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Section title
+            type: string
+            required: true
+
+          - name: questions
+            label: Questions
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{question}"
+            fields:
+              - name: question
+                label: Question
+                type: string
+                required: true
+
+              - name: answer
+                label: Answer
+                description: Leave a blank line between paragraphs. Questions with no answer yet are hidden on the site.
+                type: text
