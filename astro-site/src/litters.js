@@ -8,18 +8,22 @@ import { folderImages } from './images.js';
 const formatDate = (date) =>
   date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
+// A dam's name, photo (default: first photo in her gallery folder), and Dams-page link.
+// A dam with a gallery folder has a section on the Dams page (#lilly, #roux, ...)
+export function damInfo(name, photo) {
+  const gallery = folderImages(name);
+  return {
+    name,
+    image: photo ?? gallery[0]?.path,
+    link: gallery.length > 0 ? `/dams#${name.toLowerCase()}` : null
+  };
+}
+
 // Fills in the dam's photo and Dams-page link, formats dates, and renames photo -> image
 function toLitter({ id, data }) {
-  // A dam with a gallery folder has a section on the Dams page (#lilly, #roux, ...)
-  const damGallery = folderImages(data.dam);
-
   return {
     id,
-    dam: {
-      name: data.dam,
-      image: data.damPhoto ?? damGallery[0]?.path,
-      link: damGallery.length > 0 ? `/dams#${data.dam.toLowerCase()}` : null
-    },
+    dam: damInfo(data.dam, data.damPhoto),
     sire: { name: data.sire, image: data.sirePhoto, link: null },
     bornDate: formatDate(data.born),
     availableDate: data.readyDate && formatDate(data.readyDate),
