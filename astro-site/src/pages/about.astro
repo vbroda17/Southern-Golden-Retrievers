@@ -7,21 +7,21 @@ import EmailLink from '../components/EmailLink.astro';
 import { url } from '../utils.js';
 
 const title = "About | Southern Golden Retrievers";
-const description = "Learn about us and how we make sure you get the perfect pup. Located in Knoxville, TN.";
+const description = "Learn about Southern Golden Retrievers, a family golden retriever breeder in the Knoxville, TN area.";
 ---
 
 <Layout title={title} description={description}>
   <div class="container">
         <section class="hero">
-            <h1>About Us!</h1>
-            <p>Southern Golden Retrievers is a dedicated breeder of high-quality Golden Retrievers. We focus on producing healthy, well-socialized puppies with excellent temperaments and strong genetic lines.</p>
-            <p>We are a family of passionate breeders committed to maintaining the highest standards in our breeding program.</p>
-            <p>From the Knoxville area, we are dedicated to finding loving homes for our puppies.</p>
-            <p>To get in touch with us, please email us at <EmailLink showCopy={true} />.</p>
-            <p>Feel free to explore more about us in the meantime.</p>
+            <h1>About Us</h1>
+            <p>Southern Golden Retrievers is a family breeder of high-quality Golden Retrievers in the Knoxville area. We focus on raising healthy, well-socialized puppies with excellent temperaments and strong genetic lines.</p>
+            <p>We hold our breeding program to the highest standards, and our goal is simple: to find a loving home for every puppy.</p>
+            <p>To get in touch, email us at <EmailLink showCopy={true} />.</p>
             <a class="btn" href={url("dams")}>Dams</a>
             <a class="btn" href={url("current-litters")}>Current Litters</a>
-            <a class="btn" href={url("contact")}>Contact Us</a>
+            <a class="btn" href={url("testimonials")}>Testimonials</a>
+            <a class="btn" href={url("faq")}>FAQ</a>
+            <a class="btn" href={url("contact")}>Contact</a>
         </section>
 
         <section class="card">

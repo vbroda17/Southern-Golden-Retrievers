@@ -17,7 +17,7 @@ const pastLitters = await getPastLitters();
   <div class="container">
     <section class="hero">
       <h1>Past Litters</h1>
-      <p>Our puppies grow up to be wonderful family dogs. Here are some of our past litters, as puppies and all grown up with their families.</p>
+      <p>Our puppies grow up to be wonderful family dogs. Here are some of our past litters, both as puppies and all grown up with their families.</p>
     </section>
 
     {pastLitters.map(litter => <PastLitter litter={litter} />)}
@@ -32,7 +32,13 @@ const pastLitters = await getPastLitters();
     <section class="card past-litters-cta">
       <h2>Have One of Our Puppies?</h2>
       <p>We love seeing how they've grown! Send a photo to <EmailLink showCopy={true} subject="Photo of my Southern Golden" /> and we may add it here.</p>
-      <p><a class="btn" href={url('current-litters')}>See Current Litters</a></p>
+    </section>
+
+    <section class="card past-litters-cta">
+      <h2>Want a Puppy Like These?</h2>
+      <p>See who's available now, or check Puppy News to see which mom is having puppies next.</p>
+      <a class="btn" href={url('current-litters')}>Current Litters</a>
+      <a class="btn" href={url('puppy-news')}>Puppy News</a>
     </section>
   </div>
 </Layout>

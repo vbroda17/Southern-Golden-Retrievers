@@ -3,6 +3,7 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import testimonialImage from '../assets/images/Group/group2-4.jpeg';
+import { url } from '../utils.js';
 import '../styles/testimonials.css';
 
 const title = "Testimonials | Southern Golden Retrievers";
@@ -12,8 +13,8 @@ const description = "Hear from families who brought home a Southern Golden Retri
 <Layout title={title} description={description}>
   <div class="container">
         <section class="hero">
-            <h1>Testimonials!</h1>
-            <p>We know the quality of our dogs, and so do others! Hear some of their stories. (Currently Place Holder Stories)</p>
+            <h1>Testimonials</h1>
+            <p>We're proud of our dogs, and so are the families who brought one home. Here are some of their stories. (These are placeholder stories for now.)</p>
         </section>
 
         <!-- Testimonial Card - Image on Left -->
@@ -30,8 +31,8 @@ const description = "Hear from families who brought home a Southern Golden Retri
                 <blockquote class="testimonial-quote">
                     "Our Golden Retriever from Southern Golden Retrievers has been the best addition to our family. The entire process was smooth, and they were so helpful every step of the way!"
                 </blockquote>
-                <p class="testimonial-author">- The Smith Family</p>
-                <p class="testimonial-date">Got their pup in Spring 2024</p>
+                <p class="testimonial-author">— The Smith Family</p>
+                <p class="testimonial-date">Brought their pup home in spring 2024</p>
             </div>
         </div>
 
@@ -49,9 +50,17 @@ const description = "Hear from families who brought home a Southern Golden Retri
                 <blockquote class="testimonial-quote">
                     "We couldn't be happier with our puppy! The care and attention to detail from the breeder was exceptional. Our pup is healthy, happy, and so well-adjusted."
                 </blockquote>
-                <p class="testimonial-author">- John & Sarah</p>
-                <p class="testimonial-date">Got their pup in Fall 2023</p>
+                <p class="testimonial-author">— John &amp; Sarah</p>
+                <p class="testimonial-date">Brought their pup home in fall 2023</p>
             </div>
         </div>
+
+        <section class="card cta-card">
+            <h2>Ready for Your Own Golden?</h2>
+            <p>See who's available now, check Puppy News to see which mom is having puppies next, or look back at our past litters.</p>
+            <a class="btn" href={url('current-litters')}>Current Litters</a>
+            <a class="btn" href={url('puppy-news')}>Puppy News</a>
+            <a class="btn" href={url('past-litters')}>Past Litters</a>
+        </section>
     </div>
 </Layout>

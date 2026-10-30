@@ -1,28 +1,6 @@
 /* src/styles/dams.css - Dams page specific styles */
 
-.dam-section {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem 1.5rem;
-}
-
-.dam-certifications {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  text-align: center;
-  background: var(--cream);
-  border-color: var(--tan);
-}
-
-.dam-certifications h2 {
-  margin-bottom: 0.5rem;
-}
-
-.dam-certifications p {
-  margin: 0;
-}
-
-/* Long text reads better left-aligned at a comfortable line length */
+/* One left-aligned column, so paragraphs and the list share the same left edge */
 .dam-description {
   max-width: 700px;
   margin: 1.5rem auto 0;
@@ -31,6 +9,7 @@
 }
 
 .dam-description p {
+  max-width: none;
   margin: 0 0 1rem;
 }
 
@@ -54,11 +33,4 @@
 
 .dam-traits li::marker {
   color: var(--gold);
-}
-
-@media (max-width: 600px) {
-  .dam-section,
-  .dam-certifications {
-    padding: 1rem;
-  }
 }
