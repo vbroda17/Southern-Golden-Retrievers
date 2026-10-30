@@ -13,13 +13,11 @@
 .home-card-grid .card {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 .home-card-grid .card-buttons {
   margin-top: auto;
   padding-top: 0.5rem;
-  align-self: stretch; /* full width, so phone-width buttons span the card like everywhere else */
 }
 
 @media (max-width: 800px) {

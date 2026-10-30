@@ -20,9 +20,10 @@
     gap: 2rem;
     margin-bottom: 1.5rem;
     max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  /* Name centered under the photo */
   .parent-card {
     text-align: center;
   }
@@ -65,6 +66,7 @@
     background: var(--cream);
     border-radius: 0.75rem;
     max-width: 600px;
+    margin: 0 auto;
   }
 
   .info-item strong {
@@ -79,7 +81,8 @@
 
   .puppy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 300px));
+    justify-content: center; /* one or two puppies stay centered */
     gap: 1.25rem;
     margin-top: 1.5rem;
   }
@@ -91,7 +94,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     scroll-margin-top: 1.5rem;
   }
 
@@ -125,7 +128,9 @@
     margin-bottom: 0.25rem;
   }
 
+  /* Small cards: keep their text centered too */
   .puppy-description {
+    text-align: center;
     font-size: 0.95rem;
     color: #444;
   }

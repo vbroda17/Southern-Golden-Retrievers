@@ -4,8 +4,10 @@
   margin-bottom: 0.25rem;
 }
 
+/* Questions are full-width rows with the +/- at the right, so they stay left-aligned */
 .faq-item {
   border-bottom: 1px solid var(--tan);
+  text-align: left;
 }
 
 .faq-item:last-child {
@@ -67,6 +69,7 @@
 }
 
 .faq-answer p {
+  max-width: none;
   margin: 0 0 0.75rem;
 }
 

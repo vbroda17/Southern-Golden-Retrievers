@@ -3,6 +3,7 @@
 .litter-nav-buttons {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 @media (max-width: 600px) {

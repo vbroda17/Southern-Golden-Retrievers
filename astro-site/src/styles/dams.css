@@ -1,13 +1,15 @@
 /* src/styles/dams.css - Dams page specific styles */
 
-/* Long text reads better at a comfortable line length */
+/* One left-aligned column, so paragraphs and the list share the same left edge */
 .dam-description {
   max-width: 700px;
-  margin-top: 1.5rem;
+  margin: 1.5rem auto 0;
+  text-align: left;
   line-height: 1.65;
 }
 
 .dam-description p {
+  max-width: none;
   margin: 0 0 1rem;
 }
 

@@ -22,13 +22,11 @@
   color: #555;
 }
 
-.past-litter-note {
-  max-width: 700px;
-}
-
+/* Flex instead of grid so one or two photos stay centered */
 .past-photo-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 
