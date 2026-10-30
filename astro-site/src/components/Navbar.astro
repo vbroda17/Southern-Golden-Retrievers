@@ -40,7 +40,13 @@ const isActive = (path: string) => path === '' ? currentPath === url('') : curre
   <div class="container">
     <div class="header-inner">
       <a href={url('')} class="brand">Southern Golden Retrievers</a>
-      <nav class="nav">
+      <!-- Hamburger toggle, only shown on narrow screens -->
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <nav id="site-nav" class="nav" aria-label="Main">
         {navLinks.map(({ path, label }) => (
           <a
             href={url(path)}
@@ -52,3 +58,40 @@ const isActive = (path: string) => path === '' ? currentPath === url('') : curre
     </div>
   </div>
 </header>
+
+<!-- Without JavaScript the toggle can't work, so always show the menu -->
+<noscript>
+  <style>
+    .nav-toggle { display: none !important; }
+    .site-header .nav { display: flex !important; }
+  </style>
+</noscript>
+
+<script>
+  const header = document.querySelector('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('.nav-toggle');
+
+  if (header && toggle) {
+    const setOpen = (open: boolean) => {
+      header.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    const isOpen = () => header.classList.contains('menu-open');
+
+    toggle.addEventListener('click', () => setOpen(!isOpen()));
+
+    // Close with Escape, returning focus to the toggle
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // Close when tapping anywhere outside the header
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !header.contains(e.target as Node)) setOpen(false);
+    });
+  }
+</script>
