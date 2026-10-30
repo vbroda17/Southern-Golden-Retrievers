@@ -8,7 +8,7 @@ import { url } from '../utils.js';
 import { SITE_CONFIG } from '../config.js';
 import '../styles/current-litters.css';
 
-const title = "Available Litters - Southern Golden Retrievers";
+const title = "Current Litters | Southern Golden Retrievers";
 const description = "View our current litters of golden retriever puppies available in Knoxville, TN.";
 
 const currentLitters = await getCurrentLitters();
@@ -19,17 +19,17 @@ const currentLitters = await getCurrentLitters();
         <section class="hero">
             <h1>Current Litters</h1>
             {currentLitters.length > 0 ? (
-              <p>Meet our beautiful golden retriever puppies currently available. Our moms are tested and certified, so you know these puppies will be strong, healthy, and a great addition to your family. See which pup touches your heart!</p>
+              <p>Meet the golden retriever puppies we have available now. Our moms are health tested and certified, so you can expect a strong, healthy puppy who will be a great addition to your family. See which pup steals your heart!</p>
             ) : (
-              <p>Our moms are tested and certified, so you know their puppies will be strong, healthy, and a great addition to your family.</p>
+              <p>Our moms are health tested and certified, so you can expect strong, healthy puppies who will be a great addition to your family.</p>
             )}
-            <p>For questions or inquiries, contact us at <EmailLink showCopy={true} />.</p>
+            <p>Have a question? Email us at <EmailLink showCopy={true} />.</p>
         </section>
 
         <!-- Quick Navigation -->
         {currentLitters.length > 1 && (
           <div class="litter-nav card">
-            <h2>Jump to Litter:</h2>
+            <h2>Jump to a Litter</h2>
             <div class="litter-nav-buttons">
               {currentLitters.map(litter => (
                 <a href={`#${litter.id}`} class="btn">
@@ -49,8 +49,8 @@ const currentLitters = await getCurrentLitters();
         {currentLitters.length === 0 && (
           <section class="card no-litters">
             <h2>No Current Litters</h2>
-            <p>We don't have any puppies available right now, but we have litters planned! See what's coming next in Puppy News, and send us an email to join the waitlist so you don't miss out.</p>
-            <a class="btn" href={url("puppy-news")}>See Puppy News</a>
+            <p>We don't have any puppies available right now, but more litters are planned! See what's coming next in Puppy News, and send us an email to join the waitlist so you don't miss out.</p>
+            <a class="btn" href={url("puppy-news")}>Puppy News</a>
             <a class="btn" href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`}>Join the Waitlist</a>
           </section>
         )}
@@ -59,11 +59,12 @@ const currentLitters = await getCurrentLitters();
         {currentLitters.length > 0 && (
           <section class="card contact-cta">
               <h2>Interested in a Puppy?</h2>
-              <p>Contact us at <EmailLink showCopy={true} subject="Interested in a Puppy" /> or visit our <a href={url("contact/")}>contact page</a> to learn more about adopting one of our puppies.</p>
-              <p>Have questions about deposits, health, or pickup? See our <a href={url("faq/")}>FAQ</a>.</p>
+              <p>Email us at <EmailLink showCopy={true} subject="Interested in a Puppy" /> to learn more about bringing one of our puppies home.</p>
+              <p>Questions about deposits, health, or pickup? Many answers are in our FAQ. You can also see how our past litters grew up.</p>
+              <a class="btn" href={url("faq")}>FAQ</a>
+              <a class="btn" href={url("past-litters")}>Past Litters</a>
+              <a class="btn" href={url("contact")}>Contact</a>
           </section>
         )}
-
-        <p class="past-litters-link">Want to see how our puppies grow up? Visit our <a href={url("past-litters/")}>Past Litters</a>.</p>
     </div>
 </Layout>

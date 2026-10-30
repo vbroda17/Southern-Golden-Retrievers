@@ -5,15 +5,15 @@ import ImageCarousel from '../components/ImageCarousel.astro';
 import { url } from '../utils.js';
 import '../styles/dams.css';
 
-const title = "Our Dams - Southern Golden Retrievers";
-const description = "Meet Lilly, Roux, and Raine - our tested, certified, and award-winning golden retriever dams in Knoxville, TN.";
+const title = "Our Dams | Southern Golden Retrievers";
+const description = "Meet Lilly and Roux, our health-tested golden retriever moms in Knoxville, TN, along with our retired mom, Raine.";
 ---
 
 <Layout title={title} description={description}>
     <div class="container">
         <section class="hero">
             <h1>Meet Our Dams</h1>
-            <p>Each of our dams is health-tested, well-loved, and an important part of our family. Take a look at our favorite moments with them and at some of their pups.</p>
+            <p>Each of our dams is health tested, well loved, and an important part of our family. Here are some of our favorite photos of them.</p>
         </section>
 
         <!-- PLACEHOLDER: fill in the dams' certifications and health tests -->
@@ -72,7 +72,7 @@ const description = "Meet Lilly, Roux, and Raine - our tested, certified, and aw
 
         <section class="card cta-card">
             <h2>Meet Their Puppies</h2>
-            <p>See who's available now in Current Litters, look back at their Past Litters, or check Puppy News to see which mom is having puppies next.</p>
+            <p>See who's available now, look back at their past litters, or check Puppy News to see which mom is having puppies next.</p>
             <a class="btn" href={url('current-litters')}>Current Litters</a>
             <a class="btn" href={url('past-litters')}>Past Litters</a>
             <a class="btn" href={url('puppy-news')}>Puppy News</a>

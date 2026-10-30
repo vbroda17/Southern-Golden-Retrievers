@@ -21,7 +21,7 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
   <div class="container">
     <section class="hero">
       <h1>Puppy News</h1>
-      <p>See which of our moms is having puppies next. Send us an email to join the waitlist so you don't miss out.</p>
+      <p>Here's a look at which of our moms is having puppies next. Send us an email to join the waitlist so you don't miss out.</p>
     </section>
 
     {plannedLitters.map(litter => (
@@ -72,8 +72,12 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
       </section>
     )}
 
-    <p class="puppy-news-links">
-      <a href={url('current-litters/')}>Current litters</a> &middot; <a href={url('past-litters/')}>Past litters</a> &middot; <a href={url('faq/')}>FAQ</a>
-    </p>
+    <section class="card cta-card">
+      <h2>While You Wait</h2>
+      <p>See who's available now, look back at our past litters, or find answers in our FAQ.</p>
+      <a class="btn" href={url('current-litters')}>Current Litters</a>
+      <a class="btn" href={url('past-litters')}>Past Litters</a>
+      <a class="btn" href={url('faq')}>FAQ</a>
+    </section>
   </div>
 </Layout>

@@ -103,7 +103,7 @@ Photos straight off a phone are fine. The site automatically resizes and compres
 
 - **A pup was reserved or went home:** open the litter, expand the pup, change **Status**, and save.
 - **Add photos later:** open the pup and upload a **Photo**. Pups without one show a "Photo coming soon" box.
-- **Litter is done:** once every pup has gone home, turn on **Move to Past Litters** (see [Past litters](#past-litters)) instead of deleting it. With no current litters, the Current Litters page shows a "join our waiting list" message, and Home/Contact update their wording.
+- **Litter is done:** once every pup has gone home, turn on **Move to Past Litters** (see [Past litters](#past-litters)) instead of deleting it. With no current litters, the Current Litters page shows a "join the waitlist" message, and Home/Contact update their wording.
 - **Remove a litter completely:** delete the entry. It disappears from both pages.
 
 With two or more litters, a "Jump to Litter" menu appears at the top of the Current Litters page automatically. Litters are listed oldest first.

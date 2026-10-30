@@ -9,7 +9,7 @@ import { url, countOf } from '../utils.js';
 import { SITE_CONFIG } from '../config.js';
 
 const title = "Contact | Southern Golden Retrievers";
-const description = "Contact us today and get your perfect golden retriever pup. Located in Knoxville, TN.";
+const description = "Get in touch about our golden retriever puppies, the waitlist, or upcoming litters. Located in Knoxville, TN.";
 
 const currentLitters = await getCurrentLitters();
 
@@ -19,24 +19,24 @@ const litterCount = currentLitters.length;
 <Layout title={title} description={description}>
   <div class="container">
             <section class="hero">
-            <h1>Contact Us!</h1>
+            <h1>Contact Us</h1>
             {litterCount > 0 ? (
-              <p>We currently have {countOf(litterCount, 'litter')}. If you would like to get in touch with us for more information, please email us at <EmailLink showCopy={true} />.</p>
+              <p>We currently have {countOf(litterCount, 'litter')}. For more information, email us at <EmailLink showCopy={true} />.</p>
             ) : (
-              <p>We don't have any litters right now, but more are planned. If you would like to join our waiting list or get more information, please email us at <EmailLink showCopy={true} subject="Waiting List Inquiry" />.</p>
+              <p>We don't have any litters right now, but more are planned. To join the waitlist or ask a question, email us at <EmailLink showCopy={true} subject="Waitlist Inquiry" />.</p>
             )}
-            <p>Have a question about the waiting list, deposits, health, or pickup? Many answers are in our <a href={url("faq")}>FAQ</a>.</p>
-            <p>In the meantime, explore our other pages to learn more about our dams, current litters, and us.</p>
+            <p>Have a question about the waitlist, deposits, health, or pickup? Many answers are in our FAQ.</p>
+            <p>You can also learn more about our dams, our current litters, and us.</p>
+            <a class="btn" href={url("faq")}>FAQ</a>
             <a class="btn" href={url("dams")}>Dams</a>
             <a class="btn" href={url("current-litters")}>Current Litters</a>
-            <a class="btn" href={url("faq")}>FAQ</a>
-            <a class="btn" href={url("about")}>About Us</a>
+            <a class="btn" href={url("about")}>About</a>
         </section>
 
         <section class="card cta-card">
             <h2>Stay Up to Date</h2>
             <p>Stay up to date with our plans by checking out Puppy News, where we share which of our moms is having puppies next and about when. Send us an email to join the waitlist so you don't miss out.</p>
-            <a class="btn" href={url("puppy-news")}>See Puppy News</a>
+            <a class="btn" href={url("puppy-news")}>Puppy News</a>
             <a class="btn" href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`}>Join the Waitlist</a>
         </section>
 

@@ -25,7 +25,7 @@ const nextLitter = getPlannedLitters()[0];
   <div class="container">
     <section class="hero">
       <h1>Raised with Love. Backed by Excellence.</h1>
-      <p>See why our puppies are the perfect addition to your family.</p>
+      <p>See why our puppies make the perfect addition to your family.</p>
        <Image src={heroImage}
        alt="Our Three Golden Retrievers"
        width={1600}
@@ -37,31 +37,35 @@ const nextLitter = getPlannedLitters()[0];
     <div class="home-card-grid">
       <section class="card">
         <h2>Meet Our Moms</h2>
-        <p>Lilly, Raine, and Roux are the three most beautiful, kind, and smart dogs we could ask for.<br> Award winning and loving, they have made great additions to our home.</p>
-        <a href={url('dams')} class="btn">Learn More About Each Mom</a>
+        <p>Lilly and Roux are beautiful, gentle, and smart, and they make wonderful moms. Roux even earned Best in Show at just 11 months old.</p>
+        <p>Our sweet Raine is now retired and still a big part of our family.</p>
+        <a href={url('dams')} class="btn">Meet Our Dams</a>
       </section>
 
       <section class="card">
         <h2>View Our Litters</h2>
         {litterCount > 0 ? (
           <>
-            <p>See who is available in our current {litterCount === 1 ? 'litter' : 'litters'}. See previous pups in our <a href={url('past-litters')}>past litters</a> and <a href={url('testimonials')}>testimonials</a>.</p>
-            <p>Right now, we have {countOf(litterCount, 'litter')}. Take a look and reserve your future puppy today!</p>
-            <a href={url('current-litters')} class="btn">{litterCount === 1 ? 'Current Litter' : 'Current Litters'}</a>
+            <p>Right now we have {countOf(litterCount, 'litter')}. See who's available and reserve your future puppy today!</p>
+            <p>You can also see our past litters and testimonials.</p>
+            <a href={url('current-litters')} class="btn">Current Litters</a>
+            <a href={url('past-litters')} class="btn">Past Litters</a>
+            <a href={url('testimonials')} class="btn">Testimonials</a>
           </>
         ) : (
           <>
-            <p>See previous pups in our <a href={url('past-litters')}>past litters</a> and <a href={url('testimonials')}>testimonials</a>.</p>
-            <p>We don't have any litters right now, but more are planned. Join our waiting list to hear first when puppies arrive!</p>
-            <a href={url('current-litters')} class="btn">Join the Waiting List</a>
+            <p>We don't have any litters right now, but more are on the way. Check Puppy News below to see what's next.</p>
+            <p>In the meantime, see our past litters and testimonials.</p>
+            <a href={url('past-litters')} class="btn">Past Litters</a>
+            <a href={url('testimonials')} class="btn">Testimonials</a>
           </>
         )}
       </section>
 
       <section class="card">
         <h2>About Us</h2>
-        <p>Interested in a pup? Contact us via email at <EmailLink showCopy={true}/> or look at our contact page.</p>
-        <p>Curious about us and what we stand for. We invite you to learn more about us.</p>
+        <p>Interested in a puppy? Email us at <EmailLink showCopy={true}/>.</p>
+        <p>Want to know more about who we are and what we stand for? We'd love to tell you.</p>
         <a href={url('contact')} class="btn">Contact</a>
         <a href={url('about')} class="btn">About</a>
       </section>
@@ -77,7 +81,7 @@ const nextLitter = getPlannedLitters()[0];
       ) : (
         <p>We're planning our next litters now. Send us an email to join the waitlist so you don't miss out!</p>
       )}
-      <a href={url('puppy-news')} class="btn">See Puppy News</a>
+      <a href={url('puppy-news')} class="btn">Puppy News</a>
       <a href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`} class="btn">Join the Waitlist</a>
     </section>
   </div>
