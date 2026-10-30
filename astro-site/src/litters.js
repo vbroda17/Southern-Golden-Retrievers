@@ -3,6 +3,7 @@
 // To add or update litters, use Pages CMS or edit those YAML files (see README).
 import { getCollection } from 'astro:content';
 import { folderImages } from './images.js';
+import { countOf } from './utils.js';
 
 // "2026-01-01" -> "January 1, 2026" (YAML dates are midnight UTC, so format in UTC)
 const formatDate = (date) =>
@@ -45,4 +46,17 @@ export async function getCurrentLitters() {
 export async function getPastLitters() {
   const entries = await getCollection('litters', ({ data }) => data.archived);
   return entries.sort(byBorn).reverse().map(toLitter);
+}
+
+// Available puppies across current litters, for Puppy News and the home page:
+// "We have two puppies available right now from Roux's litter." or undefined if none
+export async function getAvailableNowText() {
+  const litters = (await getCurrentLitters())
+    .map(litter => ({ dam: litter.dam.name, count: litter.puppies.filter(p => p.status === 'Available').length }))
+    .filter(litter => litter.count > 0);
+  if (litters.length === 0) return undefined;
+
+  const total = litters.reduce((sum, litter) => sum + litter.count, 0);
+  const from = litters.length === 1 ? `from ${litters[0].dam}'s litter` : 'across our current litters';
+  return `We have ${countOf(total, 'puppy', 'puppies')} available right now ${from}.`;
 }

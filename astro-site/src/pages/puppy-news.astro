@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import ContactButton from '../components/ContactButton.astro';
 import LitterPhoto from '../components/LitterPhoto.astro';
 import { getPlannedLitters } from '../puppy-news.js';
+import { getAvailableNowText } from '../litters.js';
 import { url } from '../utils.js';
 import '../styles/litter-section.css';
 import '../styles/puppy-news.css';
@@ -13,6 +14,7 @@ const title = "Puppy News | Southern Golden Retrievers";
 const description = "Upcoming golden retriever litters planned at Southern Golden Retrievers in Knoxville, TN. Join our waitlist to hear first.";
 
 const plannedLitters = await getPlannedLitters();
+const availableNow = await getAvailableNowText();
 
 const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
 ---
@@ -23,6 +25,15 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
       <h1>Puppy News</h1>
       <p>Here's a look at which of our moms is having puppies next. Send us an email to join the waitlist so you don't miss out.</p>
     </section>
+
+    {/* Puppies people can get today come before the ones still being planned */}
+    {availableNow && (
+      <section class="card">
+        <h2>Puppies Available Now</h2>
+        <p>{availableNow} Take a look before they're gone!</p>
+        <a class="btn" href={url('current-litters')}>Current Litters</a>
+      </section>
+    )}
 
     {plannedLitters.map(litter => (
       <section id={litter.id} class="card planned-litter">

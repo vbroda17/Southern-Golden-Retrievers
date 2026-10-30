@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import heroImage from '../assets/images/Group/group2-2.jpeg';
 import EmailLink from '../components/EmailLink.astro';
-import { getCurrentLitters } from '../litters.js';
+import { getCurrentLitters, getAvailableNowText } from '../litters.js';
 import { getPlannedLitters } from '../puppy-news.js';
 import { url, countOf } from '../utils.js';
 import { SITE_CONFIG } from '../config.js';
@@ -19,6 +19,7 @@ const litterCount = currentLitters.length;
 
 // The first planned litter in Pages CMS → Puppy News is the one teased here
 const nextLitter = getPlannedLitters()[0];
+const availableNow = await getAvailableNowText();
 ---
 
 <Layout title={title} description={description}>
@@ -39,7 +40,9 @@ const nextLitter = getPlannedLitters()[0];
         <h2>Meet Our Moms</h2>
         <p>Lilly and Roux are beautiful, gentle, and smart, and they make wonderful moms. Roux even earned Best in Show at just 11 months old.</p>
         <p>Our sweet Raine is now retired and still a big part of our family.</p>
-        <a href={url('dams')} class="btn">Meet Our Dams</a>
+        <div class="card-buttons">
+          <a href={url('dams')} class="btn">Meet Our Dams</a>
+        </div>
       </section>
 
       <section class="card">
@@ -48,16 +51,20 @@ const nextLitter = getPlannedLitters()[0];
           <>
             <p>Right now we have {countOf(litterCount, 'litter')}. See who's available and reserve your future puppy today!</p>
             <p>You can also see our past litters and testimonials.</p>
-            <a href={url('current-litters')} class="btn">Current Litters</a>
-            <a href={url('past-litters')} class="btn">Past Litters</a>
-            <a href={url('testimonials')} class="btn">Testimonials</a>
+            <div class="card-buttons">
+              <a href={url('current-litters')} class="btn">Current Litters</a>
+              <a href={url('past-litters')} class="btn">Past Litters</a>
+              <a href={url('testimonials')} class="btn">Testimonials</a>
+            </div>
           </>
         ) : (
           <>
             <p>We don't have any litters right now, but more are on the way. Check Puppy News below to see what's next.</p>
             <p>In the meantime, see our past litters and testimonials.</p>
-            <a href={url('past-litters')} class="btn">Past Litters</a>
-            <a href={url('testimonials')} class="btn">Testimonials</a>
+            <div class="card-buttons">
+              <a href={url('past-litters')} class="btn">Past Litters</a>
+              <a href={url('testimonials')} class="btn">Testimonials</a>
+            </div>
           </>
         )}
       </section>
@@ -66,13 +73,18 @@ const nextLitter = getPlannedLitters()[0];
         <h2>About Us</h2>
         <p>Interested in a puppy? Email us at <EmailLink showCopy={true}/>.</p>
         <p>Want to know more about who we are and what we stand for? We'd love to tell you.</p>
-        <a href={url('contact')} class="btn">Contact</a>
-        <a href={url('about')} class="btn">About</a>
+        <p>Have a question? Many answers are in our FAQ.</p>
+        <div class="card-buttons">
+          <a href={url('about')} class="btn">About</a>
+          <a href={url('faq')} class="btn">FAQ</a>
+          <a href={url('contact')} class="btn">Contact</a>
+        </div>
       </section>
     </div>
 
     <section class="card home-news">
       <h2>Puppy News</h2>
+      {availableNow && <p>{availableNow} Take a look before they're gone!</p>}
       {nextLitter ? (
         <p>
           Next up: <strong>{nextLitter.sire ? `${nextLitter.dam.name} × ${nextLitter.sire.name}` : `${nextLitter.dam.name}'s next litter`}</strong>{nextLitter.expected ? <>, likely around <strong>{nextLitter.expected}</strong></> : null}.
@@ -81,6 +93,7 @@ const nextLitter = getPlannedLitters()[0];
       ) : (
         <p>We're planning our next litters now. Send us an email to join the waitlist so you don't miss out!</p>
       )}
+      {availableNow && <a href={url('current-litters')} class="btn">Current Litters</a>}
       <a href={url('puppy-news')} class="btn">Puppy News</a>
       <a href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`} class="btn">Join the Waitlist</a>
     </section>
