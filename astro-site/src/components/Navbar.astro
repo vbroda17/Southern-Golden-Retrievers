@@ -23,11 +23,12 @@ const isActive = (path: string) => path === '' ? currentPath === url('') : curre
 <div class="top-bar">
   <div class="container">
     <div class="top-bar-content">
-      <span class="top-bar-location">📍 Knoxville, TN</span>
-      <button 
-        class="top-bar-email copy-email-btn" 
+      <span class="top-bar-location"><span aria-hidden="true">📍</span> Knoxville, TN</span>
+      <button
+        class="top-bar-email copy-email-btn"
         data-email={SITE_CONFIG.email}
         title="Click to copy email address"
+        aria-label={`Copy email address ${SITE_CONFIG.email}`}
       >
         📧 {SITE_CONFIG.email}
       </button>
