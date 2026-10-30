@@ -21,7 +21,7 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
   <div class="container">
     <section class="hero">
       <h1>Puppy News</h1>
-      <p>See which of our moms is having puppies next. Our puppies get claimed fast, so join the waitlist to hear first.</p>
+      <p>See which of our moms is having puppies next. Send us an email to join the waitlist so you don't miss out.</p>
     </section>
 
     {plannedLitters.map(litter => (
@@ -50,9 +50,9 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
         </div>
 
         {litter.expected ? (
-          <p class="planned-timing">We are not exactly sure when {litter.dam.name} will go into heat for her next litter, but it will likely be around <strong>{litter.expected}</strong>. Our puppies get claimed fast, so email us to get on the waitlist.</p>
+          <p class="planned-timing">We are not exactly sure when {litter.dam.name} will go into heat for her next litter, but it will likely be around <strong>{litter.expected}</strong>. Send us an email to join the waitlist so you don't miss out.</p>
         ) : (
-          <p class="planned-timing">We are not exactly sure yet when {litter.dam.name} will go into heat for her next litter. Our puppies get claimed fast, so email us to get on the waitlist.</p>
+          <p class="planned-timing">We are not exactly sure yet when {litter.dam.name} will go into heat for her next litter. Send us an email to join the waitlist so you don't miss out.</p>
         )}
         {!litter.sire && <p class="planned-note">Sire to be announced.</p>}
         {litter.note && <p class="planned-note">{litter.note}</p>}
@@ -67,7 +67,7 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
     {plannedLitters.length === 0 && (
       <section class="card planned-litter">
         <h2>Next Litter Coming Soon</h2>
-        <p class="planned-timing">We're planning our next litters now. Our puppies get claimed fast, so email us to get on the waitlist and we'll let you know as soon as we have news.</p>
+        <p class="planned-timing">We're planning our next litters now. Send us an email to join the waitlist so you don't miss out. We'll let you know as soon as we have news.</p>
         <ContactButton subject="Waitlist Inquiry" buttonText="Join the Waitlist" />
       </section>
     )}

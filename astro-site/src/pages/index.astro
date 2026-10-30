@@ -72,10 +72,10 @@ const nextLitter = getPlannedLitters()[0];
       {nextLitter ? (
         <p>
           Next up: <strong>{nextLitter.sire ? `${nextLitter.dam.name} × ${nextLitter.sire.name}` : `${nextLitter.dam.name}'s next litter`}</strong>{nextLitter.expected ? <>, likely around <strong>{nextLitter.expected}</strong></> : null}.
-          Our puppies get claimed fast, so get on the waitlist early!
+          Send us an email to join the waitlist so you don't miss out!
         </p>
       ) : (
-        <p>We're planning our next litters now. Our puppies get claimed fast, so get on the waitlist early!</p>
+        <p>We're planning our next litters now. Send us an email to join the waitlist so you don't miss out!</p>
       )}
       <a href={url('puppy-news')} class="btn">See Puppy News</a>
       <a href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`} class="btn">Join the Waitlist</a>

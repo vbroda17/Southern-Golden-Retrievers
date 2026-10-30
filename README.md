@@ -190,7 +190,7 @@ The Puppy News page ([`/puppy-news`](https://vbroda17.github.io/Southern-Golden-
 For each planned litter:
 - **Mom (dam):** required. Her photo and Dams-page link are added automatically.
 - **Dad (sire)** and **Dad's photo:** optional. Without a dad, the page shows only her photo and says "Sire to be announced."
-- **Expected around:** a rough month. Pick any day in it; the site shows only the month: *"We are not exactly sure when Lilly will go into heat for her next litter, but it will likely be around March 2027. Our puppies get claimed fast, so email us to get on the waitlist."*
+- **Expected around:** a rough month. Pick any day in it; the site shows only the month: *"We are not exactly sure when Lilly will go into heat for her next litter, but it will likely be around March 2027. Send us an email to join the waitlist so you don't miss out."*
 - **Extra note:** optional.
 
 Fallbacks, so the page never looks broken:
