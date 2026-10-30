@@ -1,6 +1,8 @@
 ---
 // src/pages/contact.astro
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import showcaseImage from '../assets/images/Group/group2-3.jpeg';
 import EmailLink from '../components/EmailLink.astro';
 import { url } from '../utils.js';
 
@@ -20,9 +22,12 @@ const description = "Contact us today and get your perfect golden retriever pup.
         </section>
 
         <section class="card">
-            <img src={url("/images/Group/group2-3.jpeg")}
+            <Image src={showcaseImage}
                 alt="Our Three Golden Retrievers"
-                class="showcase-image">
+                width={1600}
+                widths={[600, 1000, 1600]}
+                sizes="(max-width: 1000px) 100vw, 1000px"
+                class="showcase-image" />
         </section>
   </div>
 </Layout>

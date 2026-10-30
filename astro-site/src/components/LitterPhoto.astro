@@ -1,0 +1,23 @@
+---
+// src/components/LitterPhoto.astro
+// Optimized photo for a dam, sire, or puppy, or a "Photo coming soon" placeholder if the file is missing
+import { Image } from 'astro:assets';
+import { findImage } from '../images.js';
+
+interface Props {
+  path: string; // Relative to src/assets/images/
+  alt: string;
+  class: string; // Sizing class, e.g. "parent-image" or "puppy-image"
+  widths: number[];
+  sizes: string;
+}
+
+const { path, alt, class: className, widths, sizes } = Astro.props;
+const image = findImage(path);
+---
+
+{image ? (
+  <Image src={image} alt={alt} width={Math.max(...widths)} widths={widths} sizes={sizes} class={className} />
+) : (
+  <div class={`${className} photo-placeholder`}>Photo coming soon</div>
+)}

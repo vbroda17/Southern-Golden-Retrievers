@@ -1,6 +1,8 @@
 ---
 // src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/Group/group2-2.jpeg';
 import EmailLink from '../components/EmailLink.astro';
 import { url } from '../utils.js';
 import '../styles/index.css';
@@ -14,9 +16,12 @@ const description = "Raised with Love. Backed by Excellence. See why our puppies
     <section class="hero">
       <h1>Raised with Love. Backed by Excellence.</h1>
       <p>See why our puppies are the perfect addition to your family.</p>
-       <img src={url('images/Group/group2-2.jpeg')} 
-       alt="Our Three Golden Retrievers" 
-       class="showcase-image">
+       <Image src={heroImage}
+       alt="Our Three Golden Retrievers"
+       width={1600}
+       widths={[600, 1000, 1600]}
+       sizes="(max-width: 1000px) 100vw, 1000px"
+       class="showcase-image" />
     </section>
     
     <div class="home-card-grid">

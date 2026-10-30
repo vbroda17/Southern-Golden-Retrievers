@@ -1,7 +1,8 @@
 ---
 // src/pages/testimonials.astro
 import Layout from '../layouts/Layout.astro';
-import { url } from '../utils.js';
+import { Image } from 'astro:assets';
+import testimonialImage from '../assets/images/Group/group2-4.jpeg';
 import '../styles/testimonials.css';
 
 const title = "Testimonials | Southern Golden Retrievers";
@@ -18,9 +19,12 @@ const description = "Hear from families who brought home a Southern Golden Retri
         <!-- Testimonial Card - Image on Left -->
         <div class="testimonial-card">
             <div class="testimonial-image-wrapper">
-                <img src={url("/images/Group/group2-4.jpeg")}
+                <Image src={testimonialImage}
                     alt="Customer with their Golden Retriever"
-                    class="testimonial-image">
+                    width={600}
+                    widths={[300, 600]}
+                    sizes="(max-width: 800px) 400px, 300px"
+                    class="testimonial-image" />
             </div>
             <div class="testimonial-content">
                 <blockquote class="testimonial-quote">
@@ -34,9 +38,12 @@ const description = "Hear from families who brought home a Southern Golden Retri
         <!-- Testimonial Card - Image on Right -->
         <div class="testimonial-card reverse">
             <div class="testimonial-image-wrapper">
-                <img src={url("/images/Group/group2-4.jpeg")}
+                <Image src={testimonialImage}
                     alt="Happy customer with Golden Retriever"
-                    class="testimonial-image">
+                    width={600}
+                    widths={[300, 600]}
+                    sizes="(max-width: 800px) 400px, 300px"
+                    class="testimonial-image" />
             </div>
             <div class="testimonial-content">
                 <blockquote class="testimonial-quote">

@@ -39,6 +39,7 @@
 
   .parent-image {
     width: 100%;
+    height: auto;
     max-width: 300px;
     aspect-ratio: 4 / 5;
     object-fit: cover;
@@ -105,6 +106,7 @@
 
   .puppy-image {
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: 0.75rem;
@@ -125,6 +127,17 @@
   .puppy-description {
     font-size: 0.95rem;
     color: #444;
+  }
+
+  /* Shown in place of a dam, sire, or puppy photo that hasn't been added yet */
+  .photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border: 2px dashed var(--tan);
+    color: #888;
+    font-size: 0.95rem;
   }
 
   .status-available {

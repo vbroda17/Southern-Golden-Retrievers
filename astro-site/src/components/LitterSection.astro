@@ -3,6 +3,7 @@
 // Reusable component for displaying a single litter
 import '../styles/litter-section.css';
 import ContactButton from './ContactButton.astro';
+import LitterPhoto from './LitterPhoto.astro';
 import { url } from '../utils.js';
 
 interface Props {
@@ -24,6 +25,9 @@ interface Props {
 }
 
 const { litter } = Astro.props;
+
+// Image paths in the litter data are relative to src/assets/images/
+const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
 ---
 
 <section id={litter.id} class="litter-section card">
@@ -36,10 +40,10 @@ const { litter } = Astro.props;
         <h3>Dam</h3>
         {litter.dam.link ? (
           <a href={url(litter.dam.link)}>
-            <img src={url(litter.dam.image)} alt={litter.dam.name} class="parent-image">
+            <LitterPhoto path={litter.dam.image} alt={litter.dam.name} {...parentPhoto} />
           </a>
         ) : (
-          <img src={url(litter.dam.image)} alt={litter.dam.name} class="parent-image">
+          <LitterPhoto path={litter.dam.image} alt={litter.dam.name} {...parentPhoto} />
         )}
         <h4>{litter.dam.name}</h4>
       </div>
@@ -49,10 +53,10 @@ const { litter } = Astro.props;
         <h3>Sire</h3>
         {litter.sire.link ? (
           <a href={url(litter.sire.link)}>
-            <img src={url(litter.sire.image)} alt={litter.sire.name} class="parent-image">
+            <LitterPhoto path={litter.sire.image} alt={litter.sire.name} {...parentPhoto} />
           </a>
         ) : (
-          <img src={url(litter.sire.image)} alt={litter.sire.name} class="parent-image">
+          <LitterPhoto path={litter.sire.image} alt={litter.sire.name} {...parentPhoto} />
         )}
         <h4>{litter.sire.name}</h4>
       </div>
@@ -78,7 +82,13 @@ const { litter } = Astro.props;
     {litter.puppies.map(puppy => (
       <div class="puppy-card">
         <h4 class="puppy-name">{puppy.name}</h4>
-        <img src={url(puppy.image)} alt={puppy.name} class="puppy-image">
+        <LitterPhoto
+          path={puppy.image}
+          alt={puppy.name}
+          class="puppy-image"
+          widths={[400, 800]}
+          sizes="(max-width: 600px) 100vw, 320px"
+        />
         
         <ul class="puppy-meta">
           <li><strong>Gender:</strong> {puppy.gender}</li>
