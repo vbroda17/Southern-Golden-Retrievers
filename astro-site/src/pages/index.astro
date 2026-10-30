@@ -4,11 +4,14 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import heroImage from '../assets/images/Group/group2-2.jpeg';
 import EmailLink from '../components/EmailLink.astro';
-import { url } from '../utils.js';
+import { currentLitters } from '../data/litters.js';
+import { url, countOf } from '../utils.js';
 import '../styles/index.css';
 
 const title = "Southern Golden Retrievers";
 const description = "Raised with Love. Backed by Excellence. See why our puppies are the perfect addition to your family.";
+
+const litterCount = currentLitters.length;
 ---
 
 <Layout title={title} description={description}>
@@ -33,9 +36,19 @@ const description = "Raised with Love. Backed by Excellence. See why our puppies
 
       <section class="card">
         <h2>View Our Litters</h2>
-        <p>See who is available in our current litter. See previous pups from the dam's gallery or our testimonials.</p>
-        <p>Right now, we have two litters. Take a look and reserve your future puppy today!</p>
-        <a href={url('current-litters')} class="btn">Current Litter</a>
+        {litterCount > 0 ? (
+          <>
+            <p>See who is available in our current {litterCount === 1 ? 'litter' : 'litters'}. See previous pups from each dam's gallery or our testimonials.</p>
+            <p>Right now, we have {countOf(litterCount, 'litter')}. Take a look and reserve your future puppy today!</p>
+            <a href={url('current-litters')} class="btn">{litterCount === 1 ? 'Current Litter' : 'Current Litters'}</a>
+          </>
+        ) : (
+          <>
+            <p>See previous pups from each dam's gallery or our testimonials.</p>
+            <p>We don't have any litters right now, but more are planned. Join our waiting list to hear first when puppies arrive!</p>
+            <a href={url('current-litters')} class="btn">Join the Waiting List</a>
+          </>
+        )}
       </section>
 
       <section class="card">
