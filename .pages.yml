@@ -1,0 +1,109 @@
+# Pages CMS configuration (https://app.pagescms.org)
+# Defines the forms used to add and update litters without editing code.
+# Saving in Pages CMS commits to the selected branch; saves on `main` go live automatically.
+#
+# Keep in sync with astro-site/src/content.config.ts (the schema the site checks at build time):
+#   - dam choices below should match the dam galleries in astro-site/src/assets/images/
+#   - status choices must match PUPPY_STATUSES in astro-site/src/config.js
+
+media:
+  input: astro-site/src/assets/images
+  output: /images
+  rename: safe
+  categories: [image]
+
+content:
+  - name: litters
+    label: Litters
+    type: collection
+    path: astro-site/src/content/litters
+    format: yaml
+    filename: "{dam}-{year}-{month}.yml"
+    view:
+      primary: dam
+      fields: [dam, sire, born]
+      sort: born
+      order: desc
+    fields:
+      - name: dam
+        label: Mom (dam)
+        type: select
+        required: true
+        options:
+          values: [Lilly, Roux, Raine]
+
+      - name: damPhoto
+        label: Mom's photo (optional)
+        description: Leave empty to use the first photo from her gallery on the Dams page.
+        type: image
+        options:
+          path: astro-site/src/assets/images
+
+      - name: sire
+        label: Dad (sire)
+        type: string
+        required: true
+
+      - name: sirePhoto
+        label: Dad's photo
+        type: image
+        options:
+          path: astro-site/src/assets/images/sires
+
+      - name: born
+        label: Date born
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: readyDate
+        label: Ready to go home
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: puppies
+        label: Puppies
+        description: Leave empty until the puppies have names. The page will say details are coming soon.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} - {status}"
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+
+          - name: photo
+            label: Photo
+            type: image
+            options:
+              path: astro-site/src/assets/images/litters
+
+          - name: gender
+            label: Gender
+            type: select
+            required: true
+            options:
+              values: [Male, Female]
+
+          - name: color
+            label: Color
+            type: string
+            required: true
+
+          - name: status
+            label: Status
+            description: Available shows a "Contact About" button. Available puppies are listed first.
+            type: select
+            required: true
+            options:
+              values: [Available, Reserved, Adopted]
+
+          - name: description
+            label: Description (optional)
+            type: text
