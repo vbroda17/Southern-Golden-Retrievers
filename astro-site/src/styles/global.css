@@ -73,6 +73,27 @@ main {
   background: var(--gold-dark);
 }
 
+/* Inline text links in page copy. :where() keeps this weaker than component styles like .email-link */
+:where(.hero, .card) p a:not(.btn) {
+  color: var(--gold-dark);
+}
+
+/* Centered "what next" box with a line or two of text and buttons, used at the end of pages */
+.cta-card {
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.cta-card h2 {
+  margin-bottom: 0.5rem;
+}
+
+.cta-card p {
+  max-width: 650px;
+  margin: 0 auto 0.75rem;
+}
+
 /* Card */
 .card {
   background: white;

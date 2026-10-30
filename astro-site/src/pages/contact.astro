@@ -6,6 +6,7 @@ import showcaseImage from '../assets/images/Group/group2-3.jpeg';
 import EmailLink from '../components/EmailLink.astro';
 import { getCurrentLitters } from '../litters.js';
 import { url, countOf } from '../utils.js';
+import { SITE_CONFIG } from '../config.js';
 
 const title = "Contact | Southern Golden Retrievers";
 const description = "Contact us today and get your perfect golden retriever pup. Located in Knoxville, TN.";
@@ -30,6 +31,13 @@ const litterCount = currentLitters.length;
             <a class="btn" href={url("current-litters")}>Current Litters</a>
             <a class="btn" href={url("faq")}>FAQ</a>
             <a class="btn" href={url("about")}>About Us</a>
+        </section>
+
+        <section class="card cta-card">
+            <h2>Stay Up to Date</h2>
+            <p>Stay up to date with our plans by checking out Puppy News, where we share which of our moms is having puppies next and about when. Send us an email to join the waitlist so you don't miss out.</p>
+            <a class="btn" href={url("puppy-news")}>See Puppy News</a>
+            <a class="btn" href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`}>Join the Waitlist</a>
         </section>
 
         <section class="card">
