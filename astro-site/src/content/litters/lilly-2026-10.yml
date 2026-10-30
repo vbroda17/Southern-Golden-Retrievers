@@ -1,0 +1,9 @@
+dam: Lilly
+sire: guy
+born: 2026-10-30
+readyDate: 2026-10-30
+puppies:
+  - name: "1"
+    gender: Male
+    color: gold
+    status: Available
