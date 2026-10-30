@@ -27,7 +27,6 @@ const litters = defineCollection({
       name: z.string(),
       photo: optionalText,
       gender: z.enum(['Male', 'Female']),
-      color: z.string(),
       status: z.enum(PUPPY_STATUSES),
       description: optionalText
     })).nullish().transform(puppies => puppies ?? []),

@@ -6,6 +6,5 @@ puppies:
   - name: puppie 1
     photo: /images/litters/images.jpg
     gender: Female
-    color: gold
     status: Available
     description: test

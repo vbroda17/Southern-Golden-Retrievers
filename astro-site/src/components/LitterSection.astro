@@ -20,7 +20,6 @@ interface Props {
       name: string;
       image?: string;
       gender: string;
-      color: string;
       status: string;
       description?: string;
     }>;
@@ -130,7 +129,6 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
         
         <ul class="puppy-meta">
           <li><strong>Gender:</strong> {puppy.gender}</li>
-          <li><strong>Color:</strong> {puppy.color}</li>
           <li><strong>Status:</strong> <span class={`status-${puppy.status.toLowerCase()}`}>{puppy.status}</span></li>
         </ul>
         
