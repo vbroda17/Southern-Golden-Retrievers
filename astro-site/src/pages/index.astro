@@ -4,12 +4,14 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import heroImage from '../assets/images/Group/group2-2.jpeg';
 import EmailLink from '../components/EmailLink.astro';
-import { currentLitters } from '../data/litters.js';
+import { getCurrentLitters } from '../litters.js';
 import { url, countOf } from '../utils.js';
 import '../styles/index.css';
 
 const title = "Southern Golden Retrievers";
 const description = "Raised with Love. Backed by Excellence. See why our puppies are the perfect addition to your family.";
+
+const currentLitters = await getCurrentLitters();
 
 const litterCount = currentLitters.length;
 ---

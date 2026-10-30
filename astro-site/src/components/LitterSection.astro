@@ -5,12 +5,14 @@ import '../styles/litter-section.css';
 import ContactButton from './ContactButton.astro';
 import LitterPhoto from './LitterPhoto.astro';
 import { url } from '../utils.js';
+import { PUPPY_STATUSES } from '../config.js';
 
+// Shape produced by getCurrentLitters() in src/litters.js
 interface Props {
   litter: {
     id: string;
-    dam: { name: string; image: string; link: string | null };
-    sire: { name: string; image: string; link: string | null };
+    dam: { name: string; image?: string; link: string | null };
+    sire: { name: string; image?: string; link: string | null };
     bornDate: string;
     availableDate: string;
     puppies: Array<{
@@ -26,21 +28,11 @@ interface Props {
 
 const { litter } = Astro.props;
 
-// A typo'd status would silently drop the status color and Contact button, so fail the build instead
-const STATUSES = ['Available', 'Reserved', 'Adopted'];
-for (const puppy of litter.puppies) {
-  if (!STATUSES.includes(puppy.status)) {
-    throw new Error(
-      `Puppy "${puppy.name}" in litter "${litter.id}" has status "${puppy.status}". ` +
-      `Use one of: ${STATUSES.join(', ')} (in src/data/litters.js).`
-    );
-  }
-}
+// Available pups first, then Reserved, then Adopted (keeping data order within each group).
+// Statuses are validated by the schema in src/content.config.ts.
+const puppies = [...litter.puppies].sort((a, b) => PUPPY_STATUSES.indexOf(a.status) - PUPPY_STATUSES.indexOf(b.status));
 
-// Available pups first, then Reserved, then Adopted (keeping data order within each group)
-const puppies = [...litter.puppies].sort((a, b) => STATUSES.indexOf(a.status) - STATUSES.indexOf(b.status));
-
-// Image paths in the litter data are relative to src/assets/images/
+// Image paths are relative to src/assets/images/
 const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
 ---
 
@@ -84,14 +76,19 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
       <div class="info-item">
         <strong>Ready:</strong> {litter.availableDate}
       </div>
-      <div class="info-item">
-        <strong>Available:</strong> {litter.puppies.filter(p => p.status === 'Available').length} of {litter.puppies.length}
-      </div>
+      {litter.puppies.length > 0 && (
+        <div class="info-item">
+          <strong>Available:</strong> {litter.puppies.filter(p => p.status === 'Available').length} of {litter.puppies.length}
+        </div>
+      )}
     </div>
   </div>
 
   <!-- Puppies Grid -->
   <h3 class="puppies-heading">Meet the Puppies</h3>
+  {puppies.length === 0 && (
+    <p class="puppies-coming-soon">Puppy details and photos are coming soon. Contact us to join the waiting list for this litter!</p>
+  )}
   <div class="puppy-grid">
     {puppies.map(puppy => (
       <div class="puppy-card">

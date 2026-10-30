@@ -83,6 +83,11 @@
     font-size: 1.8rem;
   }
 
+  .puppies-coming-soon {
+    text-align: center;
+    color: #444;
+  }
+
   .puppy-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));

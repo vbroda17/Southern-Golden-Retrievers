@@ -4,11 +4,13 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import showcaseImage from '../assets/images/Group/group2-3.jpeg';
 import EmailLink from '../components/EmailLink.astro';
-import { currentLitters } from '../data/litters.js';
+import { getCurrentLitters } from '../litters.js';
 import { url, countOf } from '../utils.js';
 
 const title = "Contact | Southern Golden Retrievers";
 const description = "Contact us today and get your perfect golden retriever pup. Located in Knoxville, TN.";
+
+const currentLitters = await getCurrentLitters();
 
 const litterCount = currentLitters.length;
 ---
