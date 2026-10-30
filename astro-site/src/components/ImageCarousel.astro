@@ -50,8 +50,8 @@ const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
       const fileName = path.split('/').pop()?.split('.')[0] || '';
       const imageAlt = `${alt} - ${fileName}`;
 
+      // Hidden slides are inert so keyboard focus skips them
       return (
-        <!-- Hidden slides are inert so keyboard focus skips them -->
         <div class={`carousel-slide ${index === 0 ? 'active' : ''}`} inert={index !== 0}>
           <button class="carousel-open" aria-label={`View larger: ${imageAlt}`}>
             <Image

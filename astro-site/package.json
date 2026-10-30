@@ -2,6 +2,9 @@
   "name": "astro-site",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.22.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.13"
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.0"
   }
 }

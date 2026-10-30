@@ -90,8 +90,13 @@ export function initCarousel(carouselId, options = {}) {
     isLightboxOpen = false;
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
-    // Return focus to whatever opened the lightbox
-    if (focusBeforeLightbox) focusBeforeLightbox.focus();
+    // Return focus to whatever opened the lightbox. If that was a carousel photo, use the one
+    // now showing, since the original slide may be inert after navigating in the lightbox.
+    if (focusBeforeLightbox && carousel.contains(focusBeforeLightbox)) {
+      slides[currentIndex].querySelector('.carousel-open')?.focus();
+    } else if (focusBeforeLightbox) {
+      focusBeforeLightbox.focus();
+    }
   }
 
   // Keep Tab cycling between the lightbox's own buttons while it's open
