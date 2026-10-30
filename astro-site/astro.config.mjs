@@ -10,6 +10,10 @@ export default defineConfig({
   // Generates sitemap-index.xml listing every page for search engines
   integrations: [sitemap()],
 
+  // Keep whitespace between inline elements (Astro 7 defaults to 'jsx', which strips it).
+  // Our button rows rely on that space for spacing and wrapping.
+  compressHTML: true,
+
   // Build output
   outDir: './dist',
 
