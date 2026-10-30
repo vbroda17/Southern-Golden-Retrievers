@@ -14,6 +14,7 @@ Built with [Astro](https://astro.build) as a static site and hosted on GitHub Pa
 - [Running the site locally](#running-the-site-locally)
 - [How changes go live](#how-changes-go-live)
 - [Updating litters](#updating-litters)
+- [Updating the FAQ](#updating-the-faq)
 - [Adding photos of the dams](#adding-photos-of-the-dams)
 - [Other common edits](#other-common-edits)
 - [Moving to a custom domain](#moving-to-a-custom-domain)
@@ -150,6 +151,20 @@ puppies:
 
 ---
 
+## Updating the FAQ
+
+The FAQ page ([`/faq`](https://vbroda17.github.io/Southern-Golden-Retrievers/faq/)) is edited in **Pages CMS** under **FAQ**, the same way as litters. Saves on `main` go live in about two minutes.
+
+- **Intro:** the short line under the page title.
+- **Sections:** groups like "Getting a Puppy" or "Health". Drag to reorder.
+- **Questions:** each has a question and an answer. Drag to reorder within a section.
+  - Leave a blank line in an answer to start a new paragraph.
+  - A question with an **empty answer is hidden** on the site, so you can add questions now and answer them later. A section whose questions are all unanswered is hidden too.
+
+The questions are stored in [`astro-site/src/content/faq.json`](astro-site/src/content/faq.json) and checked by [`astro-site/src/faq.js`](astro-site/src/faq.js); a section without a title or a question without text stops the build with a message saying which one.
+
+---
+
 ## Adding photos of the dams
 
 Each dam's photo carousel on the Dams page shows **every image in her folder**:
@@ -178,6 +193,7 @@ Drop a photo (`.jpg`, `.jpeg`, `.png`, `.webp`, or `.gif`) into the folder and i
 | Contact email (top bar, all email links) | `email` in [`astro-site/src/config.js`](astro-site/src/config.js) |
 | Default page description for search results | `defaultDescription` in `config.js` |
 | Page text | the matching file in [`astro-site/src/pages/`](astro-site/src/pages/) |
+| FAQ questions and answers | Pages CMS → **FAQ** (see [Updating the FAQ](#updating-the-faq)) |
 | Nav menu links | `navLinks` in [`astro-site/src/components/Navbar.astro`](astro-site/src/components/Navbar.astro) |
 | Colors | the `--gold`, `--cream`, etc. variables at the top of [`astro-site/src/styles/global.css`](astro-site/src/styles/global.css) |
 | Photo shown when a link is shared (Facebook, texts) | `shareImageSource` import in [`astro-site/src/layouts/Layout.astro`](astro-site/src/layouts/Layout.astro) |
@@ -235,7 +251,7 @@ Then open `dist/domain-test/robots.txt` and `sitemap-index.xml` to confirm they 
 ## Project layout
 
 ```
-.pages.yml                Pages CMS forms for editing litters
+.pages.yml                Pages CMS forms for editing litters and the FAQ
 astro-site/
   astro.config.mjs        site address, base path, sitemap
   public/                 files copied as-is (favicon)
@@ -247,12 +263,14 @@ astro-site/
       Group/              group photos used on Home/About/Contact/Testimonials
     components/           reusable pieces (Navbar, Footer, ImageCarousel, LitterSection, ...)
     content/litters/      one YAML file per current litter (edited via Pages CMS)
+    content/faq.json      FAQ intro, sections, questions, and answers (edited via Pages CMS)
     content.config.ts     rules each litter file is checked against
     layouts/Layout.astro  shared page shell: <head>, SEO tags, nav, footer
     pages/                one file per page (404, robots.txt included)
     scripts/              browser scripts (carousel, copy email)
     styles/               CSS, one file per page/component plus global.css
     config.js             email, site name, default description
+    faq.js                loads and checks faq.json for the FAQ page
     images.js             photo lookup used by the carousel and litter cards
     litters.js            loads litter files and fills in dam photo/link and dates
     utils.js              url() for base-path links, countOf() for wording
