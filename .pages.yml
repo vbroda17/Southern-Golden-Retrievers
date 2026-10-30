@@ -1,11 +1,12 @@
 # Pages CMS configuration (https://app.pagescms.org)
-# Defines the forms used to update litters and the FAQ without editing code.
+# Defines the forms used to update litters, Puppy News, and the FAQ without editing code.
 # Saving in Pages CMS commits to the selected branch; saves on `main` go live automatically.
 #
 # Keep in sync with the checks the site runs at build time:
 #   - Litters: astro-site/src/content.config.ts
 #     - dam choices below should match the dam galleries in astro-site/src/assets/images/
 #     - status choices must match PUPPY_STATUSES in astro-site/src/config.js
+#   - Puppy News: astro-site/src/puppy-news.js (dam choices same as Litters)
 #   - FAQ: astro-site/src/faq.js
 
 media:
@@ -179,3 +180,48 @@ content:
                 label: Answer
                 description: Leave a blank line between paragraphs. Questions with no answer yet are hidden on the site.
                 type: text
+
+  - name: puppy-news
+    label: Puppy News
+    type: file
+    path: astro-site/src/content/puppy-news.json
+    format: json
+    fields:
+      - name: plannedLitters
+        label: Planned litters
+        description: The first one listed is also shown on the home page. Drag to reorder. Remove a litter once she has her puppies and add it under Litters instead.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{dam} × {sire}"
+        fields:
+          - name: dam
+            label: Mom (dam)
+            type: select
+            required: true
+            options:
+              values: [Lilly, Roux, Raine]
+
+          - name: sire
+            label: Dad (sire) (optional)
+            description: Leave empty if not decided yet. The page will say "Sire to be announced."
+            type: string
+
+          - name: sirePhoto
+            label: Dad's photo (optional)
+            type: image
+            options:
+              path: astro-site/src/assets/images/sires
+
+          - name: expected
+            label: Expected around (rough estimate)
+            description: Pick any day in the month; only the month and year are shown ("likely around March 2027"). Leave empty, or once the month has passed, and the page says you're not sure yet.
+            type: date
+            options:
+              format: yyyy-MM-dd
+
+          - name: note
+            label: Extra note (optional)
+            description: Anything else to share about this litter.
+            type: text

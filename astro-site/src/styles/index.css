@@ -25,6 +25,27 @@
   margin-left: 0.5rem;
 }
 
+/* Full-width Puppy News banner under the three cards */
+.home-news {
+  margin-top: 1rem;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+}
+
+.home-news h2 {
+  margin-bottom: 0.5rem;
+}
+
+.home-news p {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.home-news .btn {
+  display: inline-block;
+  margin: 1rem 0.25rem 0;
+}
+
 @media (max-width: 600px) {
   .home-card-grid {
     grid-template-columns: 1fr;

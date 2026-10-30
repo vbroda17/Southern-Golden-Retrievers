@@ -1,0 +1,50 @@
+/* src/styles/puppy-news.css - Puppy News page */
+
+.planned-litter {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  text-align: center;
+  scroll-margin-top: 5rem;
+}
+
+.planned-litter h2 {
+  margin-bottom: 1.25rem;
+}
+
+/* Only the dam's photo when the sire isn't announced yet */
+.parents-grid.parents-grid-single {
+  grid-template-columns: 1fr;
+  max-width: 340px;
+}
+
+.planned-timing {
+  max-width: 650px;
+  margin: 0 auto 1rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.planned-note {
+  max-width: 650px;
+  margin: 0 auto 1rem;
+  color: #444;
+}
+
+.puppy-news-links {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.puppy-news-links a {
+  color: var(--gold);
+}
+
+.puppy-news-links a:hover {
+  color: var(--gold-dark);
+}
+
+@media (max-width: 600px) {
+  .planned-litter {
+    padding: 1rem;
+  }
+}

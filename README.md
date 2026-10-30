@@ -15,6 +15,7 @@ Built with [Astro](https://astro.build) as a static site and hosted on GitHub Pa
 - [How changes go live](#how-changes-go-live)
 - [Updating litters](#updating-litters)
 - [Past litters](#past-litters)
+- [Puppy News](#puppy-news)
 - [Updating the FAQ](#updating-the-faq)
 - [Adding photos of the dams](#adding-photos-of-the-dams)
 - [Other common edits](#other-common-edits)
@@ -182,6 +183,28 @@ familyPhotos:                  # optional
 
 ---
 
+## Puppy News
+
+The Puppy News page ([`/puppy-news`](https://vbroda17.github.io/Southern-Golden-Retrievers/puppy-news/)) lists the litters being planned, and a **Puppy News** banner on the home page shows the next one. Edit it in **Pages CMS → Puppy News**.
+
+For each planned litter:
+- **Mom (dam):** required. Her photo and Dams-page link are added automatically.
+- **Dad (sire)** and **Dad's photo:** optional. Without a dad, the page shows only her photo and says "Sire to be announced."
+- **Expected around:** a rough month. Pick any day in it; the site shows only the month: *"We are not exactly sure when Lilly will go into heat for her next litter, but it will likely be around March 2027. Send us an email to join the waitlist so you don't miss out."*
+- **Extra note:** optional.
+
+Fallbacks, so the page never looks broken:
+- **No expected month**, or the month has already passed: *"We are not exactly sure yet when Lilly will go into heat for her next litter. ..."*
+- **No planned litters:** a "Next Litter Coming Soon" message with a waitlist button, and the home banner says more litters are being planned.
+
+The **first** planned litter is the one on the home page; drag to reorder. Once she has her puppies, remove her from Puppy News and add the litter under **Litters**.
+
+"Already passed" is checked when the site rebuilds (any save in Pages CMS or code change), so an old month can show for a while if nothing has been saved since.
+
+The data is in [`astro-site/src/content/puppy-news.json`](astro-site/src/content/puppy-news.json), checked by [`astro-site/src/puppy-news.js`](astro-site/src/puppy-news.js).
+
+---
+
 ## Updating the FAQ
 
 The FAQ page ([`/faq`](https://vbroda17.github.io/Southern-Golden-Retrievers/faq/)) is edited in **Pages CMS** under **FAQ**, the same way as litters. Saves on `main` go live in about two minutes.
@@ -212,7 +235,7 @@ Drop a photo (`.jpg`, `.jpeg`, `.png`, `.webp`, or `.gif`) into the folder and i
 
 1. Create her photo folder, e.g. `astro-site/src/assets/images/Daisy/`, and add photos.
 2. In [`astro-site/src/pages/dams.astro`](astro-site/src/pages/dams.astro), copy one of the `<section id="...">` blocks and change the id, name, folder, and description. Use her name in lowercase as the id (e.g. `id="daisy"`) so litter pages can link to her.
-3. Add her name to the **Mom (dam)** list in [`.pages.yml`](.pages.yml) (`values: [Lilly, Roux, Raine, Daisy]`) so she can be picked in Pages CMS.
+3. Add her name to both **Mom (dam)** lists in [`.pages.yml`](.pages.yml) (Litters and Puppy News: `values: [Lilly, Roux, Raine, Daisy]`) so she can be picked in Pages CMS.
 4. Update the "Meet Our Moms" text on the home page ([`index.astro`](astro-site/src/pages/index.astro)), which names the dams.
 
 ---
@@ -225,6 +248,7 @@ Drop a photo (`.jpg`, `.jpeg`, `.png`, `.webp`, or `.gif`) into the folder and i
 | Default page description for search results | `defaultDescription` in `config.js` |
 | Page text | the matching file in [`astro-site/src/pages/`](astro-site/src/pages/) |
 | Past Litters (move a litter, family photos) | Pages CMS → **Litters** (see [Past litters](#past-litters)) |
+| Puppy News (planned litters, expected month) | Pages CMS → **Puppy News** (see [Puppy News](#puppy-news)) |
 | FAQ questions and answers | Pages CMS → **FAQ** (see [Updating the FAQ](#updating-the-faq)) |
 | Nav menu links | `navLinks` in [`astro-site/src/components/Navbar.astro`](astro-site/src/components/Navbar.astro) |
 | Colors | the `--gold`, `--cream`, etc. variables at the top of [`astro-site/src/styles/global.css`](astro-site/src/styles/global.css) |
@@ -296,6 +320,7 @@ astro-site/
     components/           reusable pieces (Navbar, Footer, ImageCarousel, LitterSection, PastLitter, ...)
     content/litters/      one YAML file per litter, current or past (edited via Pages CMS)
     content/faq.json      FAQ intro, sections, questions, and answers (edited via Pages CMS)
+    content/puppy-news.json planned litters for Puppy News (edited via Pages CMS)
     content.config.ts     rules each litter file is checked against
     layouts/Layout.astro  shared page shell: <head>, SEO tags, nav, footer
     pages/                one file per page (404, robots.txt included)
@@ -303,6 +328,7 @@ astro-site/
     styles/               CSS, one file per page/component plus global.css
     config.js             email, site name, default description
     faq.js                loads and checks faq.json for the FAQ page
+    puppy-news.js         loads and checks puppy-news.json for Puppy News and the home banner
     images.js             photo lookup used by the carousel and litter cards
     litters.js            loads litter files, splits current/past, fills in dam photo/link and dates
     utils.js              url() for base-path links, countOf() for wording

@@ -5,7 +5,9 @@ import { Image } from 'astro:assets';
 import heroImage from '../assets/images/Group/group2-2.jpeg';
 import EmailLink from '../components/EmailLink.astro';
 import { getCurrentLitters } from '../litters.js';
+import { getPlannedLitters } from '../puppy-news.js';
 import { url, countOf } from '../utils.js';
+import { SITE_CONFIG } from '../config.js';
 import '../styles/index.css';
 
 const title = "Southern Golden Retrievers";
@@ -14,6 +16,9 @@ const description = "Raised with Love. Backed by Excellence. See why our puppies
 const currentLitters = await getCurrentLitters();
 
 const litterCount = currentLitters.length;
+
+// The first planned litter in Pages CMS → Puppy News is the one teased here
+const nextLitter = getPlannedLitters()[0];
 ---
 
 <Layout title={title} description={description}>
@@ -61,5 +66,19 @@ const litterCount = currentLitters.length;
         <a href={url('about')} class="btn">About</a>
       </section>
     </div>
+
+    <section class="card home-news">
+      <h2>Puppy News</h2>
+      {nextLitter ? (
+        <p>
+          Next up: <strong>{nextLitter.sire ? `${nextLitter.dam.name} × ${nextLitter.sire.name}` : `${nextLitter.dam.name}'s next litter`}</strong>{nextLitter.expected ? <>, likely around <strong>{nextLitter.expected}</strong></> : null}.
+          Send us an email to join the waitlist so you don't miss out!
+        </p>
+      ) : (
+        <p>We're planning our next litters now. Send us an email to join the waitlist so you don't miss out!</p>
+      )}
+      <a href={url('puppy-news')} class="btn">See Puppy News</a>
+      <a href={`mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent('Waitlist Inquiry')}`} class="btn">Join the Waitlist</a>
+    </section>
   </div>
 </Layout>

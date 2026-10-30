@@ -1,0 +1,79 @@
+---
+// src/pages/puppy-news.astro
+// Planned litters come from src/content/puppy-news.json (edit in Pages CMS → Puppy News)
+import Layout from '../layouts/Layout.astro';
+import ContactButton from '../components/ContactButton.astro';
+import LitterPhoto from '../components/LitterPhoto.astro';
+import { getPlannedLitters } from '../puppy-news.js';
+import { url } from '../utils.js';
+import '../styles/litter-section.css';
+import '../styles/puppy-news.css';
+
+const title = "Puppy News | Southern Golden Retrievers";
+const description = "Upcoming golden retriever litters planned at Southern Golden Retrievers in Knoxville, TN. Join our waitlist to hear first.";
+
+const plannedLitters = await getPlannedLitters();
+
+const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
+---
+
+<Layout title={title} description={description}>
+  <div class="container">
+    <section class="hero">
+      <h1>Puppy News</h1>
+      <p>See which of our moms is having puppies next. Send us an email to join the waitlist so you don't miss out.</p>
+    </section>
+
+    {plannedLitters.map(litter => (
+      <section id={litter.id} class="card planned-litter">
+        <h2>{litter.sire ? <>{litter.dam.name} &times; {litter.sire.name}</> : <>{litter.dam.name}'s Next Litter</>}</h2>
+
+        <div class:list={['parents-grid', { 'parents-grid-single': !litter.sire }]}>
+          <div class="parent-card">
+            <h3>Dam</h3>
+            {litter.dam.link ? (
+              <a href={url(litter.dam.link)}>
+                <LitterPhoto path={litter.dam.image} alt={litter.dam.name} {...parentPhoto} />
+              </a>
+            ) : (
+              <LitterPhoto path={litter.dam.image} alt={litter.dam.name} {...parentPhoto} />
+            )}
+            <h4>{litter.dam.name}</h4>
+          </div>
+          {litter.sire && (
+            <div class="parent-card">
+              <h3>Sire</h3>
+              <LitterPhoto path={litter.sire.image} alt={litter.sire.name} {...parentPhoto} />
+              <h4>{litter.sire.name}</h4>
+            </div>
+          )}
+        </div>
+
+        {litter.expected ? (
+          <p class="planned-timing">We are not exactly sure when {litter.dam.name} will go into heat for her next litter, but it will likely be around <strong>{litter.expected}</strong>. Send us an email to join the waitlist so you don't miss out.</p>
+        ) : (
+          <p class="planned-timing">We are not exactly sure yet when {litter.dam.name} will go into heat for her next litter. Send us an email to join the waitlist so you don't miss out.</p>
+        )}
+        {!litter.sire && <p class="planned-note">Sire to be announced.</p>}
+        {litter.note && <p class="planned-note">{litter.note}</p>}
+
+        <ContactButton
+          subject={`Waitlist: ${litter.dam.name}'s Next Litter`}
+          buttonText="Join the Waitlist"
+        />
+      </section>
+    ))}
+
+    {plannedLitters.length === 0 && (
+      <section class="card planned-litter">
+        <h2>Next Litter Coming Soon</h2>
+        <p class="planned-timing">We're planning our next litters now. Send us an email to join the waitlist so you don't miss out. We'll let you know as soon as we have news.</p>
+        <ContactButton subject="Waitlist Inquiry" buttonText="Join the Waitlist" />
+      </section>
+    )}
+
+    <p class="puppy-news-links">
+      <a href={url('current-litters/')}>See current litters</a> &middot; <a href={url('faq/')}>Read our FAQ</a>
+    </p>
+  </div>
+</Layout>
