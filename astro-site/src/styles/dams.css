@@ -2,5 +2,63 @@
 
 .dam-section {
   text-align: center;
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
 }
 
+.dam-certifications {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  background: var(--cream);
+  border-color: var(--tan);
+}
+
+.dam-certifications h2 {
+  margin-bottom: 0.5rem;
+}
+
+.dam-certifications p {
+  margin: 0;
+}
+
+/* Long text reads better left-aligned at a comfortable line length */
+.dam-description {
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+  line-height: 1.65;
+}
+
+.dam-description p {
+  margin: 0 0 1rem;
+}
+
+.dam-description p:last-child {
+  margin-bottom: 0;
+}
+
+.dam-traits-heading {
+  font-weight: 600;
+  color: var(--gold-dark);
+}
+
+.dam-traits {
+  margin: -0.5rem 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.dam-traits li {
+  margin-bottom: 0.25rem;
+}
+
+.dam-traits li::marker {
+  color: var(--gold);
+}
+
+@media (max-width: 600px) {
+  .dam-section,
+  .dam-certifications {
+    padding: 1rem;
+  }
+}
