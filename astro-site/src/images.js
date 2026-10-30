@@ -13,9 +13,11 @@ const images = Object.fromEntries(
   Object.entries(modules).map(([path, image]) => [path.replace('./assets/images/', ''), image])
 );
 
-// Get one image by its path, or undefined if the file doesn't exist
+// Get one image by its path, or undefined if the file doesn't exist.
+// Accepts "Lilly/lilly1.jpeg" as well as the "/images/Lilly/lilly1.jpeg" form Pages CMS saves.
 export function findImage(path) {
-  return images[path];
+  const key = path.replace(/^\/+/, '').replace(/^images\//, '');
+  return images[key];
 }
 
 // Get every image in a folder (e.g. "Lilly"), sorted by file name

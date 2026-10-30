@@ -3,12 +3,14 @@
 import Layout from '../layouts/Layout.astro';
 import EmailLink from '../components/EmailLink.astro';
 import LitterSection from '../components/LitterSection.astro';
-import { currentLitters } from '../data/litters.js';
+import { getCurrentLitters } from '../litters.js';
 import { url } from '../utils.js';
 import '../styles/current-litters.css';
 
 const title = "Available Litters - Southern Golden Retrievers";
 const description = "View our current litters of golden retriever puppies available in Knoxville, TN.";
+
+const currentLitters = await getCurrentLitters();
 ---
 
 <Layout title={title} description={description}>
