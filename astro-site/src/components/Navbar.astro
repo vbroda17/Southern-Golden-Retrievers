@@ -5,6 +5,18 @@ import { url } from '../utils.js';
 import '../styles/navbar.css';
 
 const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { path: '', label: 'Home' },
+  { path: 'current-litters', label: 'Current Litters' },
+  { path: 'dams', label: 'Dams' },
+  { path: 'testimonials', label: 'Testimonials' },
+  { path: 'contact', label: 'Contact' },
+  { path: 'about', label: 'About' }
+];
+
+// Home only matches exactly; other pages match anywhere in the path
+const isActive = (path: string) => path === '' ? currentPath === url('') : currentPath.includes(path);
 ---
 
 <!-- Top Info Bar -->
@@ -29,12 +41,13 @@ const currentPath = Astro.url.pathname;
     <div class="header-inner">
       <a href={url('')} class="brand">Southern Golden Retrievers</a>
       <nav class="nav">
-        <a href={url('')} class={`nav-link ${currentPath === url('') ? 'active' : ''}`}>Home</a>
-        <a href={url('current-litters')} class={`nav-link ${currentPath.includes('current-litters') ? 'active' : ''}`}>Current Litters</a>
-        <a href={url('dams')} class={`nav-link ${currentPath.includes('dams') ? 'active' : ''}`}>Dams</a>
-        <a href={url('testimonials')} class={`nav-link ${currentPath.includes('testimonials') ? 'active' : ''}`}>Testimonials</a>
-        <a href={url('contact')} class={`nav-link ${currentPath.includes('contact') ? 'active' : ''}`}>Contact</a>
-        <a href={url('about')} class={`nav-link ${currentPath.includes('about') ? 'active' : ''}`}>About</a>
+        {navLinks.map(({ path, label }) => (
+          <a
+            href={url(path)}
+            class={`nav-link ${isActive(path) ? 'active' : ''}`}
+            aria-current={isActive(path) ? 'page' : undefined}
+          >{label}</a>
+        ))}
       </nav>
     </div>
   </div>
