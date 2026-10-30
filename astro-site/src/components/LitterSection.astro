@@ -4,7 +4,7 @@
 import '../styles/litter-section.css';
 import ContactButton from './ContactButton.astro';
 import LitterPhoto from './LitterPhoto.astro';
-import { url } from '../utils.js';
+import { url, slugify } from '../utils.js';
 import { PUPPY_STATUSES } from '../config.js';
 
 // Shape produced by getCurrentLitters() in src/litters.js
@@ -30,7 +30,17 @@ const { litter } = Astro.props;
 
 // Available pups first, then Reserved, then Adopted (keeping data order within each group).
 // Statuses are validated by the schema in src/content.config.ts.
-const puppies = [...litter.puppies].sort((a, b) => PUPPY_STATUSES.indexOf(a.status) - PUPPY_STATUSES.indexOf(b.status));
+const sortedPuppies = [...litter.puppies].sort((a, b) => PUPPY_STATUSES.indexOf(a.status) - PUPPY_STATUSES.indexOf(b.status));
+
+// Each puppy card gets its own link target, e.g. #lilly-winter-2026-puppy-1 (numbered if two pups share a name)
+const usedIds = new Set();
+const puppies = sortedPuppies.map((puppy) => {
+  const base = `${litter.id}-${slugify(puppy.name) || 'puppy'}`;
+  let id = base;
+  for (let n = 2; usedIds.has(id); n++) id = `${base}-${n}`;
+  usedIds.add(id);
+  return { ...puppy, id };
+});
 
 // Image paths are relative to src/assets/images/
 const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
@@ -91,7 +101,7 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
   )}
   <div class="puppy-grid">
     {puppies.map(puppy => (
-      <div class="puppy-card">
+      <div id={puppy.id} class="puppy-card">
         <h4 class="puppy-name">{puppy.name}</h4>
         <LitterPhoto
           path={puppy.image}

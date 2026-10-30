@@ -12,7 +12,17 @@ export function url(path) {
   return `${base}${cleanPath}`.replace(/\/+/g, '/');
 }
 
-const NUMBER_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+// URL-safe id from a name: "Puppy 1" -> "puppy-1", "Bella Rosé" -> "bella-rose"
+export function slugify(text) {
+  return String(text)
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+const NUMBER_WORDS =['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 
 // Count with the right noun form for reading: "no litters", "one litter", "two litters", "12 litters"
 export function countOf(count, singular, plural = `${singular}s`) {
