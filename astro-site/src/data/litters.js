@@ -11,7 +11,7 @@
 //
 // Puppy fields:
 //   name, gender, color
-//   status        Must be "Available", "Reserved", or "Adopted"
+//   status        Must be "Available", "Reserved", or "Adopted" (anything else fails the build)
 //   description   Optional short blurb
 //   image         Optional; a missing photo shows a "Photo coming soon" placeholder
 //
