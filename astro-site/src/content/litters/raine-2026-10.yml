@@ -1,0 +1,10 @@
+dam: Raine
+sire: test
+born: 2026-10-30
+readyDate: 2026-10-30
+puppies:
+  - name: test1
+    gender: Female
+    color: gold
+    status: Adopted
+    description: aggg
