@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 import { findImage } from '../images.js';
 
 interface Props {
-  path: string; // Relative to src/assets/images/
+  path?: string; // Relative to src/assets/images/
   alt: string;
   class: string; // Sizing class, e.g. "parent-image" or "puppy-image"
   widths: number[];
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { path, alt, class: className, widths, sizes } = Astro.props;
-const image = findImage(path);
+const image = path ? findImage(path) : undefined;
 ---
 
 {image ? (

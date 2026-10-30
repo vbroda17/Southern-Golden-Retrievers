@@ -1,6 +1,21 @@
-// src/data/sample-litters-data.js
-// Simple data file for managing litters
-// Image paths are relative to src/assets/images/ (e.g. "Lilly/lilly3.jpeg")
+// src/data/litters.js
+// Current litters shown on the Current Litters page (and counted on Home/Contact).
+// Add a litter by copying one of the objects below; remove it once all pups go home.
+// An empty list ([]) shows a "No Current Litters" message instead.
+//
+// Litter fields:
+//   id            Unique slug used in the page URL (#lilly-winter-2026) and photo folder name
+//   dam / sire    name, image, and link (a page link like "/dams#lilly", or null for none)
+//   bornDate      Shown as written, e.g. "January 1, 2026"
+//   availableDate When pups can go home, shown as written
+//
+// Puppy fields:
+//   name, gender, color
+//   status        Must be "Available", "Reserved", or "Adopted" (anything else fails the build)
+//   description   Optional short blurb
+//   image         Optional; a missing photo shows a "Photo coming soon" placeholder
+//
+// Image paths are relative to src/assets/images/ (e.g. "Lilly/lilly3.jpeg").
 // Put puppy photos in src/assets/images/litters/<litter id>/
 
 export const currentLitters = [

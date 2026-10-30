@@ -15,16 +15,30 @@ interface Props {
     availableDate: string;
     puppies: Array<{
       name: string;
-      image: string;
+      image?: string;
       gender: string;
       color: string;
       status: string;
-      description: string;
+      description?: string;
     }>;
   };
 }
 
 const { litter } = Astro.props;
+
+// A typo'd status would silently drop the status color and Contact button, so fail the build instead
+const STATUSES = ['Available', 'Reserved', 'Adopted'];
+for (const puppy of litter.puppies) {
+  if (!STATUSES.includes(puppy.status)) {
+    throw new Error(
+      `Puppy "${puppy.name}" in litter "${litter.id}" has status "${puppy.status}". ` +
+      `Use one of: ${STATUSES.join(', ')} (in src/data/litters.js).`
+    );
+  }
+}
+
+// Available pups first, then Reserved, then Adopted (keeping data order within each group)
+const puppies = [...litter.puppies].sort((a, b) => STATUSES.indexOf(a.status) - STATUSES.indexOf(b.status));
 
 // Image paths in the litter data are relative to src/assets/images/
 const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' };
@@ -33,7 +47,7 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
 <section id={litter.id} class="litter-section card">
   <!-- Parents Section -->
   <div class="parents-section">
-    <h2>Current Litter</h2>
+    <h2>{litter.dam.name} &times; {litter.sire.name}</h2>
     <div class="parents-grid">
       <!-- Dam -->
       <div class="parent-card">
@@ -77,9 +91,9 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
   </div>
 
   <!-- Puppies Grid -->
-  <h3 class="puppies-heading">Available Puppies</h3>
+  <h3 class="puppies-heading">Meet the Puppies</h3>
   <div class="puppy-grid">
-    {litter.puppies.map(puppy => (
+    {puppies.map(puppy => (
       <div class="puppy-card">
         <h4 class="puppy-name">{puppy.name}</h4>
         <LitterPhoto
@@ -96,7 +110,7 @@ const parentPhoto = { class: 'parent-image', widths: [300, 600], sizes: '300px' 
           <li><strong>Status:</strong> <span class={`status-${puppy.status.toLowerCase()}`}>{puppy.status}</span></li>
         </ul>
         
-        <p class="puppy-description">{puppy.description}</p>
+        {puppy.description && <p class="puppy-description">{puppy.description}</p>}
         
         {puppy.status === 'Available' && (
             <ContactButton 
