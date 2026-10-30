@@ -1,0 +1,100 @@
+/* src/styles/share-button.css - ShareButton component */
+
+.share {
+  position: relative;
+  display: inline-block;
+}
+
+/* The <summary> acts as the button */
+.share-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--gold);
+  border-radius: 0.8rem;
+  background: white;
+  color: var(--charcoal);
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+/* Hide the default disclosure triangle */
+.share-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.share-toggle::marker {
+  content: '';
+}
+
+.share-toggle:hover,
+.share[open] .share-toggle {
+  background: var(--cream);
+}
+
+.share-toggle:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.share-toggle .share-icon {
+  color: var(--gold-dark);
+}
+
+.share-icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+
+.share-menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  min-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem;
+  background: white;
+  border: 1px solid var(--tan);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  text-align: left;
+}
+
+.share-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: none;
+  color: var(--charcoal);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* display:flex above would otherwise override the hidden attribute */
+.share-option[hidden] {
+  display: none;
+}
+
+.share-option:hover,
+.share-option:focus-visible {
+  background: var(--cream);
+  outline: none;
+}
+
+.share-facebook .share-icon {
+  color: #1877F2;
+}
